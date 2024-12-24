@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Infrastructure.Data;
 using Core.Entities;
+using Core.Interfaces;
 
 namespace api.Controllers
 {
@@ -13,28 +14,35 @@ namespace api.Controllers
     [Route("api/[controller]")]
     public class ProductController : ControllerBase
     {
-        private readonly StoreContext _context;
+        
 
-        public ProductController(StoreContext context)
+        // Injecting my repository(Services _repo) to clean up my api calls
+        private readonly IProductRepository _repo;
+
+        public ProductController(IProductRepository repo)
         {
-            _context = context;
+            _repo = repo;
+         
         }
 
+
+    // Get all products
 
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetProducts()
         {
-            var products = await _context.Products.ToListAsync();
+            var products = await _repo.GetProductsAsync();
 
             return Ok(products);
         }
 
 
-
+        // Get all items by specific Id
+        
          [HttpGet("{id}")]
         public async Task<ActionResult<Product>>GetProductsById([FromRoute] int id)
         {
-          return await _context.Products.FindAsync(id);
+          return await _repo.GetProductsByIdAsync(id);
         }
     }
 }
