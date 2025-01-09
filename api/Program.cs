@@ -3,12 +3,16 @@ using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Core.Interfaces;
 using Microsoft.Extensions.Logging;
+using AutoMapper;
+using api.Helpers;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddAutoMapper(typeof(MappingProfiles));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
@@ -32,6 +36,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.MapControllers();
+app.UseStaticFiles();
 
 // Apply migrations and seed the database on startup
 using var scope = app.Services.CreateScope();
