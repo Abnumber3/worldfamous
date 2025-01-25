@@ -19,7 +19,9 @@ namespace Core.Entities
                 public decimal Price {get; set;}
 
                 public string PictureUrl { get; set; } = string.Empty;
+
                 public int ProductTypeId { get; set; }
+                
                 public  ProductType? ProductType { get; set; }       
                 
     }

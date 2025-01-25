@@ -13,6 +13,7 @@ namespace Infrastructure.Data
     {
 
         //this will give us access to store context using the _context variable
+        
         private readonly StoreContext _context;
         public GenericRepository(StoreContext context)
         {

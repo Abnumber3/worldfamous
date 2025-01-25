@@ -10,12 +10,11 @@ using Core.Interfaces;
 using Core.Specifications;
 using api.Dtos;
 using AutoMapper;
+using api.Errors;
 
 namespace api.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ProductController : ControllerBase
+    public class ProductController : BaseApiController
     {
         // Injecting my repository(Services _repo) to clean up my api calls
 
@@ -43,9 +42,10 @@ namespace api.Controllers
 
         // Gets all products and returns them as a DTO (certain columns missing from the original entity). the purpose is to only let the user see what they need to see
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts()
+        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts(
+            string sort, int? typeId)
         {
-            var spec = new ProductsWithTypesSpecification();
+            var spec = new ProductsWithTypesSpecification(sort, typeId);
             var products = await _productsRepo.ListAsync(spec);
             return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products));
         }
@@ -68,7 +68,7 @@ namespace api.Controllers
 
             if (product == null)
             {
-                return NotFound(); // This returns a 404 response
+                return NotFound(new ApiResponse(404)); // This returns a 404 response
             }
             
           return _mapper.Map<Product, ProductToReturnDto>(product);

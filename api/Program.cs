@@ -5,19 +5,20 @@ using Core.Interfaces;
 using Microsoft.Extensions.Logging;
 using AutoMapper;
 using api.Helpers;
+using api.Middleware;
+using System.Numerics;
+using Microsoft.AspNetCore.Mvc;
+using api.Errors;
+using api.Extensions;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
-
-
 // Add DbContext
 builder.Services.AddDbContext<StoreContext>(options =>
 {
@@ -25,15 +26,17 @@ builder.Services.AddDbContext<StoreContext>(options =>
          
 });
 
+builder.Services.AddApplicationServices();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 
+    app.UseMiddleware<ExceptionMiddleware>();
+    app.UseSwaggerServices();
+
+app.UseStatusCodePagesWithReExecute("/errors/{0}");
 app.UseHttpsRedirection();
 app.MapControllers();
 app.UseStaticFiles();
