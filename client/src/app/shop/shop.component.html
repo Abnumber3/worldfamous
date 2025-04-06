@@ -23,7 +23,7 @@
       <li 
         class="list-group-item"
         *ngFor="let productTypes of productType"
-        [class.active]="productTypes.id === typeIdSelected"
+        [class.active]="productTypes.id === shopParams.typeId"
         (click)="onTypeSelected(productTypes.id)">
         {{ productTypes.name }}
       </li>
@@ -48,7 +48,7 @@
         <li 
           class="list-group-item"
           *ngFor="let productTypes of productType"
-          [class.active]="productTypes.id === typeIdSelected"
+          [class.active]="productTypes.id === shopParams.typeId"
           (click)="onTypeSelected(productTypes.id)">
           {{ productTypes.name }}
         </li>
@@ -80,6 +80,39 @@
           <app-product-item [product]="item"></app-product-item>
         </div>
       </div>
+
+
+<!-- Minimal Pagination Controls -->
+<nav *ngIf="totalCount > shopParams.pageSize" class="text-center mt-4">
+  <ul class="list-inline pagination-minimal">
+
+    <li class="list-inline-item" [class.disabled]="shopParams.pageNumber === 1">
+      <button class="page-link-min"
+      
+       (click)="onPageChanged(shopParams.pageNumber - 1)">Previous</button>
+    </li>
+
+    <li 
+  class="list-inline-item"
+  *ngFor="let page of getPageNumbers()">
+  <button 
+    class="page-link-min"
+    [ngClass]="{ 'active-page': page === shopParams.pageNumber }"
+    (click)="onPageChanged(page)">
+    {{ page }}
+  </button>
+</li>
+
+
+    <li class="list-inline-item" [class.disabled]="shopParams.pageNumber === getPageCount()">
+      <button class="page-link-min"
+       [disabled]="shopParams.pageNumber === getPageCount()"
+       (click)="onPageChanged(shopParams.pageNumber + 1)">Next</button>
+    </li>
+
+  </ul>
+</nav>
+
 
     </section>
   </div>

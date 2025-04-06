@@ -69,7 +69,7 @@ public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts(
     int? typeId = null, 
     string? search = null,
     int pageIndex = 1, 
-    int pageSize = 10)
+    int pageSize = 9)
 {
 
      try

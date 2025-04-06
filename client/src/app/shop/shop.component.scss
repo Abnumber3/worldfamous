@@ -1,28 +1,46 @@
+.pagination-minimal {
+  padding-left: 0;
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
 
 
+  // ↓ Target only the number buttons
+  li.list-inline-item:not(:first-child):not(:last-child) {
+    margin: 0 2px; // ← Tighter spacing between page numbers
+  }
 
-.list-group-item {
-  cursor: pointer;
-}
+  .page-link-min {
+    border: none;
+    background: none;
+    padding: 6px 10px;
+    font-size: 14px;
+    border-radius: 8px;
+    color: #333;
+    transition: all 0.2s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-
-
-@media (max-width: 768px) {
-    input.form-control {
-      border-radius: 0.5rem;
+    &:hover {
+      background-color: #f1f1f1;
     }
 
-    .container-fluid.px-3 {
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-    }
-  
-    button.btn-primary {
-      border-radius: 0.5rem;
-      font-weight: 500;
+    &:disabled,
+    :host-context(.disabled) & {
+      opacity: 0.4;
+      pointer-events: none;
     }
   }
 
+  .active-page {
+    font-weight: 600;
+    font-size: 16px;
+    color: #007bff;
+    transform: scale(1.2);
+  }
+}
 
-
-  
+section{
+ cursor: pointer;
+}
