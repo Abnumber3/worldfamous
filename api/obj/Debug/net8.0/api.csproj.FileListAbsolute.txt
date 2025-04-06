@@ -142,3 +142,5 @@ C:\Users\Tina Peterson\Desktop\World-Famous\api\obj\Debug\net8.0\api.sourcelink.
 C:\Users\Tina Peterson\Desktop\World-Famous\api\bin\Debug\net8.0\AutoMapper.dll
 C:\Users\Tina Peterson\Desktop\World-Famous\api\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\Tina Peterson\Desktop\World-Famous\api\bin\Debug\net8.0\api.staticwebassets.runtime.json
+C:\Users\Tina Peterson\Desktop\World-Famous\api\bin\Debug\net8.0\package-lock.json
+C:\Users\Tina Peterson\Desktop\World-Famous\api\bin\Debug\net8.0\package.json

@@ -1,0 +1,26 @@
+<div class="card h-100 shadow-sm">
+  <img src="{{product.pictureUrl}}" alt="{{product.name}}" class="card-img-top bg-light" />
+  
+  <div class="card-body d-flex flex-column">
+    <a href="#">
+      <h6 class="text-uppercase mb-1">{{product.name}}</h6>
+    </a>
+    <span class="mb-3">{{product.price | currency }}</span>
+
+    <!-- Button Container -->
+    <div class="d-flex flex-column flex-sm-row gap-2 mt-auto">
+      <button 
+        type="button" 
+        class="btn btn-outline-secondary btn-sm flex-fill px-2 py-1">
+        Add to Cart
+      </button>
+      <button 
+        type="button" 
+        class="btn btn-outline-secondary btn-sm flex-fill px-2 py-1">
+        View
+      </button>
+    </div>
+
+    <small class="text-muted mt-2">9 mins</small>
+  </div>
+</div>

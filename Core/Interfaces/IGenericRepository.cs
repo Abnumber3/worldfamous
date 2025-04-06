@@ -10,6 +10,9 @@ namespace Core.Interfaces
     public interface IGenericRepository<T> where T : BaseEntity
     {
         Task<T> GetByIdAsync(int id);
+
+        Task<int> CountAsync(ISpecification<T> spec);
+
         Task<IReadOnlyList<T>> ListAllAsync();
 
         Task<T> GetEntityWithSpec(ISpecification<T> spec);

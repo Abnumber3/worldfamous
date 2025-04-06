@@ -1,0 +1,58 @@
+<nav class="navbar bg-dark navbar-expand-lg p-3 fixed-top shadow-sm border-bottom border-secondary" data-bs-theme="dark">
+  <div class="container-fluid">
+
+    <!-- Logo + Brand -->
+    <div class="d-flex align-items-center">
+      <img src="/WF-Images/globe.png" alt="globe" width="42" height="42" class="me-2">
+      <a class="navbar-brand text-white  fs-5" href="#">WorldFamous LLC</a>
+    </div>
+
+    <!-- Toggler -->
+    <button 
+      class="navbar-toggler" 
+      type="button" 
+      data-bs-toggle="collapse" 
+      data-bs-target="#navbar-collapse" 
+      aria-controls="navbar-collapse" 
+      aria-expanded="false" 
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Content -->
+    <div class="collapse navbar-collapse justify-content-between" id="navbar-collapse">
+
+      <!-- Center Nav Links -->
+      <ul class="navbar-nav mx-auto text-uppercase fw-semibold gap-lg-4 gap-2">
+        <li class="nav-item">
+          <a class="nav-link text-white" routerLink="/men">Men</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" routerLink="/women">Women</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" routerLink="/accessories">Accessories</a>
+        </li>
+      </ul>
+
+      <!-- Right Side: Cart + Auth -->
+      <div class="d-flex align-items-center gap-2">
+
+        <!-- Cart Icon -->
+        <a class="position-relative me-3" href="#">
+          <i class="fa fa-shopping-cart fa-lg text-white"></i>
+          <span 
+            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+            style="font-size: 0.7rem;">
+            3
+          </span>
+        </a>
+
+        <!-- Auth Buttons -->
+        <a class="btn btn-outline-light btn-sm px-3" routerLink="/login">Login</a>
+        <a class="btn btn-light btn-sm px-3" routerLink="/register">Register</a>
+      </div>
+    </div>
+  </div>
+</nav>

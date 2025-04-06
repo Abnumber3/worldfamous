@@ -1,0 +1,28 @@
+
+
+
+.list-group-item {
+  cursor: pointer;
+}
+
+
+
+@media (max-width: 768px) {
+    input.form-control {
+      border-radius: 0.5rem;
+    }
+
+    .container-fluid.px-3 {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+  
+    button.btn-primary {
+      border-radius: 0.5rem;
+      font-weight: 500;
+    }
+  }
+
+
+
+  

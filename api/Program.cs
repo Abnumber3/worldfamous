@@ -10,6 +10,7 @@ using System.Numerics;
 using Microsoft.AspNetCore.Mvc;
 using api.Errors;
 using api.Extensions;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,26 @@ builder.Services.AddControllers();
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Setting up my CORS (allowing access to the frontend)
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                    configurePolicy:  policyBuilder =>
+                      {
+                          policyBuilder.WithOrigins("https://localhost:4200"); // Allow frontend
+                                policyBuilder.AllowAnyHeader();
+                                policyBuilder.AllowAnyMethod();
+                                policyBuilder.AllowCredentials();
+                      });
+});
+
+
+
+
+
+
 // Add DbContext
 builder.Services.AddDbContext<StoreContext>(options =>
 {
@@ -29,7 +50,16 @@ builder.Services.AddDbContext<StoreContext>(options =>
 builder.Services.AddApplicationServices();
 
 
+
+
+
+
+
 var app = builder.Build();
+
+
+
+
 
 // Configure the HTTP request pipeline.
 
@@ -40,6 +70,7 @@ app.UseStatusCodePagesWithReExecute("/errors/{0}");
 app.UseHttpsRedirection();
 app.MapControllers();
 app.UseStaticFiles();
+app.UseCors(MyAllowSpecificOrigins);
 
 // Apply migrations and seed the database on startup
 using var scope = app.Services.CreateScope();

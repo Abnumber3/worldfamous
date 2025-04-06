@@ -1,0 +1,86 @@
+<div class="container-fluid ">
+
+  <!-- Mobile Filter/Sort Button -->
+  <div class="d-flex justify-content-end mb-3 d-md-none">
+    <button class="btn btn-outline-primary" (click)="toggleFilterPanel()">
+      Filter / Sort
+    </button>
+  </div>
+
+  <!-- Mobile Filter Panel (toggleable) -->
+  <div class="card mb-3 p-3 d-md-none" *ngIf="showFilterPanel">
+    <h5 class="text-warning">Sort</h5>
+    <select class="form-select mb-3" (change)="onSortSelected($event)">
+      <option *ngFor="let sort of sortOptions"
+      [value]="sort.value"
+      >
+       {{sort.name}}
+      </option>
+    </select>
+
+    <h5 class="text-warning">Clothing Types</h5>
+    <ul class="list-group" style="padding-left: 0rem">
+      <li 
+        class="list-group-item"
+        *ngFor="let productTypes of productType"
+        [class.active]="productTypes.id === typeIdSelected"
+        (click)="onTypeSelected(productTypes.id)">
+        {{ productTypes.name }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="row gy-4">
+
+    <!-- Desktop Sidebar Filters -->
+    <section class="col-md-3 d-none d-md-block"> 
+      <h5 class="text-warning ms-3">Sort</h5>
+      <select class="custom-select mb-4 w-100" (change)="onSortSelected($event)">
+        <option *ngFor="let sort of sortOptions"
+        [value]="sort.value">
+      {{sort.name}}
+      </option>
+       
+      </select>
+
+      <h5 class="text-warning mb-3">Clothing Types</h5>
+      <ul class="list-group" style="padding-left: 0;">
+        <li 
+          class="list-group-item"
+          *ngFor="let productTypes of productType"
+          [class.active]="productTypes.id === typeIdSelected"
+          (click)="onTypeSelected(productTypes.id)">
+          {{ productTypes.name }}
+        </li>
+      </ul>
+    </section>
+
+    <!-- Product Section -->
+    <section class="col-12 col-md-9">
+
+      <!-- Search Bar (mobile-friendly layout) -->
+      <div class="mb-3">
+        <form class="d-flex flex-column flex-sm-row gap-2 w-100" style= "width: 100%; max-width: 500px ">
+          <input 
+            type="text" 
+            class="form-control w-100" 
+            placeholder="Search items...">
+          <button class="btn btn-primary" type="button">Search</button>
+        </form>
+      </div>
+
+      <!-- Result Count -->
+      <div class="mb-3 text-muted">
+        Showing <strong>{{ products.length }}</strong> result{{ products.length === 1 ? '' : 's' }}
+      </div>
+
+      <!-- Product Grid (2x2 on mobile, 3 on desktop) -->
+      <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3 g-3 my-3">
+        <div class="col" *ngFor="let item of products">
+          <app-product-item [product]="item"></app-product-item>
+        </div>
+      </div>
+
+    </section>
+  </div>
+</div>

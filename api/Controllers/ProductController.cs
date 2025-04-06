@@ -11,6 +11,8 @@ using Core.Specifications;
 using api.Dtos;
 using AutoMapper;
 using api.Errors;
+using api.Helpers;
+
 
 namespace api.Controllers
 {
@@ -41,16 +43,54 @@ namespace api.Controllers
 
 
         // Gets all products and returns them as a DTO (certain columns missing from the original entity). the purpose is to only let the user see what they need to see
-        [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts(
-            string sort, int? typeId)
-        {
-            var spec = new ProductsWithTypesSpecification(sort, typeId);
-            var products = await _productsRepo.ListAsync(spec);
-            return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products));
-        }
+        // [HttpGet]
+        // public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts(
+        //     string sort, int? typeId)
+        // {
+        //     var spec = new ProductsWithTypesSpecification(sort, typeId);
+        //     var products = await _productsRepo.ListAsync(spec);
+        //     return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products));
+        // }
 
 
+//             [HttpGet]
+// public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts(
+//     string? sort = null, int? typeId = null)
+// {
+//     var spec = new ProductsWithTypesSpecification(sort, typeId, pageIndex, pageSize);
+//     var products = await _productsRepo.ListAsync(spec);
+    
+//     return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products));
+// }
+
+[HttpGet]
+public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts(
+    string? sort = null, 
+    int? typeId = null, 
+    string? search = null,
+    int pageIndex = 1, 
+    int pageSize = 10)
+{
+
+     try
+    {
+        var spec = new ProductsWithTypesSpecification(sort, typeId, search, pageIndex, pageSize);
+        var countSpec = new ProductWithFiltersForCountSpecification(search, typeId);
+        
+        var totalItems = await _productsRepo.CountAsync(countSpec);
+        if (totalItems == 0) return NotFound(new ApiResponse(404, "No products found matching your search criteria."));
+        
+        var products = await _productsRepo.ListAsync(spec);
+
+        var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products);
+
+        return Ok(new Pagination<ProductToReturnDto>(pageIndex, pageSize, totalItems, data));
+    }
+    catch 
+    {
+        return StatusCode(500, new ApiResponse(500, "An error occurred while processing your request."));
+    }
+}
 
 
 
