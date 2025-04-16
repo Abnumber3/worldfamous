@@ -73,15 +73,18 @@ public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts(
 {
 
      try
-    {
+   {
         var spec = new ProductsWithTypesSpecification(sort, typeId, search, pageIndex, pageSize);
         var countSpec = new ProductWithFiltersForCountSpecification(search, typeId);
         
         var totalItems = await _productsRepo.CountAsync(countSpec);
-        if (totalItems == 0) return NotFound(new ApiResponse(404, "No products found matching your search criteria."));
-        
-        var products = await _productsRepo.ListAsync(spec);
 
+        if (totalItems == 0)
+        {
+            return Ok(new Pagination<ProductToReturnDto>(pageIndex, pageSize, 0, new List<ProductToReturnDto>()));
+        }
+
+        var products = await _productsRepo.ListAsync(spec);
         var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products);
 
         return Ok(new Pagination<ProductToReturnDto>(pageIndex, pageSize, totalItems, data));

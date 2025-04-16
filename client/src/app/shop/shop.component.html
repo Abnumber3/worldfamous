@@ -60,19 +60,28 @@
 
       <!-- Search Bar (mobile-friendly layout) -->
       <div class="mb-3">
-        <form class="d-flex flex-column flex-sm-row gap-2 w-100" style= "width: 100%; max-width: 500px ">
+        <form class="d-flex flex-sm-row flex-column align-items-stretch gap-2 w-100" style="max-width: 500px;">
           <input 
+            #search
             type="text" 
-            class="form-control w-100" 
+            class="form-control" 
             placeholder="Search items...">
-          <button class="btn btn-primary" type="button">Search</button>
+        
+          <button (click)="onSearch()" class="btn btn-primary" type="button">
+            Search
+          </button>
+        
+          <button (click)="onClear()" class="btn btn-outline-secondary" type="button">
+            Clear
+          </button>
         </form>
       </div>
 
       <!-- Result Count -->
       <div class="mb-3 text-muted">
-        Showing <strong>{{ products.length }}</strong> result{{ products.length === 1 ? '' : 's' }}
+        Showing <strong>{{ getDisplayedCount() }}</strong> of <strong>{{ totalCount }}</strong> result{{ totalCount === 1 ? '' : 's' }}
       </div>
+      
 
       <!-- Product Grid (2x2 on mobile, 3 on desktop) -->
       <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3 g-3 my-3">
@@ -81,38 +90,19 @@
         </div>
       </div>
 
-
-<!-- Minimal Pagination Controls -->
-<nav *ngIf="totalCount > shopParams.pageSize" class="text-center mt-4">
-  <ul class="list-inline pagination-minimal">
-
-    <li class="list-inline-item" [class.disabled]="shopParams.pageNumber === 1">
-      <button class="page-link-min"
-      
-       (click)="onPageChanged(shopParams.pageNumber - 1)">Previous</button>
-    </li>
-
-    <li 
-  class="list-inline-item"
-  *ngFor="let page of getPageNumbers()">
-  <button 
-    class="page-link-min"
-    [ngClass]="{ 'active-page': page === shopParams.pageNumber }"
-    (click)="onPageChanged(page)">
-    {{ page }}
-  </button>
-</li>
+      <div class="text-center text-muted mt-4" *ngIf="hasSearched && products.length === 0">
+        😕 0 matches found
+      </div>
 
 
-    <li class="list-inline-item" [class.disabled]="shopParams.pageNumber === getPageCount()">
-      <button class="page-link-min"
-       [disabled]="shopParams.pageNumber === getPageCount()"
-       (click)="onPageChanged(shopParams.pageNumber + 1)">Next</button>
-    </li>
-
-  </ul>
-</nav>
-
+<!-- Pagination Controls -->
+<app-pagination-controls 
+*ngIf="!hasSearched && totalCount > 0"
+[pageNumber]="shopParams.pageNumber"
+[pageSize]="shopParams.pageSize"
+[totalCount]="totalCount"
+(pageChanged)="onPageChanged($event)">
+</app-pagination-controls>
 
     </section>
   </div>

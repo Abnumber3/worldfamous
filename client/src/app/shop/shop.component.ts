@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IProduct } from '../shared/models/product';
 import { ShopService } from './shop.service';
 import { ProductItemComponent } from './product-item/product-item.component';
 import { CommonModule } from '@angular/common';
 import { IType } from '../shared/models/productType';
-import { ShopParams } from '../shared/models/shop.Params';
+import { PaginationControlsComponent } from '../shared/pagination-controls.component';
+import { ShopParams } from '../shared/models/shopParams';
+
 
 
 @Component({
@@ -14,7 +16,7 @@ import { ShopParams } from '../shared/models/shop.Params';
   styleUrl: './shop.component.scss'
 })
 export class ShopComponent implements OnInit {
-
+  @ViewChild('search') search!: ElementRef;
   products: IProduct[] = [];
   productType: IType[] = [];
   shopParams  = new ShopParams();
@@ -24,6 +26,8 @@ export class ShopComponent implements OnInit {
     {name: 'Price: Low to High', value: 'priceAsc'},
     {name: 'Price: High to Low', value: 'priceDesc'},
   ]
+
+  hasSearched: boolean = false;
 
 
   constructor(private shopService: ShopService) { }
@@ -35,14 +39,17 @@ export class ShopComponent implements OnInit {
   }
 
   getproducts() {
-    this.shopService.getProducts(this.shopParams).subscribe((response)=>{
-      this.products = response!.data;
-      this.shopParams.pageNumber = response!.pageIndex;
-      this.shopParams.pageSize = response!.pageSize;
-      this.totalCount = response!.count;
-    }, error => {
-      console.log(error);
-    })
+    this.shopService.getProducts(this.shopParams).subscribe({
+      next: (response) => {
+        this.products = response!.data;
+        this.shopParams.pageNumber = response!.pageIndex;
+        this.shopParams.pageSize = response!.pageSize;
+        this.totalCount = response!.count;
+      },
+      error: (error) => {
+        console.error('Error fetching products:', error);
+      }
+    });
   }
 
   getTypes(){
@@ -57,6 +64,7 @@ export class ShopComponent implements OnInit {
     this.shopParams.typeId = typeId;
     this.getproducts();
     console.log(typeId);
+    this.shopParams.pageNumber = 1; // reset page when filtering
   }
 
 
@@ -77,13 +85,9 @@ onSortSelected(event: Event) {
 
           
   console.log('Sort value:', value);
-
-
 }
-onPageChanged(page: number) {
-  const lastPage = this.getPageCount();
-  if (page < 1 || page > lastPage) return; // 🛑 clamp the bounds
 
+onPageChanged(page: number) {
   if (page === this.shopParams.pageNumber) return;
 
   this.shopParams.pageNumber = page;
@@ -92,16 +96,24 @@ onPageChanged(page: number) {
 }
 
 
-getPageCount(): number {
-  return Math.ceil(this.totalCount / this.shopParams.pageSize);
+
+getDisplayedCount(): number {
+  const currentTotal = this.shopParams.pageNumber * this.shopParams.pageSize;
+  return currentTotal > this.totalCount ? this.totalCount : currentTotal;
 }
 
-getPageNumbers(): number[] {
-  const totalPages = this.getPageCount();
-  return Array.from({ length: totalPages }, (_, i) => i + 1);
+onSearch(){
+  this.shopParams.search = this.search.nativeElement.value;
+  this.hasSearched = true;
+  this.getproducts();
 }
 
-
-
-
+onClear(){
+  this.shopParams.search = '';
+  this.hasSearched = false;
+  this.shopParams = new ShopParams();
+  this.getproducts();
+  this.search.nativeElement.value = '';
+  this.shopParams.pageNumber = 1; // reset page when filtering
+}
 }

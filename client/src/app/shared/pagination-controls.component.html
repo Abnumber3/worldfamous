@@ -1,0 +1,26 @@
+<div class="d-flex justify-content-center mt-4" >
+<ul class="pagination-minimal">
+
+  <li class="list-inline-item">
+    <button class="page-link-min" (click)="onPageChange(pageNumber - 1)" [disabled]="pageNumber === 1">
+      Prev
+    </button>
+  </li>
+
+  <li class="list-inline-item" *ngFor="let page of getPages()">
+    <button 
+      class="page-link-min" 
+      [ngClass]="{'active-page': page === pageNumber}"
+      (click)="onPageChange(page)">
+      {{ page }}
+    </button>
+  </li>
+
+  <li class="list-inline-item">
+    <button class="page-link-min" (click)="onPageChange(pageNumber + 1)" [disabled]="pageNumber === totalPages">
+      Next
+    </button>
+  </li>
+
+</ul>
+</div>

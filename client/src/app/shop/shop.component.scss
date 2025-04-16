@@ -4,17 +4,16 @@
   display: inline-flex;
   align-items: center;
 
-
-  // ↓ Target only the number buttons
+  // Tighter spacing between number buttons
   li.list-inline-item:not(:first-child):not(:last-child) {
-    margin: 0 2px; // ← Tighter spacing between page numbers
+    margin: 0 2px;
   }
 
   .page-link-min {
     border: none;
     background: none;
-    padding: 6px 10px;
-    font-size: 14px;
+    padding: 6px 12px;
+    font-size: 16px; // ← Bigger text here
     border-radius: 8px;
     color: #333;
     transition: all 0.2s ease-in-out;
@@ -35,12 +34,12 @@
 
   .active-page {
     font-weight: 600;
-    font-size: 16px;
+    font-size: 18px; // ← Even bigger for the active page
     color: #007bff;
     transform: scale(1.2);
   }
 }
 
-section{
- cursor: pointer;
+section {
+  cursor: pointer;
 }

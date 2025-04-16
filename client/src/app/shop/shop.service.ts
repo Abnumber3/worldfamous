@@ -4,7 +4,7 @@ import { IPagination } from '../shared/models/pagination';
 import { IProduct } from '../shared/models/product';
 import { IType } from '../shared/models/productType';
 import { delay, map } from 'rxjs/operators';
-import { ShopParams } from '../shared/models/shop.Params';
+import { ShopParams } from '../shared/models/shopParams';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,9 @@ export class ShopService {
       params = params.append('sort', shopParams.sort);
     }
 
+    if(shopParams.search){
+      params = params.append('search', shopParams.search);
+    }
     params = params.append('pageIndex', shopParams.pageNumber.toString()); // <-- backend expects 'pageIndex'
     params = params.append('pageSize', shopParams.pageSize.toString());
 
