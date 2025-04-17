@@ -62,9 +62,14 @@ export class ShopComponent implements OnInit {
 
   onTypeSelected(typeId: number) {
     this.shopParams.typeId = typeId;
-    this.getproducts();
     console.log(typeId);
+    this.shopParams.search = '';
     this.shopParams.pageNumber = 1; // reset page when filtering
+    this.hasSearched = false;
+    this.getproducts();
+  
+
+   
   }
 
 
@@ -79,9 +84,10 @@ toggleFilterPanel() {
 onSortSelected(event: Event) {
   const selectElement = event.target as HTMLSelectElement;
   const value = selectElement.value;
-
   this.shopParams.sort = value;
+  this.shopParams.pageNumber = 1;
   this.getproducts();
+  
 
           
   console.log('Sort value:', value);
@@ -102,9 +108,17 @@ getDisplayedCount(): number {
   return currentTotal > this.totalCount ? this.totalCount : currentTotal;
 }
 
-onSearch(){
-  this.shopParams.search = this.search.nativeElement.value;
+onSearch() {
+  const searchTerm = this.search.nativeElement.value.trim();
+
   this.hasSearched = true;
+  this.shopParams.search = searchTerm;
+  this.shopParams.pageNumber = 1;
+
+  // Only reset typeId (search globally) IF there's actually a search term
+  if (searchTerm.length > 0) {
+    this.shopParams.typeId = 0;
+  }
   this.getproducts();
 }
 

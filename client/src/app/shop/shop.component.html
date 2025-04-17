@@ -60,21 +60,22 @@
 
       <!-- Search Bar (mobile-friendly layout) -->
       <div class="mb-3">
-        <form class="d-flex flex-sm-row flex-column align-items-stretch gap-2 w-100" style="max-width: 500px;">
+        <div class="d-flex flex-sm-row flex-column align-items-stretch gap-2 w-100" style="max-width: 550px;">
           <input 
-            #search
+            (keyup.enter)="onSearch()" 
+            #search 
             type="text" 
             class="form-control" 
-            placeholder="Search items...">
+            placeholder="Search items..." />
         
           <button (click)="onSearch()" class="btn btn-primary" type="button">
             Search
           </button>
         
-          <button (click)="onClear()" class="btn btn-outline-secondary" type="button">
-            Clear
+          <button  (click)="onClear()" class="btn btn-outline-secondary" type="button">
+            Clear 
           </button>
-        </form>
+        </div>
       </div>
 
       <!-- Result Count -->
@@ -97,7 +98,7 @@
 
 <!-- Pagination Controls -->
 <app-pagination-controls 
-*ngIf="!hasSearched && totalCount > 0"
+*ngIf="!hasSearched && totalCount > 9"
 [pageNumber]="shopParams.pageNumber"
 [pageSize]="shopParams.pageSize"
 [totalCount]="totalCount"
