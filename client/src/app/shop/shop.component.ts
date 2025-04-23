@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { IType } from '../shared/models/productType';
 import { PaginationControlsComponent } from '../shared/pagination-controls.component';
 import { ShopParams } from '../shared/models/shopParams';
+import { SearchNormalizerService } from './search-normlizer.service';
 
 
 
@@ -30,7 +31,10 @@ export class ShopComponent implements OnInit {
   hasSearched: boolean = false;
 
 
-  constructor(private shopService: ShopService) { }
+  constructor(
+    private shopService: ShopService,
+    private searchNormalizer: SearchNormalizerService
+  ) { }
 
   ngOnInit() {
    this.getproducts();
@@ -108,19 +112,28 @@ getDisplayedCount(): number {
   return currentTotal > this.totalCount ? this.totalCount : currentTotal;
 }
 
+
+
+
+
 onSearch() {
   const searchTerm = this.search.nativeElement.value.trim();
-
+  const normalizedTerm = this.searchNormalizer.normalize(searchTerm);
   this.hasSearched = true;
-  this.shopParams.search = searchTerm;
+  this.shopParams.search = normalizedTerm;
   this.shopParams.pageNumber = 1;
 
   // Only reset typeId (search globally) IF there's actually a search term
-  if (searchTerm.length > 0) {
+  if (normalizedTerm.length > 0) {
     this.shopParams.typeId = 0;
   }
   this.getproducts();
 }
+
+
+
+
+
 
 onClear(){
   this.shopParams.search = '';

@@ -19,3 +19,45 @@
       right: 30px;
 
 }
+
+
+.nav-link {
+      position: relative;
+      display: inline-block; /* Ensures positioning works correctly */
+      padding-bottom: 5px; /* Optional: gives room for the underline */
+      text-align: center;
+    }
+    
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 0;
+      width: 80%; /* Adjust width as needed */
+      height: 1px;
+      background-color: white;
+      border-radius: 1px;
+    }
+    
+
+/* Base for hover underline */
+.nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 1px;
+      background-color: white;
+      border-radius: 1px;
+      transition: width 0.6s ease;
+    }
+    
+    /* On hover - expand from center */
+    .nav-link:hover::after {
+      width: 80%;
+    }
+    
+
