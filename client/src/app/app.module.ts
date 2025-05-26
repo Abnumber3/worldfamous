@@ -18,7 +18,6 @@ import { HomeModule } from "./home/home.module";
     BrowserAnimationsModule,
     AppRoutingModule,
     CoreModule,
-    ShopModule,
     HomeModule
 ],
   providers: [

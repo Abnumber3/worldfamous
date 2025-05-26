@@ -6,8 +6,7 @@ import { ProductDetailsComponent } from './shop/product-details/product-details.
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
-    {path: 'shop', component: ShopComponent},
-    {path: 'shop/:id', component: ProductDetailsComponent}, // Dynamic route for shop items
+    {path: 'shop', loadChildren: () => import('./shop/shop.module').then(m => m.ShopModule)}, // Lazy loading the Shop module
     {path: '**', redirectTo: ''} // Redirect to home for any unknown routes
 ];
 
