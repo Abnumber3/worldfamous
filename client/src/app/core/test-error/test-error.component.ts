@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-test-error',
-  imports: [],
+  standalone: false,
   templateUrl: './test-error.component.html',
   styleUrl: './test-error.component.scss'
 })
