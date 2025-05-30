@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, Type } from '@angular/core';
 
 @Component({
   selector: 'app-test-error',
@@ -12,6 +12,7 @@ export class TestErrorComponent {
   constructor(private http: HttpClient) { }
 
   baseUrl = 'http://localhost:5187/api/';
+  validationErrors: any;
 
   ngOnInit(){
 
@@ -58,6 +59,7 @@ export class TestErrorComponent {
         console.log('Response:', response);
       }, error: (error) => {
         console.error('Error:', error);
+        this.validationErrors = error.errors;
       }
     })
   }
