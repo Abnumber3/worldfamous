@@ -22,7 +22,7 @@ import { withInterceptorsFromDi } from '@angular/common/http';
     AppRoutingModule,
     CoreModule,
     ShopModule,
-    HomeModule
+    HomeModule,
 ],
   providers: [
 provideHttpClient(withInterceptorsFromDi()),
