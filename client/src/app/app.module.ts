@@ -10,6 +10,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { ShopModule } from "./shop/shop.module";
 import { HomeModule } from "./home/home.module";
 import { withInterceptorsFromDi } from '@angular/common/http';
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
   declarations: [
