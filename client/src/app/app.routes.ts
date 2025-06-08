@@ -8,14 +8,36 @@ import { ServerErrorComponent } from './core/server-error/server-error.component
 import { NotFoundComponent } from './core/not-found/not-found.component';
 
 export const routes: Routes = [
-    {path: '', component: HomeComponent},
-    {path: 'test-error', component: TestErrorComponent, data: {breadcrumb: 'Test Error'}}, // Route for testing errors
-    {path: 'server-error', component: ServerErrorComponent, data: {breadcrumb: 'Server Error'}},
-    {path: 'not-found', component:NotFoundComponent, data: {breadcrumb: 'Not Found'}},
-    {
-      path: 'shop', loadChildren: () => import('./shop/shop.module').then(m => m.ShopModule),
-   data: {breadcrumb: 'Shop'} }, // Lazy loading the Shop module
-    {path: '**', redirectTo: 'not-found'} // Redirect to home for any unknown routes
+  {
+    path: '',
+    component: HomeComponent,
+    data: { breadcrumb: 'Home' }
+  },
+  {
+    path: 'test-error',
+    component: TestErrorComponent,
+    data: { breadcrumb: 'Test Error' }
+  },
+  {
+    path: 'server-error',
+    component: ServerErrorComponent,
+    data: { breadcrumb: 'Server Error' }
+  },
+  {
+    path: 'not-found',
+    component: NotFoundComponent,
+    data: { breadcrumb: 'Not Found' }
+  },
+  {
+    path: 'shop',
+    loadChildren: () =>
+      import('./shop/shop.module').then(m => m.ShopModule),
+    data: { breadcrumb: 'Shop' } // ✅ Fixed capitalization
+  },
+  {
+    path: '**',
+    redirectTo: 'not-found'
+  }
 ];
 
 

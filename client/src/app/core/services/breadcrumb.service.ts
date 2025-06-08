@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, PRIMARY_OUTLET, Router } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  PRIMARY_OUTLET,
+  Router
+} from '@angular/router';
 import { BehaviorSubject, filter } from 'rxjs';
 
 export interface Breadcrumb {
@@ -14,31 +19,46 @@ export class BreadcrumbService {
 
   constructor(private router: Router, private route: ActivatedRoute) {
     this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
+      .pipe(filter(e => e instanceof NavigationEnd))
       .subscribe(() => {
-        const root = this.route.root;
-        const breadcrumbs = this.buildBreadcrumbs(root);
+        // 1) start fresh with Home
+        const breadcrumbs: Breadcrumb[] = [{ label: 'Home', url: '/' }];
+        // 2) walk the tree and fill in Shop, Product Details, etc.
+        this.addBreadcrumbs(this.route.root, '', breadcrumbs);
         this._breadcrumbs$.next(breadcrumbs);
       });
   }
 
-  private buildBreadcrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: Breadcrumb[] = []): Breadcrumb[] {
-    const children = route.children;
-
-    for (const child of children) {
+  private addBreadcrumbs(
+    route: ActivatedRoute,
+    url: string,
+    breadcrumbs: Breadcrumb[]
+  ): void {
+    for (const child of route.children) {
       if (child.outlet !== PRIMARY_OUTLET) continue;
 
-      const routeSegment = child.snapshot.url.map(segment => segment.path).join('/');
-      if (routeSegment) url += `/${routeSegment}`;
-
-      const label = child.snapshot.data['breadcrumb'];
-      if (label) {
-        breadcrumbs.push({ label, url });
+      // build up the URL
+      const segment = child.snapshot.url.map(s => s.path).join('/');
+      if (segment) {
+        url += `/${segment}`;
       }
 
-      return this.buildBreadcrumbs(child, url, breadcrumbs);
-    }
+      // grab static or dynamic label
+      let label = child.snapshot.data['breadcrumb'];
+      if (typeof label === 'function') {
+        label = label(child.snapshot);
+      }
 
-    return breadcrumbs;
+      // only push if label exists *and* it's not the same as the last one
+      if (label) {
+        const last = breadcrumbs[breadcrumbs.length - 1];
+        if (!last || last.label !== label) {
+          breadcrumbs.push({ label, url });
+        }
+      }
+
+      // recurse deeper
+      this.addBreadcrumbs(child, url, breadcrumbs);
+    }
   }
 }
