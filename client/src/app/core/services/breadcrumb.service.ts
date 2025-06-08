@@ -29,6 +29,19 @@ export class BreadcrumbService {
       });
   }
 
+  /**
+   * Set a breadcrumb label by its alias.
+   * @param alias The alias of the breadcrumb to set.
+   * @param label The new label for the breadcrumb.
+   */
+  set(alias: string, label: string) {
+    const current = this._breadcrumbs$.getValue();
+    const updated = current.map(b =>
+      b.label === alias ? { ...b, label } : b
+    );
+    this._breadcrumbs$.next(updated);
+  }
+
   private addBreadcrumbs(
     route: ActivatedRoute,
     url: string,

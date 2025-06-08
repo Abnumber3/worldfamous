@@ -1,7 +1,7 @@
 <nav class="breadcrumb-container" *ngIf="(breadcrumbs$ | async)?.length">
   <ng-container *ngFor="let breadcrumb of breadcrumbs$ | async; let last = last">
     <ng-container *ngIf="!last">
-      <a [routerLink]="breadcrumb.url">{{ breadcrumb.label }}</a> /
+      <a [routerLink]="breadcrumb.url">{{ breadcrumb.label }}</a> 
     </ng-container>
     <ng-container *ngIf="last">
       <span>{{ breadcrumb.label }}</span>

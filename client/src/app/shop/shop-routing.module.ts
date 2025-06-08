@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path: ':id',
     component: ProductDetailsComponent,
-    data: { breadcrumb: 'Product Details' } // Static breadcrumb label for dynamic product routes
+    data: { breadcrumb: '@productDetail' } // Static breadcrumb label for dynamic product routes
   }
 ];
 

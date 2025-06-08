@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../../shared/models/product';
 import { ShopService } from '../shop.service';
 import { ActivatedRoute } from '@angular/router';
+import { BreadcrumbService } from '../../core/services/breadcrumb.service';
 
 @Component({
   selector: 'app-product-details',
@@ -15,7 +16,8 @@ product: IProduct | null = null;
 
 constructor(
   private shopService: ShopService,
-  private activatedRoute: ActivatedRoute
+  private activatedRoute: ActivatedRoute,
+  private bcService: BreadcrumbService
 ) { }
 
 
@@ -34,6 +36,7 @@ loadProduct() {
   this.shopService.getProduct(+id).subscribe({
     next: (product) => {
       this.product = product;
+      this.bcService.set('@productDetail', product.name); // Set the breadcrumb with the product name
     },
     error: (error) => {
       console.error('Error loading product:', error);
