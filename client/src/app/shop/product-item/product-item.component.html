@@ -1,36 +1,33 @@
 <div class="card h-100 shadow-sm">
- <a routerLink="/shop/{{product.id}}">
-   <img
-    src="{{product.pictureUrl}}"
-    alt="{{product.name}}"
-    class="card-img-top bg-light"
-    />
-</a>
-  <div class="flex align center justify-content-center hover-overlay">
-    
-  </div>
-  <div class="card-body d-flex flex-column">
-    <a routerLink="/shop/{{product.id}}">
-      <h6 class="text-uppercase mb-1">{{product.name}}</h6>
+  <div class="position-relative image" style="cursor: pointer;">
+
+    <a [routerLink]="'/shop/' + product.id">
+      <img
+        [src]="product.pictureUrl"
+        [alt]="product.name"
+        class="card-img-top bg-light"
+      />
     </a>
-    <span class="mb-3">{{product.price | currency }}</span>
 
-    <!-- Button Container -->
-    <div class="d-flex flex-column flex-sm-row gap-2 mt-auto">
+    <div class="hover-overlay d-flex justify-content-center align-items-end gap-2 p-2 pt-5">
       <button 
         type="button" 
-        class="btn btn-outline-secondary btn-sm flex-fill px-2 py-1">
-        Add to Cart
+        class="btn btn-primary btn-sm custom-btn">
+        <i class="fa-solid fa-cart-shopping"></i>
       </button>
+
       <button 
         type="button" 
-        class="btn btn-outline-secondary btn-sm flex-fill px-2 py-1"
-        routerLink="/shop/{{product.id}}">
-
+        class="btn btn-primary btn-sm custom-btn"
+        [routerLink]="'/shop/' + product.id">
         View
       </button>
     </div>
 
-    <small class="text-muted mt-2">9 mins</small>
   </div>
-</div>
+
+  <div class="card-body d-flex flex-column">
+    <a [routerLink]="'/shop/' + product.id">
+      <h6 class="text-uppercase mb-1">{{ product.name }}</h6>
+    </a>
+    <span class="mb-3">{{ product.price | currency }}</span>
