@@ -10,7 +10,9 @@ import { provideHttpClient } from '@angular/common/http';
 import { ShopModule } from "./shop/shop.module";
 import { HomeModule } from "./home/home.module";
 import { withInterceptorsFromDi } from '@angular/common/http';
+import { NgxSpinnerModule } from "ngx-spinner";   // <-- Corrected line
 import { SharedModule } from "./shared/shared.module";
+import { LoadingInterceptor } from "./core/Interceptors/loading.interceptors";
 
 @NgModule({
   declarations: [
@@ -24,12 +26,18 @@ import { SharedModule } from "./shared/shared.module";
     CoreModule,
     ShopModule,
     HomeModule,
-],
+    NgxSpinnerModule,   // <-- No more error here
+  ],
   providers: [
-provideHttpClient(withInterceptorsFromDi()),
- {
+    provideHttpClient(withInterceptorsFromDi()),
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,
+      multi: true
+    },
+      {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
       multi: true
     }
 

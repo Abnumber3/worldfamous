@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from './shared/models/product';
 import { IPagination } from './shared/models/pagination';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-root',
@@ -14,9 +15,14 @@ export class AppComponent implements OnInit {
   products: IProduct[] = []; // Initialize products array
 
   //Setting up connection to backend
-  constructor() {}
+  constructor(private spinner: NgxSpinnerService) {}
 
-  ngOnInit(): void {
-    
-  }
+ngOnInit() {
+  this.spinner.show(undefined, {
+    type:    'ball-scale-multiple',
+    bdColor: 'rgba(255, 255, 255, 0.7)',
+    color:   '#333333',
+  });
+  setTimeout(() => this.spinner.hide(), 3000);
+}
 }
