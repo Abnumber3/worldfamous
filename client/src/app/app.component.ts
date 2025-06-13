@@ -18,11 +18,11 @@ export class AppComponent implements OnInit {
   constructor(private spinner: NgxSpinnerService) {}
 
 ngOnInit() {
-  this.spinner.show(undefined, {
-    type:    'ball-scale-multiple',
-    bdColor: 'rgba(255, 255, 255, 0.7)',
-    color:   '#333333',
-  });
-  setTimeout(() => this.spinner.hide(), 3000);
+  // this.spinner.show(undefined, {
+  //   type:    'pacman',
+  //   bdColor: 'rgba(255, 255, 255, 0.7)',
+  //   color:   '#333333',
+  // });
+  // setTimeout(() => this.spinner.hide(), 3000);
 }
 }
