@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { AppComponent } from "./app.component";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app.routes";
@@ -10,7 +10,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { ShopModule } from "./shop/shop.module";
 import { HomeModule } from "./home/home.module";
 import { withInterceptorsFromDi } from '@angular/common/http';
-import { NgxSpinnerModule } from "ngx-spinner";   // <-- Corrected line
+import { NgxSpinnerModule } from "ngx-spinner";
 import { SharedModule } from "./shared/shared.module";
 import { LoadingInterceptor } from "./core/Interceptors/loading.interceptors";
 
@@ -18,7 +18,6 @@ import { LoadingInterceptor } from "./core/Interceptors/loading.interceptors";
   declarations: [
     AppComponent,
   ],
-
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -26,7 +25,7 @@ import { LoadingInterceptor } from "./core/Interceptors/loading.interceptors";
     CoreModule,
     ShopModule,
     HomeModule,
-    NgxSpinnerModule,   // <-- No more error here
+    NgxSpinnerModule,
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
@@ -35,13 +34,15 @@ import { LoadingInterceptor } from "./core/Interceptors/loading.interceptors";
       useClass: ErrorInterceptor,
       multi: true
     },
-      {
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: LoadingInterceptor,
       multi: true
     }
-
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
+  // 🔧 THIS LINE RIGHT HERE IS YOUR FIX:
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
