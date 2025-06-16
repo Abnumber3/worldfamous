@@ -8,40 +8,41 @@ import { BreadcrumbService } from '../../core/services/breadcrumb.service';
   selector: 'app-product-details',
   standalone: false,
   templateUrl: './product-details.component.html',
-  styleUrl: './product-details.component.scss'
+  styleUrls: ['./product-details.component.scss']  // <-- corrected typo: styleUrls
 })
 export class ProductDetailsComponent implements OnInit {
-product: IProduct | null = null;
+  product: IProduct | null = null;
 
-
-constructor(
-  private shopService: ShopService,
-  private activatedRoute: ActivatedRoute,
-  private bcService: BreadcrumbService
-) { }
-
-
-ngOnInit(){
-this.loadProduct();
-}
-
-
-loadProduct() {
-  const id = this.activatedRoute.snapshot.paramMap.get('id');
-  if (id === null) {
-    console.error('No ID in route');
-    return;
+  constructor(
+    private shopService: ShopService,
+    private activatedRoute: ActivatedRoute,
+    private bcService: BreadcrumbService
+  ) { 
+    // Do NOT set breadcrumb here — let product load first
+     this.bcService.set('@productDetail', '');
+    
   }
 
-  this.shopService.getProduct(+id).subscribe({
-    next: (product) => {
-      this.product = product;
-      this.bcService.set('@productDetail', product.name); // Set the breadcrumb with the product name
-    },
-    error: (error) => {
-      console.error('Error loading product:', error);
-    }
-  });
-}
+  ngOnInit() {
+    this.loadProduct();
+  }
 
+  loadProduct() {
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    if (id === null) {
+      console.error('No ID in route');
+      return;
+    }
+
+    this.shopService.getProduct(+id).subscribe({
+      next: (product) => {
+        this.product = product;
+        // Only set breadcrumb after product successfully loaded
+        this.bcService.set('@productDetail', product.name);
+      },
+      error: (error) => {
+        console.error('Error loading product:', error);
+      }
+    });
+  }
 }
