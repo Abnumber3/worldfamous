@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
   ActivatedRoute,
+  ActivationEnd,
   NavigationEnd,
   PRIMARY_OUTLET,
   Router
@@ -17,31 +18,40 @@ export class BreadcrumbService {
   private readonly _breadcrumbs$ = new BehaviorSubject<Breadcrumb[]>([]);
   readonly breadcrumbs$ = this._breadcrumbs$.asObservable();
 
+  // Holds dynamic labels for aliases like "@productDetail"
+  private readonly labelMap = new Map<string, string>();
+
   constructor(private router: Router, private route: ActivatedRoute) {
+    // Rebuild on each navigation end
     this.router.events
       .pipe(filter(e => e instanceof NavigationEnd))
       .subscribe(() => {
-        // 1) start fresh with Home
-        const breadcrumbs: Breadcrumb[] = [{ label: 'Home', url: '/' }];
-        // 2) walk the tree and fill in Shop, Product Details, etc.
-        this.addBreadcrumbs(this.route.root, '', breadcrumbs);
-        this._breadcrumbs$.next(breadcrumbs);
+        this.recomputeBreadcrumbs();
       });
   }
 
   /**
-   * Set a breadcrumb label by its alias.
-   * @param alias The alias of the breadcrumb to set.
-   * @param label The new label for the breadcrumb.
+   * Public method to set a dynamic label.
    */
   set(alias: string, label: string) {
-    const current = this._breadcrumbs$.getValue();
-    const updated = current.map(b =>
-      b.label === alias ? { ...b, label } : b
-    );
-    this._breadcrumbs$.next(updated);
+    console.log('[BreadcrumbService] set:', alias, '→', label);
+    this.labelMap.set(alias, label);
+    this.recomputeBreadcrumbs();
   }
 
+  /**
+   * Rebuilds the entire breadcrumb trail from the root.
+   */
+  private recomputeBreadcrumbs() {
+    const breadcrumbs: Breadcrumb[] = [{ label: 'Home', url: '/' }];
+    this.addBreadcrumbs(this.route.root, '', breadcrumbs);
+    console.log('[BreadcrumbService] new breadcrumbs:', breadcrumbs);
+    this._breadcrumbs$.next(breadcrumbs);
+  }
+
+  /**
+   * Recursively walks the ActivatedRoute tree to build breadcrumbs.
+   */
   private addBreadcrumbs(
     route: ActivatedRoute,
     url: string,
@@ -50,19 +60,25 @@ export class BreadcrumbService {
     for (const child of route.children) {
       if (child.outlet !== PRIMARY_OUTLET) continue;
 
-      // build up the URL
+      // Build URL segment
       const segment = child.snapshot.url.map(s => s.path).join('/');
       if (segment) {
         url += `/${segment}`;
       }
 
-      // grab static or dynamic label
+      // Grab the breadcrumb data (could be string or function)
       let label = child.snapshot.data['breadcrumb'];
       if (typeof label === 'function') {
         label = label(child.snapshot);
       }
 
-      // only push if label exists *and* it's not the same as the last one
+      // If it's an alias (starts with '@'), resolve from labelMap
+      if (typeof label === 'string' && label.startsWith('@')) {
+        const dynamic = this.labelMap.get(label);
+        label = dynamic ?? ''; // if no dynamic value, treat as empty
+      }
+
+      // Only push if we have a label
       if (label) {
         const last = breadcrumbs[breadcrumbs.length - 1];
         if (!last || last.label !== label) {
@@ -70,7 +86,6 @@ export class BreadcrumbService {
         }
       }
 
-      // recurse deeper
       this.addBreadcrumbs(child, url, breadcrumbs);
     }
   }
