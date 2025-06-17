@@ -1,9 +1,9 @@
-<div class="carousel">
+<!-- <div class="carousel">
   <div class="slides" [style.transform]="'translateX(-' + (current * 100) + '%)'">
     <div class="slide" *ngFor="let img of slides" [style.backgroundImage]="'url(' + img + ')'">
       <div class="overlay">
    
-        <!-- <button class="cta-btn">Shop Now</button> -->
+        <!-- <button class="cta-btn">Shop Now</button> 
       </div>
     </div>
   </div>
@@ -14,4 +14,10 @@
   <div class="dots">
     <span *ngFor="let _ of slides; let i = index" [class.active]="i === current" (click)="goTo(i)"></span>
   </div>
-</div>
+</div> -->
+
+<carousel>
+<slide>
+    <img src="/WF-Images/man-1.png" alt="first slide" style="display: block; width: 100%"/>
+</slide>
+</carousel>
