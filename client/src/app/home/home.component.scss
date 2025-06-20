@@ -1,108 +1,129 @@
-.carousel {
-  position: relative;
-  overflow: hidden;
-  height: calc(100vh - 90px);
-  margin: 70px auto;
+// .carousel {
+//   position: relative;
+//   overflow: hidden;
+//   height: calc(100vh - 90px);
+//   margin: 70px auto;
+//   width: 100%;
+//   max-width: 3800px;
+//   border-radius: 20px;
+//   box-shadow: 0 4px 12px #0000004d;
+
+//   .slides {
+//     display: flex;
+//     height: 100%;
+//     transition: transform 0.5s ease;
+//   }
+
+//   .slide {
+//     flex: 0 0 100%;
+//     height: 100%;
+//     background-size: cover;
+//     background-repeat: no-repeat;
+//     background-position: center 13%;
+//     border-radius: 20px;
+//     position: relative;
+//   }
+
+//   .overlay {
+//     position: absolute;
+//     top: 70%;
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+//     color: #fff;
+//     text-align: center;
+
+//     h1 {
+//       font-size: 3rem;
+//       margin-bottom: 1rem;
+//       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+//     }
+
+//     p {
+//       font-size: 1.5rem;
+//       margin-bottom: 2rem;
+//       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+//     }
+
+//     .cta-btn {
+//       padding: 0.75rem 2rem;
+//       font-size: 1rem;
+//       background: #1f4ed8;
+//       border: none;
+//       border-radius: 8px;
+//       color: #fff;
+//       cursor: pointer;
+//       transition: background 0.3s;
+
+//       &:hover {
+//         background: #3b82f6;
+//       }
+//     }
+//   }
+
+//   .nav {
+//     position: absolute;
+//     top: 50%;
+//     transform: translateY(-50%);
+//     border: none;
+//     color: #fff;
+//     font-size: 3rem;
+//     background: none;
+//     cursor: pointer;
+//     z-index: 10;
+//     transition: transform 0.2s;
+
+//     &:hover {
+//       transform: translateY(-50%) scale(1.2);
+//     }
+
+//     &.prev {
+//       left: 1rem;
+//     }
+
+//     &.next {
+//       right: 1rem;
+//     }
+//   }
+
+//   .dots {
+//     position: absolute;
+//     bottom: 1rem;
+//     left: 50%;
+//     transform: translateX(-50%);
+
+//     span {
+//       display: inline-block;
+//       width: 0.75rem;
+//       height: 0.75rem;
+//       margin: 0 0.25rem;
+//       background: rgba(255, 255, 255, 0.5);
+//       border-radius: 50%;
+//       cursor: pointer;
+
+//       &.active {
+//         background: #1f4ed8;
+//       }
+//     }
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
+.featured{
+  height: 250px
+}
+
+img {
   width: 100%;
-  max-width: 3800px;
+  height: 600px;
+  object-fit: cover;
   border-radius: 20px;
-  box-shadow: 0 4px 12px #0000004d;
-
-  .slides {
-    display: flex;
-    height: 100%;
-    transition: transform 0.5s ease;
-  }
-
-  .slide {
-    flex: 0 0 100%;
-    height: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center 13%;
-    border-radius: 20px;
-    position: relative;
-  }
-
-  .overlay {
-    position: absolute;
-    top: 70%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
-    text-align: center;
-
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-    }
-
-    p {
-      font-size: 1.5rem;
-      margin-bottom: 2rem;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    }
-
-    .cta-btn {
-      padding: 0.75rem 2rem;
-      font-size: 1rem;
-      background: #1f4ed8;
-      border: none;
-      border-radius: 8px;
-      color: #fff;
-      cursor: pointer;
-      transition: background 0.3s;
-
-      &:hover {
-        background: #3b82f6;
-      }
-    }
-  }
-
-  .nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    border: none;
-    color: #fff;
-    font-size: 3rem;
-    background: none;
-    cursor: pointer;
-    z-index: 10;
-    transition: transform 0.2s;
-
-    &:hover {
-      transform: translateY(-50%) scale(1.2);
-    }
-
-    &.prev {
-      left: 1rem;
-    }
-
-    &.next {
-      right: 1rem;
-    }
-  }
-
-  .dots {
-    position: absolute;
-    bottom: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-
-    span {
-      display: inline-block;
-      width: 0.75rem;
-      height: 0.75rem;
-      margin: 0 0.25rem;
-      background: rgba(255, 255, 255, 0.5);
-      border-radius: 50%;
-      cursor: pointer;
-
-      &.active {
-        background: #1f4ed8;
-      }
-    }
-  }
 }
