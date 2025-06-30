@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "oLsE2CuTth4=",
+  "dgSpecHash": "oPfTV7etwF8=",
   "success": true,
   "projectFilePath": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\api.csproj",
   "expectedPackageFiles": [
@@ -49,6 +49,8 @@
     "C:\\Users\\Tina Peterson\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
     "C:\\Users\\Tina Peterson\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\Tina Peterson\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\Tina Peterson\\.nuget\\packages\\pipelines.sockets.unofficial\\2.2.8\\pipelines.sockets.unofficial.2.2.8.nupkg.sha512",
+    "C:\\Users\\Tina Peterson\\.nuget\\packages\\stackexchange.redis\\2.8.41\\stackexchange.redis.2.8.41.nupkg.sha512",
     "C:\\Users\\Tina Peterson\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
     "C:\\Users\\Tina Peterson\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
     "C:\\Users\\Tina Peterson\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",

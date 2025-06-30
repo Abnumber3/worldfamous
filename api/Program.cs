@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using api.Errors;
 using api.Extensions;
 using Microsoft.AspNetCore.Cors.Infrastructure;
+using StackExchange.Redis;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton<ConnectionMultiplexer>(c =>
+{
+    var configuration = ConfigurationOptions.Parse(builder.Configuration.GetConnectionString("Redis"), true);
+    return ConnectionMultiplexer.Connect(configuration);
+});
 
 // Setting up my CORS (allowing access to the frontend)
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
