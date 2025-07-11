@@ -34,6 +34,16 @@ export const routes: Routes = [
       import('./shop/shop.module').then(m => m.ShopModule),
     data: { breadcrumb: 'Shop' } // ✅ Fixed capitalization
   },
+
+
+  {
+    path: 'basket',
+    loadChildren: () =>
+      import('./basket/basket.module').then(m => m.BasketModule),
+    data: { breadcrumb: 'Basket' } // ✅ Fixed capitalization
+  },
+
+
   {
     path: '**',
     redirectTo: 'not-found'
