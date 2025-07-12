@@ -5,6 +5,7 @@ import { IPagination } from './shared/models/pagination';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { BasketService } from './basket/basket.service';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,11 @@ export class AppComponent implements OnInit {
   products: IProduct[] = [];
   showSectionHeader = true;  // <--- this is the flag controlling whether breadcrumb shows
 
-  constructor(private spinner: NgxSpinnerService, private router: Router) {}
+  constructor(
+    private spinner: NgxSpinnerService, private router: Router,
+    private basketService: BasketService
+  
+  ) {}
 
   ngOnInit() {
     // Spinner logic (if you want to keep it)
@@ -34,5 +39,19 @@ export class AppComponent implements OnInit {
     ).subscribe((event: NavigationEnd) => {
       this.showSectionHeader = event.urlAfterRedirects !== '/';
     });
+
+
+
+
+
+    const basketId = localStorage.getItem('basket_id');
+    if(basketId) {
+      // Fetch the basket items if basket_id exists
+      this.basketService.getBasket(basketId).subscribe(()=>{
+        console.log('Basket loaded successfully');
+      }, error => {
+        console.error('Error loading basket:', error);
+      })
+    }
   }
 }

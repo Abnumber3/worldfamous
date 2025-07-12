@@ -13,6 +13,7 @@ import { withInterceptorsFromDi } from '@angular/common/http';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { SharedModule } from "./shared/shared.module";
 import { LoadingInterceptor } from "./core/Interceptors/loading.interceptors";
+import { BasketModule } from "./basket/basket.module";
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { LoadingInterceptor } from "./core/Interceptors/loading.interceptors";
     CoreModule,
     ShopModule,
     HomeModule,
+    BasketModule,
     NgxSpinnerModule,
   ],
   providers: [

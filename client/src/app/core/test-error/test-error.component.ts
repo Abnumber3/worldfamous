@@ -11,7 +11,7 @@ export class TestErrorComponent {
 
   constructor(private http: HttpClient) { }
 
-  baseUrl = 'http://localhost:5187/api/';
+  baseUrl = 'https://localhost:5187/api/';
   validationErrors: any;
 
   ngOnInit(){
