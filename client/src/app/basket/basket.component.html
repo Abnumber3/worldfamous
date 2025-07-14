@@ -1,42 +1,97 @@
-<div *ngIf="(basket$ |async) == null">
-    <p>There are no items in your basket</p>
+<div *ngIf="(basket$ | async) == null">
+  <p>There are no items in your basket</p>
 </div>
 
 <div *ngIf="(basket$ | async) as basket">
-<div class="pb-5">
+  <div class="pb-5">
     <div class="container">
-        <div class="row">
-            <div class="col-12 py-5 mb-1">
-            <div class ="table-responsive">
-                <table class ="table">
-                    <thead>
-                        <tr>
-                            <th class="border-0 bg-light" scope="col">
-                                <div class="p-2 px-3 text-uppercase">Product</div>
-                            </th>
-                            <th scope="col" class="border-0 bg-light">
-                               <div class="py-2 text-uppercase">Price</div>
-                            </th>
-                              <th scope="col" class="border-0 bg-light">
-                               <div class="py-2 text-uppercase">Quantity</div>
-                            </th>
-                              <th scope="col" class="border-0 bg-light">
-                               <div class="py-2 text-uppercase">Total</div>
-                            </th>
-                              <th scope="col" class="border-0 bg-light">
-                               <div class="py-2 text-uppercase">Remove</div>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of basket.items"></tr>
-                    </tbody>
-                </table>
-            </div>
+      <div class="row">
+        <div class="col-12 py-5 mb-1">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" class="border-0 bg-light p-0">
+                    <div class="p-3 px-4 text-uppercase fs-5">Product</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light p-0">
+                    <div class="p-3 px-4 text-uppercase fs-5">Price</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light p-0">
+                    <div class="p-3 px-4 text-uppercase fs-5">Quantity</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light p-0">
+                    <div class="p-3 px-4 text-uppercase fs-5">Total</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light p-0">
+                    <div class="p-3 px-4 text-uppercase text-center fs-5">Remove</div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of basket.items">
+                  <th scope="row" class="p-0">
+                    <div class="p-3 px-4 d-flex align-items-center">
+                      <img
+                        src="{{item.pictureUrl}}"
+                        alt="{{item.productName}}"
+                        class="img-fluid"
+                        style="max-height:70px;"
+                      />
+                      <div class="ms-4">
+                        <h5 class="mb-0 fs-5">
+                          <a routerLink="/shop/{{item.id}}" class="text-dark">
+                            {{item.productName}}
+                          </a>
+                        </h5>
+                        <small class="text-muted fst-italic fs-6">
+                          Type: {{item.type}}
+                        </small>
+                      </div>
+                    </div>
+                  </th>
+
+                  <td class="align-middle p-0">
+                    <div class="p-3 px-4 fs-6">
+                      <strong>{{ item.price | currency }}</strong>
+                    </div>
+                  </td>
+
+                  <td class="align-middle p-0">
+                    <div class="p-3 px-4 d-flex align-items-center">
+                      <i
+                        class="fas fa-minus-circle text-warning"
+                        style="cursor:pointer; font-size:2em;"
+                      ></i>
+                      <span class="fw-bold mx-3" style="font-size:1.3em;">
+                        {{ item.quantity }}
+                      </span>
+                      <i
+                        class="fas fa-plus-circle text-warning"
+                        style="cursor:pointer; font-size:2em;"
+                      ></i>
+                    </div>
+                  </td>
+
+                  <td class="align-middle p-0">
+                    <div class="p-3 px-4 fs-6">
+                      <strong>{{ (item.price * item.quantity) | currency }}</strong>
+                    </div>
+                  </td>
+
+                  <td class="align-middle p-0">
+                    <div class="d-flex justify-content-center align-items-center p-3 px-4">
+                      <a class="text-danger">
+                        <i class="fa fa-trash" style="font-size:2.5em;"></i>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div> <!-- .table-responsive -->
         </div>
-
+      </div>
     </div>
-</div>
-
-</div>
+  </div>
 </div>
