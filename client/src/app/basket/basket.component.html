@@ -1,7 +1,11 @@
-<div *ngIf="(basket$ | async) == null">
-  <p>There are no items in your basket</p>
+<!-- Empty Basket Message -->
+<div *ngIf="(basket$ | async) === null">
+  <div class="container py-5 text-center">
+    <h4 class="text-muted">There are no items in your basket</h4>
+  </div>
 </div>
 
+<!-- Basket Table -->
 <div *ngIf="(basket$ | async) as basket">
   <div class="pb-5">
     <div class="container">
@@ -11,45 +15,40 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col" class="border-0 bg-light p-0">
+                  <th class="border-0 bg-light p-0">
                     <div class="p-3 px-4 text-uppercase fs-5">Product</div>
                   </th>
-                  <th scope="col" class="border-0 bg-light p-0">
+                  <th class="border-0 bg-light p-0">
                     <div class="p-3 px-4 text-uppercase fs-5">Price</div>
                   </th>
-                  <th scope="col" class="border-0 bg-light p-0">
+                  <th class="border-0 bg-light p-0">
                     <div class="p-3 px-4 text-uppercase fs-5">Quantity</div>
                   </th>
-                  <th scope="col" class="border-0 bg-light p-0">
+                  <th class="border-0 bg-light p-0">
                     <div class="p-3 px-4 text-uppercase fs-5">Total</div>
                   </th>
-                  <th scope="col" class="border-0 bg-light p-0">
+                  <th class="border-0 bg-light p-0">
                     <div class="p-3 px-4 text-uppercase text-center fs-5">Remove</div>
                   </th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let item of basket.items">
-                  <th scope="row" class="p-0">
+                  <td class="p-0">
                     <div class="p-3 px-4 d-flex align-items-center">
-                      <img
-                        src="{{item.pictureUrl}}"
-                        alt="{{item.productName}}"
-                        class="img-fluid"
-                        style="max-height:70px;"
-                      />
+                      <img [src]="item.pictureUrl" [alt]="item.productName" class="img-fluid" style="max-height:70px;" />
                       <div class="ms-4">
                         <h5 class="mb-0 fs-5">
-                          <a routerLink="/shop/{{item.id}}" class="text-dark">
-                            {{item.productName}}
+                          <a [routerLink]="'/shop/' + item.id" class="text-dark">
+                            {{ item.productName }}
                           </a>
                         </h5>
                         <small class="text-muted fst-italic fs-6">
-                          Type: {{item.type}}
+                          Type: {{ item.type }}
                         </small>
                       </div>
                     </div>
-                  </th>
+                  </td>
 
                   <td class="align-middle p-0">
                     <div class="p-3 px-4 fs-6">
@@ -59,29 +58,23 @@
 
                   <td class="align-middle p-0">
                     <div class="p-3 px-4 d-flex align-items-center">
-                      <i
-                        class="fas fa-minus-circle text-warning"
-                        style="cursor:pointer; font-size:2em;"
-                      ></i>
+                      <i class="fas fa-minus-circle text-warning" style="cursor:pointer; font-size:2em;"></i>
                       <span class="fw-bold mx-3" style="font-size:1.3em;">
                         {{ item.quantity }}
                       </span>
-                      <i
-                        class="fas fa-plus-circle text-warning"
-                        style="cursor:pointer; font-size:2em;"
-                      ></i>
+                      <i class="fas fa-plus-circle text-warning" style="cursor:pointer; font-size:2em;"></i>
                     </div>
                   </td>
 
                   <td class="align-middle p-0">
                     <div class="p-3 px-4 fs-6">
-                      <strong>{{ (item.price * item.quantity) | currency }}</strong>
+                      <strong>{{ item.price * item.quantity | currency }}</strong>
                     </div>
                   </td>
 
                   <td class="align-middle p-0">
                     <div class="d-flex justify-content-center align-items-center p-3 px-4">
-                      <a class="text-danger">
+                      <a class="text-danger" style="cursor:pointer;">
                         <i class="fa fa-trash" style="font-size:2.2em;"></i>
                       </a>
                     </div>
@@ -89,9 +82,18 @@
                 </tr>
               </tbody>
             </table>
-          </div> <!-- .table-responsive -->
+          </div> <!-- table-responsive -->
         </div>
-      </div>
-    </div>
-  </div>
+
+        <!-- Summary / Checkout -->
+        <div class="col-6 offset-6">
+          <app-order-tools></app-order-tools>
+          <a routerLink="/checkout" class="btn btn-outline-primary py-2 w-100">
+            Proceed to checkout
+          </a>
+        </div>
+
+      </div> <!-- row -->
+    </div> <!-- container -->
+  </div> <!-- pb-5 -->
 </div>
