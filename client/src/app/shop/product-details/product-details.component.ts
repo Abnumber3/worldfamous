@@ -3,6 +3,7 @@ import { IProduct } from '../../shared/models/product';
 import { ShopService } from '../shop.service';
 import { ActivatedRoute } from '@angular/router';
 import { BreadcrumbService } from '../../core/services/breadcrumb.service';
+import { BasketService } from '../../basket/basket.service';  // <-- added missing import
 
 @Component({
   selector: 'app-product-details',
@@ -12,11 +13,13 @@ import { BreadcrumbService } from '../../core/services/breadcrumb.service';
 })
 export class ProductDetailsComponent implements OnInit {
   product: IProduct | null = null;
+  quantity = 1;
 
   constructor(
     private shopService: ShopService,
     private activatedRoute: ActivatedRoute,
-    private bcService: BreadcrumbService
+    private bcService: BreadcrumbService,
+    private basketService: BasketService  
   ) { 
     // Do NOT set breadcrumb here — let product load first
      this.bcService.set('@productDetail', '');
@@ -26,6 +29,8 @@ export class ProductDetailsComponent implements OnInit {
   ngOnInit() {
     this.loadProduct();
   }
+
+  addItemToBasket() {}
 
   loadProduct() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');

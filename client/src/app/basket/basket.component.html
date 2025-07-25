@@ -58,11 +58,11 @@
 
                   <td class="align-middle p-0">
                     <div class="p-3 px-4 d-flex align-items-center">
-                      <i class="fas fa-minus-circle text-warning" style="cursor:pointer; font-size:2em;"></i>
+                      <i (click)="decrementItemQuanity(item)" class="fas fa-minus-circle text-warning" style="cursor:pointer; font-size:2em;"></i>
                       <span class="fw-bold mx-3" style="font-size:1.3em;">
                         {{ item.quantity }}
                       </span>
-                      <i class="fas fa-plus-circle text-warning" style="cursor:pointer; font-size:2em;"></i>
+                      <i (click)="incrementItemQuanity(item)"  class="fas fa-plus-circle text-warning" style="cursor:pointer; font-size:2em;"></i>
                     </div>
                   </td>
 
@@ -75,7 +75,7 @@
                   <td class="align-middle p-0">
                     <div class="d-flex justify-content-center align-items-center p-3 px-4">
                       <a class="text-danger" style="cursor:pointer;">
-                        <i class="fa fa-trash" style="font-size:2.2em;"></i>
+                        <i (click)="removeBasketItem(item)"   class="fa fa-trash" style="font-size:2.2em; cursor: pointer"></i>
                       </a>
                     </div>
                   </td>
