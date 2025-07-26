@@ -30,7 +30,9 @@ export class ProductDetailsComponent implements OnInit {
     this.loadProduct();
   }
 
-  addItemToBasket() {}
+  addItemToBasket() {
+    this.basketService.addItemToBasket(this.product, this.quantity);
+  }
 
   loadProduct() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
