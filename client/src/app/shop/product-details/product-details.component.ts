@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IProduct } from '../../shared/models/product';
 import { ShopService } from '../shop.service';
 import { ActivatedRoute } from '@angular/router';
 import { BreadcrumbService } from '../../core/services/breadcrumb.service';
 import { BasketService } from '../../basket/basket.service';  // <-- added missing import
+import { AddToCartToastComponent } from '../../shared/components/add-to-cart-toast/add-to-cart-toast.component';
 
 @Component({
   selector: 'app-product-details',
@@ -14,6 +15,9 @@ import { BasketService } from '../../basket/basket.service';  // <-- added missi
 export class ProductDetailsComponent implements OnInit {
   product: IProduct | null = null;
   quantity = 1;
+  newPrice: number | null = null; // Initialize newPrice
+  isAdding = false;
+  @ViewChild('toast') toast!: AddToCartToastComponent;
 
   constructor(
     private shopService: ShopService,
@@ -30,8 +34,31 @@ export class ProductDetailsComponent implements OnInit {
     this.loadProduct();
   }
 
-  addItemToBasket() {
-    this.basketService.addItemToBasket(this.product, this.quantity);
+addItemToBasket() {
+  if (!this.product || this.isAdding) return;
+
+  this.isAdding = true;
+
+  this.basketService.addItemToBasket(this.product, this.quantity);
+  this.toast.show(this.product, this.quantity);
+
+  // Disable for a full second to avoid spamming
+  setTimeout(() => {
+    this.isAdding = false;
+  }, 1000); // try 1000ms instead of 800ms
+}
+
+
+  incrementQuantity() {
+    this.quantity++; 
+    this.newPrice = this.product!.price * this.quantity; // Update price based on quantity
+  }
+
+  decrementQuantity() {
+    if (this.quantity > 1) {
+      this.quantity--;
+      this.newPrice = this.product!.price / this.quantity; // Update price based on quantity
+    }
   }
 
   loadProduct() {

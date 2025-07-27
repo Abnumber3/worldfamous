@@ -5,13 +5,15 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel'; // 
 import { RouterModule } from '@angular/router';
 import { OrderToolsComponent } from './components/order-tools/order-tools.component';
+import { AddToCartToastComponent } from './components/add-to-cart-toast/add-to-cart-toast.component';
 
 
 @NgModule({
   declarations: [
     PaginationControlsComponent,
     BreadcrumbComponent,
-    OrderToolsComponent
+    OrderToolsComponent,
+    AddToCartToastComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { OrderToolsComponent } from './components/order-tools/order-tools.compon
     PaginationControlsComponent,
     BreadcrumbComponent,
     CarouselModule,
-    OrderToolsComponent
+    OrderToolsComponent,
+    AddToCartToastComponent
   ]
 })
 export class SharedModule { }

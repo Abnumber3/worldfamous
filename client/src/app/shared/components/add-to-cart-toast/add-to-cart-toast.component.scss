@@ -1,0 +1,35 @@
+.toast-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3); // dim background
+  z-index: 1050;
+  pointer-events: auto;
+}
+
+.toast-flyout {
+  position: fixed; // <— key change from absolute to fixed
+  top: 20px;
+  right: 20px;
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  width: 360px;
+  max-width: 90vw;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  animation: fly-in 0.7s ease-out;
+  z-index: 1060; // ensure it's above the overlay
+}
+
+@keyframes fly-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

@@ -1,17 +1,20 @@
 <div class="card h-100 shadow-sm">
-  <div class="position-relative image" style="cursor: pointer;">
-
-    <a [routerLink]="'/shop/' + product.id">
+  <div
+   class="position-relative image" style="cursor: pointer;"
+     style="cursor: pointer;" 
+  [routerLink]="'/shop/' + product.id"
+   >
       <img
         [src]="product.pictureUrl"
         [alt]="product.name"
         class="card-img-top bg-light"
       />
-    </a>
 
-    <div class="hover-overlay d-flex justify-content-center align-items-end gap-2 p-2 pt-5">
-      <button 
-      (click)="addItemtoBasket()"
+
+    <div class="hover-overlay d-flex justify-content-center align-items-end gap-2 p-2 pt-5"
+    >
+      <button
+      [routerLink]="'/shop/' + product.id"
         type="button" 
         class="btn btn-primary btn-sm custom-btn">
         <i class="fa-solid fa-cart-shopping"></i>

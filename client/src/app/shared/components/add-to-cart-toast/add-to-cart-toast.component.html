@@ -1,0 +1,18 @@
+<!-- Blocks entire screen (for background dimming + interaction lock) -->
+<div class="toast-overlay" *ngIf="visible">
+  <!-- Toast box (floats top-right) -->
+  <div class="toast-flyout">
+    <div class="d-flex">
+      <img [src]="product.pictureUrl" alt="product" width="100" class="me-3" />
+      <div>
+        <strong>{{ product.name }}</strong><br>
+        <span>Qty: {{ quantity }}</span><br>
+        <span>Price: {{ product.price * quantity | currency }}</span>
+        <div class="mt-2">
+          <button class="btn btn-sm btn-outline-secondary me-2" (click)="hide()">Keep Shopping</button>
+          <button class="btn btn-sm btn-primary" routerLink="/basket">Checkout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
