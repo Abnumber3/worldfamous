@@ -35,6 +35,13 @@ export const routes: Routes = [
     data: { breadcrumb: 'Shop' } // ✅ Fixed capitalization
   },
 
+  {
+    path: 'checkout',
+    loadChildren: () =>
+      import('./checkout/checkout.module').then(m => m.CheckoutModule),
+    data: { breadcrumb: 'Checkout' } // ✅ Fixed capitalization
+  },
+
 
   {
     path: 'basket',
