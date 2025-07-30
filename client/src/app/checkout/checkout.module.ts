@@ -5,7 +5,7 @@ import { CheckoutRoutingModule } from './checkout-routing.module';
 
 
 @NgModule({
-  declarations: []
+  declarations: [],
   imports: [
     CommonModule,
     CheckoutRoutingModule
