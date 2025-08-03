@@ -9,6 +9,6 @@ namespace Core.Entities
 {
     public class AppUser : IdentityUser<int>
     {
-        
+        public string DisplayName { get; set; }
     }
 }
