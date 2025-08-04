@@ -12,6 +12,9 @@ using api.Errors;
 using api.Extensions;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using StackExchange.Redis;
+using Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity;
+using Core.Entities.Identity;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,11 +24,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddIdentityServices();
+builder.Services.AddAuthentication();
+
+builder.Services.AddDbContext<AppIdentityDbContext>(x=>
+{
+    x.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection"));
+});
 builder.Services.AddSingleton<IConnectionMultiplexer>(c =>
 {
     var configuration = ConfigurationOptions.Parse(builder.Configuration.GetConnectionString("Redis"), true);
     return ConnectionMultiplexer.Connect(configuration);
 });
+
 
 // Setting up my CORS (allowing access to the frontend)
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -90,6 +101,11 @@ try
     await context.Database.MigrateAsync();
     // Seed the database with initial data
     await StoreContextSeed.SeedAsync(context);
+
+    var userManager = services.GetRequiredService<UserManager<AppUser>>();
+    var identityContext = services.GetRequiredService<AppIdentityDbContext>();
+    await identityContext.Database.MigrateAsync();
+    await AppIdentityDbContextSeed.SeedUsersAsync(userManager);
 }
 catch (Exception ex)
 {
