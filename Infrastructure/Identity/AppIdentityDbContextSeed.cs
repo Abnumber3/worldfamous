@@ -31,8 +31,23 @@ namespace Infrastructure.Identity
 
                 };
 
-                await userManager.CreateAsync(user, "Monkey3@!");
+                var result = await userManager.CreateAsync(user, "Monkey3@!");
+                if (!result.Succeeded)
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        Console.WriteLine($"[SEED ERROR] {error.Description}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("[SEED SUCCESS] Bob was created.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("[SEED] Bob already exists.");
+            }
             }
         }
     }
-}

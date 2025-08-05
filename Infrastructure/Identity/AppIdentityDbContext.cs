@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Identity
 {
-public class AppIdentityDbContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
+public class AppIdentityDbContext : IdentityDbContext<AppUser>
 {
     public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options) : base(options)
     {
@@ -22,7 +22,7 @@ public class AppIdentityDbContext : IdentityDbContext<AppUser, IdentityRole<int>
     builder.Entity<AppUser>()
         .HasOne(u => u.Address)
         .WithOne(a => a.AppUser)
-        .HasForeignKey<Address>(a => a.Id); // or a.AppUserId if you define it explicitly
+        .HasForeignKey<Address>(a => a.AppUserId); // or a.AppUserId if you define it explicitly
     }
 }
 }
