@@ -33,7 +33,7 @@ namespace api.Controllers
             return new UserDto
             {
                 Email = user.Email,
-                Token = "This will be  token.",
+                Token = "This will be token.",
                 DisplayName = user.UserName
                 
             };
