@@ -41,7 +41,7 @@ namespace Infrastructure.Identity
                 }
                 else
                 {
-                    Console.WriteLine("[SEED SUCCESS] Bob was created.");
+                    Console.WriteLine("[SEED SUCCESS] Bob was created..");
                 }
             }
             else
