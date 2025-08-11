@@ -41,13 +41,14 @@ namespace Infrastructure.Identity
                 }
                 else
                 {
-                    Console.WriteLine("[SEED SUCCESS] Bob was created..");
+                    Console.WriteLine("[SEED SUCCESS] Bob was created.");
                 }
             }
             else
             {
-                Console.WriteLine("[SEED] Bob already exists.");
+                Console.WriteLine("[SEED] Bob already exist.");
             }
             }
         }
     }
+
