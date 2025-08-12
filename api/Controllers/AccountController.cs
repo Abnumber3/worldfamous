@@ -29,15 +29,18 @@ namespace api.Controllers
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
             if (!result.Succeeded) return Unauthorized(new Errors.ApiResponse(401, "Invalid password"));
-            
+
             return new UserDto
             {
                 Email = user.Email,
                 Token = "This will be token.",
                 DisplayName = user.UserName
-                
+
             };
-        }
+
+            [HttpPost("register")] 
+            public async Task
+        } 
 
 
     }
