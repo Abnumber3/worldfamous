@@ -24,11 +24,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-IServiceCollection serviceCollection = builder.Services.AddIdentityServices();
+builder.Services.AddIdentityServices();
 builder.Services.AddAuthentication();
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+    options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Amin"));
     options.AddPolicy("RequireCustomerRole", policy => policy.RequireRole("Customer"));
 });
 
