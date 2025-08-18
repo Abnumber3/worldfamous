@@ -24,13 +24,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddIdentityServices();
+builder.Services.AddIdentityServices(builder.Configuration);
 builder.Services.AddAuthentication();
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Amin"));
-    options.AddPolicy("RequireCustomerRole", policy => policy.RequireRole("Customer"));
-});
+builder.Services.AddAuthorization();
 
 builder.Services.AddDbContext<AppIdentityDbContext>(x=>
 {
