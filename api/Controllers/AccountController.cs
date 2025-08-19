@@ -66,7 +66,7 @@ namespace api.Controllers
             return new UserDto
             {
                 DisplayName = user.DisplayName,
-                Token = _tokenService.CreateToken(user),
+                Token = _tokenService.CreateToken(),
                 Email = user.Email
             };
         }
