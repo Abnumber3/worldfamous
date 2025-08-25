@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using api.Errors;
 using Core.Interfaces;
 using Infrastructure.Data;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Extensions
