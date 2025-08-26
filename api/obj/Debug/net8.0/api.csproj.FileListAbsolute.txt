@@ -161,3 +161,4 @@ C:\Users\Tina Peterson\Desktop\World-Famous\API\bin\Debug\net8.0\Microsoft.Exten
 C:\Users\Tina Peterson\Desktop\World-Famous\API\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
 C:\Users\Tina Peterson\Desktop\World-Famous\API\bin\Debug\net8.0\System.Security.Cryptography.Xml.dll
 C:\Users\Tina Peterson\Desktop\World-Famous\API\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\Tina Peterson\Desktop\World-Famous\api\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
