@@ -4,7 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
-using api.Errors; // Ensure the namespace for error handling is included
+using api.Errors;
+using Microsoft.AspNetCore.Authorization; // Ensure the namespace for error handling is included
 
 namespace api.Controllers
 {
@@ -15,6 +16,13 @@ namespace api.Controllers
         public BuggyController(StoreContext context)
         {
             _context = context;
+        }
+
+        [HttpGet("testauth")]
+        [Authorize]
+        public ActionResult<string> GetSecretText()
+        {
+            return "secret stuff";
         }
 
         // Example for Not Found Request
