@@ -31,7 +31,7 @@ namespace api.Controllers
         {
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
 
-            if (user == null) return Unauthorized(new Errors.ApiResponse(401, "Invalid email"));
+            if (user == null) return Unauthorized(new Errors.ApiResponse(401, "Invalid Email"));
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
