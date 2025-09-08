@@ -52,7 +52,7 @@ namespace api.Controllers
             return await _userManager.FindByEmailAsync(email) != null;
         }
 
-        // [HttpPost("login")]
+        [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
