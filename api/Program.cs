@@ -1,5 +1,7 @@
 using Infrastructure.Data;
 using Infrastructure.Identity;
+using Infrastructure.Services;          // <— add (for TokenService)
+using Core.Interfaces;                  // <— add (for ITokenService)
 using Core.Entities.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
@@ -16,20 +18,31 @@ builder.Services.AddAutoMapper(typeof(MappingProfiles));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddIdentityServices(builder.Configuration);  // includes AddAuthentication + AddAuthorization
+// ✅ Register Identity/JWT ONCE using the real configuration
+builder.Services.AddIdentityServices(builder.Configuration);
 
+// ✅ Token service to create JWTs with 'iss'
+builder.Services.AddScoped<ITokenService, TokenService>();
+
+// DbContexts
 builder.Services.AddDbContext<AppIdentityDbContext>(x =>
 {
     x.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection"));
 });
 
+builder.Services.AddDbContext<StoreContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
+// Redis
 builder.Services.AddSingleton<IConnectionMultiplexer>(c =>
 {
     var configuration = ConfigurationOptions.Parse(builder.Configuration.GetConnectionString("Redis"), true);
     return ConnectionMultiplexer.Connect(configuration);
 });
 
-// CORS (you said HTTPS frontend; keep it if that's true)
+// CORS (you said frontend is HTTPS)
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>
 {
@@ -43,12 +56,6 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddControllers();
-
-builder.Services.AddDbContext<StoreContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
-
 builder.Services.AddApplicationServices();
 
 var app = builder.Build();
@@ -64,7 +71,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseCors(MyAllowSpecificOrigins);
 
-app.UseAuthentication();   // <-- must be before authorization
+app.UseAuthentication();   // must be before authorization
 app.UseAuthorization();
 
 app.MapControllers();
