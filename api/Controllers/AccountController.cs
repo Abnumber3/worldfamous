@@ -4,12 +4,15 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using api.Dtos;
+using api.Extensions;
+using AutoMapper;
 using Core.Entities.Identity;
 using Core.Interfaces;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace api.Controllers
 {
@@ -18,22 +21,29 @@ namespace api.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ITokenService _tokenService;
+        
+        private readonly IMapper _mapper;
 
 
-                public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ITokenService tokenService)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ITokenService tokenService, IMapper mapper)
         {
             _tokenService = tokenService;
             _signInManager = signInManager;
             _userManager = userManager;
+            _mapper = mapper;
+
+
 
         }
+
+
         [Authorize]
         [HttpGet]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
-            var email = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email);
 
-            var user = await _userManager.FindByEmailAsync(email.Value);
+
+            var user = await _userManager.FindByEmailFromClaimsPrinciple(HttpContext.User);
 
             return new UserDto
             {
@@ -45,12 +55,25 @@ namespace api.Controllers
         }
 
         [HttpGet("emailexists")]
-
-
         public async Task<ActionResult<bool>> CheckEmailExistsAsync([FromQuery] string email)
         {
             return await _userManager.FindByEmailAsync(email) != null;
         }
+
+   
+[HttpGet("address")]
+public async Task<ActionResult<AddressDto>> GetUserAddress()
+{
+    var user = await _userManager.FindUserByClaimsPrincipleWithAddressAsync(User);
+    if (user == null) return Unauthorized(new Errors.ApiResponse(401, "User not found or no email claim"));
+
+    if (user.Address == null)
+        return NotFound(new Errors.ApiResponse(404, "Address not set"));
+
+    return Ok(_mapper.Map<AddressDto>(user.Address));
+}
+
+
 
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
@@ -96,6 +119,8 @@ namespace api.Controllers
                 Email = user.Email
             };
         }
+
+     
 
     }
 }
