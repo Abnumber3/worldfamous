@@ -1,6 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Core.Entities.Identity;
@@ -11,20 +9,42 @@ namespace api.Extensions
 {
     public static class UserManagerExtensions
     {
-        public static async Task<AppUser> FindUserByClaimsPrincipleWithAddressAsync(this UserManager<AppUser> input, ClaimsPrincipal user)
+        private static string GetUserIdFlexible(this UserManager<AppUser> userManager, ClaimsPrincipal principal)
         {
-            var email = user?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
+            if (principal?.Identity?.IsAuthenticated != true) return null;
 
-            return await input.Users.Include(x => x.Address).SingleOrDefaultAsync(x => x.Email == email);
+            // Respect configured claim type first
+            var id = userManager.GetUserId(principal);
+            if (!string.IsNullOrWhiteSpace(id)) return id;
 
+            // Fallbacks
+            id = principal.FindFirstValue(ClaimTypes.NameIdentifier)
+                 ?? principal.FindFirstValue(JwtRegisteredClaimNames.Sub)
+                 ?? principal.FindFirstValue("sub");
 
+            return string.IsNullOrWhiteSpace(id) ? null : id;
         }
 
-        public static async Task<AppUser> FindByEmailFromClaimsPrinciple(this UserManager<AppUser> input, ClaimsPrincipal user)
+        public static async Task<AppUser> FindByIdFromClaimsAsync(
+            this UserManager<AppUser> userManager,
+            ClaimsPrincipal principal)
         {
-            var email = user?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
+            var userId = userManager.GetUserIdFlexible(principal);
+            if (string.IsNullOrWhiteSpace(userId)) return null;
 
-            return await input.FindByEmailAsync(email);
+            return await userManager.Users.SingleOrDefaultAsync(u => u.Id == userId);
+        }
+
+        public static async Task<AppUser> FindUserWithAddressByIdAsync(
+            this UserManager<AppUser> userManager,
+            ClaimsPrincipal principal)
+        {
+            var userId = userManager.GetUserIdFlexible(principal);
+            if (string.IsNullOrWhiteSpace(userId)) return null;
+
+            return await userManager.Users
+                .Include(u => u.Address)
+                .SingleOrDefaultAsync(u => u.Id == userId);
         }
     }
 }
