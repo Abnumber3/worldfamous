@@ -63,6 +63,25 @@ namespace api.Controllers
             return Ok(_mapper.Map<AddressDto>(user.Address));
         }
 
+        [Authorize]
+        [HttpPut("address")]
+
+        public async Task<ActionResult<AddressDto>> UpdateUserAddress(AddressDto address)
+
+        {
+            var user = await _userManager.FindUserWithAddressByIdAsync(User);
+            if (user == null) return Unauthorized(new Errors.ApiResponse(401, "User not found"));
+
+            user.Address = _mapper.Map<AddressDto, Address>(address);
+
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded) return Ok(_mapper.Map<Address, AddressDto>(user.Address));
+
+            return BadRequest("Problem updating the user");
+        }
+
+
+        
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {

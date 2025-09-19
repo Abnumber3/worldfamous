@@ -1,3 +1,5 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 using Core.Entities.Identity;
 using Infrastructure.Identity;
@@ -15,22 +17,17 @@ namespace api.Extensions
             this IServiceCollection services,
             IConfiguration config)
         {
-            // Read once and fail fast if missing
             var issuer = config["Token:Issuer"];
             var keyStr = config["Token:Key"];
 
-            Console.WriteLine($"[AuthBoot] ENV={Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}");
-            Console.WriteLine($"[AuthBoot] Token:Issuer='{issuer}'");
-            Console.WriteLine($"[AuthBoot] Token:Key length={(keyStr?.Length ?? 0)}");
-
             if (string.IsNullOrWhiteSpace(issuer))
-                throw new InvalidOperationException("Token:Issuer is missing or empty in configuration.");
+                throw new InvalidOperationException("Token:Issuer missing in configuration.");
             if (string.IsNullOrWhiteSpace(keyStr))
-                throw new InvalidOperationException("Token:Key is missing or empty in configuration.");
+                throw new InvalidOperationException("Token:Key missing in configuration.");
 
             var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(keyStr));
 
-            // Identity (EF stores + sign-in manager)
+            // Identity setup
             var id = services.AddIdentityCore<AppUser>(opt =>
             {
                 opt.User.RequireUniqueEmail = true;
@@ -40,40 +37,36 @@ namespace api.Extensions
                 .AddEntityFrameworkStores<AppIdentityDbContext>()
                 .AddSignInManager<SignInManager<AppUser>>();
 
-            // JWT Bearer
+            // Prevent inbound claim type mapping (keeps "sub", "email" as-is)
+            JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
-                    options.RequireHttpsMetadata = true; // you're on HTTPS locally
+                    options.RequireHttpsMetadata = true; // keep true in prod
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = signingKey,
-
                         ValidateIssuer = true,
-                        ValidIssuer = issuer,         // MUST match token `iss`
+                        ValidIssuer = issuer,
+                        ValidateAudience = false,
+                        ClockSkew = TimeSpan.Zero,
 
-                        ValidateAudience = false,     // we’re not using aud
-                        ClockSkew = TimeSpan.Zero
-                    };
-
-                    // Optional diagnostics
-                    options.Events = new JwtBearerEvents
-                    {
-                        OnAuthenticationFailed = ctx =>
-                        {
-                            Console.WriteLine("[JWT] Auth failed: " + ctx.Exception.Message);
-                            return Task.CompletedTask;
-                        },
-                        OnChallenge = ctx =>
-                        {
-                            Console.WriteLine("[JWT] Challenge: " + ctx.ErrorDescription);
-                            return Task.CompletedTask;
-                        }
+                        // Tell ASP.NET which claims represent identity
+                        NameClaimType = JwtRegisteredClaimNames.Email,
+                        RoleClaimType = ClaimTypes.Role
                     };
                 });
 
+            services.Configure<IdentityOptions>(opt =>
+            {
+                opt.ClaimsIdentity.UserIdClaimType = JwtRegisteredClaimNames.Sub;
+                opt.ClaimsIdentity.UserNameClaimType = JwtRegisteredClaimNames.Email;
+            });
+
             services.AddAuthorization();
+
             return services;
         }
     }
