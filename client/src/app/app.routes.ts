@@ -44,6 +44,14 @@ export const routes: Routes = [
 
 
   {
+    path: 'account',
+    loadChildren: () =>
+      import('./account/account.module').then(m => m.AccountModule),
+    data: { breadcrumb: "" } // ✅ Fixed capitalization
+  },
+
+
+  {
     path: 'basket',
     loadChildren: () =>
       import('./basket/basket.module').then(m => m.BasketModule),
