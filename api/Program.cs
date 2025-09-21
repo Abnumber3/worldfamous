@@ -16,7 +16,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Services
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+// builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerServices();  // <— use extension method
 
 // ✅ Register Identity/JWT ONCE using the real configuration
 builder.Services.AddIdentityServices(builder.Configuration);
