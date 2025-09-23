@@ -2,9 +2,12 @@
   <div class="container">
     <div class="row d-flex align-items-center">
       <div class="col-8">
-       <h1 *ngIf="(breadcrumbs$ | async) as crumbs">
-  {{ crumbs[crumbs.length - 1].label }}
-</h1>
+        <ng-container *ngIf="breadcrumbs$ | async as crumbs">
+          <h1 *ngIf="crumbs.length > 0">
+            {{ crumbs[crumbs.length - 1].label }}
+          </h1>
+          <!-- optional fallback: <h1>&nbsp;</h1> -->
+        </ng-container>
       </div>
       <div class="col-4 text-end">
         <app-breadcrumb></app-breadcrumb>

@@ -6,6 +6,7 @@ import { CarouselModule } from 'ngx-bootstrap/carousel'; //
 import { RouterModule } from '@angular/router';
 import { OrderToolsComponent } from './components/order-tools/order-tools.component';
 import { AddToCartToastComponent } from './components/add-to-cart-toast/add-to-cart-toast.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,12 +14,16 @@ import { AddToCartToastComponent } from './components/add-to-cart-toast/add-to-c
     PaginationControlsComponent,
     BreadcrumbComponent,
     OrderToolsComponent,
-    AddToCartToastComponent
+    AddToCartToastComponent,
+    
+    
   ],
   imports: [
     CommonModule,
     RouterModule,
-    CarouselModule.forRoot() // Assuming CarouselModule is imported from ngx-bootstrap or similar
+    CarouselModule.forRoot(),
+    ReactiveFormsModule
+
   ],
 
   exports: [
@@ -26,7 +31,8 @@ import { AddToCartToastComponent } from './components/add-to-cart-toast/add-to-c
     BreadcrumbComponent,
     CarouselModule,
     OrderToolsComponent,
-    AddToCartToastComponent
+    AddToCartToastComponent,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

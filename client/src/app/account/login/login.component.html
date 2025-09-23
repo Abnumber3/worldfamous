@@ -1,1 +1,50 @@
-<p>login works!</p>
+<div class="d-flex justify-content-center mt-5">
+  <div class="col-3">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-signin">
+      <div class="text-center mb-4">
+        <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+      </div>
+
+      <!-- Email Floating Label -->
+      <div class="form-floating mb-3">
+        <input
+          formControlName="email"
+          type="email"
+          id="inputEmail"
+          class="form-control"
+          placeholder="Email address"
+        />
+        <label for="inputEmail">Email address</label>
+      </div>
+
+      <!-- Password Floating Label + Eye -->
+      <div class="form-floating mb-3 position-relative">
+        <input
+          formControlName="password"
+          [type]="showPassword ? 'text' : 'password'"
+          id="inputPassword"
+          class="form-control pe-5"
+          placeholder="Password"
+          (input)="onPasswordInput()"
+          autocomplete="off"
+        />
+        <label for="inputPassword">Password</label>
+
+        <!-- Eye icon -->
+        <span
+          *ngIf="passwordHasValue"
+          class="position-absolute top-50 translate-middle-y"
+          [ngStyle]="{ right: '1.2rem', zIndex: 10 }"
+          style="cursor: pointer; color: #6c757d;"
+          (click)="togglePassword()"
+        >
+          <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+        </span>
+      </div>
+
+      <!-- Submit -->
+      <button class="btn btn-primary w-100" type="submit">Sign in</button>
+      <p class="mt-5 mb-3 text-muted text-center">© World Famous 2025</p>
+    </form>
+  </div>
+</div>
