@@ -59,5 +59,12 @@
     .nav-link:hover::after {
       width: 80%;
     }
+
+
+    .no-link {
+  text-decoration: none; /* removes underline */
+  color: white;        /* use parent text color */
+  cursor: default;       /* optional: make it feel like plain text */
+}
     
 

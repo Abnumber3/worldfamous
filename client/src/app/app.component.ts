@@ -6,6 +6,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { BasketService } from './basket/basket.service';
+import { AccountService } from './account/account.service';
 
 @Component({
   selector: 'app-root',
@@ -18,9 +19,11 @@ export class AppComponent implements OnInit {
   products: IProduct[] = [];
   showSectionHeader = true;  // <--- this is the flag controlling whether breadcrumb shows
 
+
   constructor(
     private spinner: NgxSpinnerService, private router: Router,
-    private basketService: BasketService
+    private basketService: BasketService,
+    private accountService: AccountService
   
   ) {}
 
@@ -34,17 +37,34 @@ export class AppComponent implements OnInit {
     // setTimeout(() => this.spinner.hide(), 3000);
 
     // Handle route changes to hide breadcrumb on homepage
+     this.loadBasket();
+    this.loadcurrentUser();
+
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
       this.showSectionHeader = event.urlAfterRedirects !== '/';
     });
 
+   
 
+   
+  }
 
+   loadcurrentUser() {
+     const token = localStorage.getItem('token');
+     if(token){
+      this.accountService.loadcurrentUser(token).subscribe(() => {
+        console.log('User loaded');
+      }, (error: any) => {
+        console.error('Error loading user:', error);
+      });
+     }
 
+    }
 
-    const basketId = localStorage.getItem('basket_id');
+  loadBasket() {
+        const basketId = localStorage.getItem('basket_id');
     if(basketId) {
       // Fetch the basket items if basket_id exists
       this.basketService.getBasket(basketId).subscribe(()=>{

@@ -7,6 +7,9 @@ import { RouterModule } from '@angular/router';
 import { OrderToolsComponent } from './components/order-tools/order-tools.component';
 import { AddToCartToastComponent } from './components/add-to-cart-toast/add-to-cart-toast.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 
 @NgModule({
@@ -22,7 +25,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     RouterModule,
     CarouselModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    BsDropdownModule.forRoot()
 
   ],
 
@@ -32,7 +37,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     CarouselModule,
     OrderToolsComponent,
     AddToCartToastComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BsDropdownModule,
+    BrowserAnimationsModule
   ]
 })
 export class SharedModule { }

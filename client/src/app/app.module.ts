@@ -14,6 +14,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { SharedModule } from "./shared/shared.module";
 import { LoadingInterceptor } from "./core/Interceptors/loading.interceptors";
 import { BasketModule } from "./basket/basket.module";
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { BasketModule } from "./basket/basket.module";
     HomeModule,
     BasketModule,
     NgxSpinnerModule,
+    BsDropdownModule.forRoot(),
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
