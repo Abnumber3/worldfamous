@@ -88,7 +88,7 @@
           "defaultConfiguration": "development",
           "options": {
             "ssl": true,
-            "sslKey":"localhost+2-key.pem" ,
+            "sslKey": "localhost+2-key.pem",
             "sslCert": "localhost+2.pem"
           }
         },
@@ -118,5 +118,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

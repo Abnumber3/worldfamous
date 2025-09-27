@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "+iBjhsuVsDgcGLZMc8iKwOquIxoUWkZqOho5Be7l7Fc=",
+  "Hash": "G9mavXsz+Ndeshx+9RoxE6dcs5AY65byStatfLYIFzs=",
   "Source": "api",
   "BasePath": "_content/api",
   "Mode": "Default",
@@ -10,17 +10,36 @@
     {
       "Name": "api\\wwwroot",
       "Source": "api",
-      "ContentRoot": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\",
       "BasePath": "_content/api",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\images\\products\\boot-ang1.png",
+      "Identity": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\.gitkeep",
       "SourceId": "api",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\",
+      "BasePath": "_content/api",
+      "RelativePath": ".gitkeep",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\.gitkeep"
+    },
+    {
+      "Identity": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\boot-ang1.png",
+      "SourceId": "api",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\",
       "BasePath": "_content/api",
       "RelativePath": "images/products/boot-ang1.png",
       "AssetKind": "All",
@@ -36,10 +55,10 @@
       "OriginalItemSpec": "wwwroot\\images\\products\\boot-ang1.png"
     },
     {
-      "Identity": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\images\\products\\boot-ang2.png",
+      "Identity": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\boot-ang2.png",
       "SourceId": "api",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\",
       "BasePath": "_content/api",
       "RelativePath": "images/products/boot-ang2.png",
       "AssetKind": "All",
@@ -55,10 +74,10 @@
       "OriginalItemSpec": "wwwroot\\images\\products\\boot-ang2.png"
     },
     {
-      "Identity": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\images\\products\\boot-core1.png",
+      "Identity": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\boot-core1.png",
       "SourceId": "api",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\",
       "BasePath": "_content/api",
       "RelativePath": "images/products/boot-core1.png",
       "AssetKind": "All",
@@ -74,10 +93,10 @@
       "OriginalItemSpec": "wwwroot\\images\\products\\boot-core1.png"
     },
     {
-      "Identity": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\images\\products\\boot-core2.png",
+      "Identity": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\boot-core2.png",
       "SourceId": "api",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\",
       "BasePath": "_content/api",
       "RelativePath": "images/products/boot-core2.png",
       "AssetKind": "All",
@@ -93,10 +112,10 @@
       "OriginalItemSpec": "wwwroot\\images\\products\\boot-core2.png"
     },
     {
-      "Identity": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\images\\products\\boot-redis1.png",
+      "Identity": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\boot-redis1.png",
       "SourceId": "api",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\",
       "BasePath": "_content/api",
       "RelativePath": "images/products/boot-redis1.png",
       "AssetKind": "All",
@@ -112,10 +131,10 @@
       "OriginalItemSpec": "wwwroot\\images\\products\\boot-redis1.png"
     },
     {
-      "Identity": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\images\\products\\glove-code1.png",
+      "Identity": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\glove-code1.png",
       "SourceId": "api",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\",
       "BasePath": "_content/api",
       "RelativePath": "images/products/glove-code1.png",
       "AssetKind": "All",
@@ -131,10 +150,10 @@
       "OriginalItemSpec": "wwwroot\\images\\products\\glove-code1.png"
     },
     {
-      "Identity": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\images\\products\\glove-code2.png",
+      "Identity": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\glove-code2.png",
       "SourceId": "api",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\",
       "BasePath": "_content/api",
       "RelativePath": "images/products/glove-code2.png",
       "AssetKind": "All",
@@ -150,10 +169,10 @@
       "OriginalItemSpec": "wwwroot\\images\\products\\glove-code2.png"
     },
     {
-      "Identity": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\images\\products\\glove-react1.png",
+      "Identity": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\glove-react1.png",
       "SourceId": "api",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\",
       "BasePath": "_content/api",
       "RelativePath": "images/products/glove-react1.png",
       "AssetKind": "All",
@@ -169,10 +188,10 @@
       "OriginalItemSpec": "wwwroot\\images\\products\\glove-react1.png"
     },
     {
-      "Identity": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\images\\products\\glove-react2.png",
+      "Identity": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\glove-react2.png",
       "SourceId": "api",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\",
       "BasePath": "_content/api",
       "RelativePath": "images/products/glove-react2.png",
       "AssetKind": "All",
@@ -188,10 +207,10 @@
       "OriginalItemSpec": "wwwroot\\images\\products\\glove-react2.png"
     },
     {
-      "Identity": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\images\\products\\hat-core1.png",
+      "Identity": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\hat-core1.png",
       "SourceId": "api",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\",
       "BasePath": "_content/api",
       "RelativePath": "images/products/hat-core1.png",
       "AssetKind": "All",
@@ -207,10 +226,10 @@
       "OriginalItemSpec": "wwwroot\\images\\products\\hat-core1.png"
     },
     {
-      "Identity": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\images\\products\\hat-react1.png",
+      "Identity": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\hat-react1.png",
       "SourceId": "api",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\",
       "BasePath": "_content/api",
       "RelativePath": "images/products/hat-react1.png",
       "AssetKind": "All",
@@ -226,10 +245,10 @@
       "OriginalItemSpec": "wwwroot\\images\\products\\hat-react1.png"
     },
     {
-      "Identity": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\images\\products\\hat-react2.png",
+      "Identity": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\hat-react2.png",
       "SourceId": "api",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\",
       "BasePath": "_content/api",
       "RelativePath": "images/products/hat-react2.png",
       "AssetKind": "All",
@@ -245,10 +264,10 @@
       "OriginalItemSpec": "wwwroot\\images\\products\\hat-react2.png"
     },
     {
-      "Identity": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\images\\products\\sb-ang1.png",
+      "Identity": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\sb-ang1.png",
       "SourceId": "api",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\",
       "BasePath": "_content/api",
       "RelativePath": "images/products/sb-ang1.png",
       "AssetKind": "All",
@@ -264,10 +283,10 @@
       "OriginalItemSpec": "wwwroot\\images\\products\\sb-ang1.png"
     },
     {
-      "Identity": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\images\\products\\sb-ang2.png",
+      "Identity": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\sb-ang2.png",
       "SourceId": "api",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\",
       "BasePath": "_content/api",
       "RelativePath": "images/products/sb-ang2.png",
       "AssetKind": "All",
@@ -283,10 +302,10 @@
       "OriginalItemSpec": "wwwroot\\images\\products\\sb-ang2.png"
     },
     {
-      "Identity": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\images\\products\\sb-core1.png",
+      "Identity": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\sb-core1.png",
       "SourceId": "api",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\",
       "BasePath": "_content/api",
       "RelativePath": "images/products/sb-core1.png",
       "AssetKind": "All",
@@ -302,10 +321,10 @@
       "OriginalItemSpec": "wwwroot\\images\\products\\sb-core1.png"
     },
     {
-      "Identity": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\images\\products\\sb-core2.png",
+      "Identity": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\sb-core2.png",
       "SourceId": "api",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\",
       "BasePath": "_content/api",
       "RelativePath": "images/products/sb-core2.png",
       "AssetKind": "All",
@@ -321,10 +340,10 @@
       "OriginalItemSpec": "wwwroot\\images\\products\\sb-core2.png"
     },
     {
-      "Identity": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\images\\products\\sb-react1.png",
+      "Identity": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\sb-react1.png",
       "SourceId": "api",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\",
       "BasePath": "_content/api",
       "RelativePath": "images/products/sb-react1.png",
       "AssetKind": "All",
@@ -340,10 +359,10 @@
       "OriginalItemSpec": "wwwroot\\images\\products\\sb-react1.png"
     },
     {
-      "Identity": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\images\\products\\sb-ts1.png",
+      "Identity": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\sb-ts1.png",
       "SourceId": "api",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Tina Peterson\\Desktop\\World-Famous\\api\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\",
       "BasePath": "_content/api",
       "RelativePath": "images/products/sb-ts1.png",
       "AssetKind": "All",

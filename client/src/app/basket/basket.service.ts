@@ -66,7 +66,8 @@ removeItemFromBasket(item: IBasketItem) {
     if (basket.items.length > 0) {
       this.setBasket(basket);
     } else {
-      this.deleteBasket(basket);
+      this.basketSource.next({ id: basket.id, items: [] });
+      this.basketTotalSource.next({ shipping: 0, subtotal: 0, total: 0 });
     }
   }
 }

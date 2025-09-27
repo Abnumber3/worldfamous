@@ -21,4 +21,10 @@
     <ProjectReference Include="..\Core\Core.csproj" />
   </ItemGroup>
 
+  <PropertyGroup>
+  <TargetFramework>net8.0</TargetFramework>
+  <UserSecretsId>worldfamous-api-dev</UserSecretsId>
+</PropertyGroup>
+
+
 </Project> <!-- Make sure this line is here -->

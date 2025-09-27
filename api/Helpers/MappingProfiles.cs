@@ -22,7 +22,9 @@ namespace api.Helpers
 
             CreateMap<Address, AddressDto>().ReverseMap(); // ReverseMap allows us to map in both directions
 
-            CreateMap<CustomerBasket, CustomerBasketDto>();
+            CreateMap<CustomerBasket, CustomerBasketDto>().ReverseMap();
+            CreateMap<BasketItem, BasketItemDto>().ReverseMap();
+
           
         }
     }
