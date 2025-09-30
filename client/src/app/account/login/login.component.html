@@ -15,6 +15,16 @@
           placeholder="Email address"
         />
         <label for="inputEmail">Email address</label>
+
+        <!-- Email errors -->
+        <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
+          <small class="text-danger" *ngIf="loginForm.get('email')?.hasError('required')">
+            Email is required
+          </small>
+          <small class="text-danger" *ngIf="loginForm.get('email')?.hasError('email')">
+            Must be a valid email
+          </small>
+        </div>
       </div>
 
       <!-- Password Floating Label + Eye -->
@@ -26,16 +36,25 @@
           class="form-control pe-5"
           placeholder="Password"
           (input)="onPasswordInput()"
-          autocomplete="off"
+          autocomplete="current-password"
         />
         <label for="inputPassword">Password</label>
+
+        <!-- Password errors -->
+        <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+          <small class="text-danger" *ngIf="loginForm.get('password')?.hasError('required')">
+            Password is required
+          </small>
+          <small class="text-danger" *ngIf="loginForm.get('password')?.hasError('pattern')">
+            Must include at least 6 characters, with letters and numbers
+          </small>
+        </div>
 
         <!-- Eye icon -->
         <span
           *ngIf="passwordHasValue"
           class="position-absolute top-50 translate-middle-y"
-          [ngStyle]="{ right: '1.2rem', zIndex: 10 }"
-          style="cursor: pointer; color: #6c757d;"
+          style="right: 1.2rem; z-index: 10; cursor: pointer; color: #6c757d;"
           (click)="togglePassword()"
         >
           <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
@@ -43,7 +62,9 @@
       </div>
 
       <!-- Submit -->
-      <button class="btn btn-primary w-100" type="submit">Sign in</button>
+      <button [disabled]="loginForm.invalid" class="btn btn-primary w-100" type="submit">
+        Sign in
+      </button>
       <p class="mt-5 mb-3 text-muted text-center">© World Famous 2025</p>
     </form>
   </div>
@@ -55,4 +76,8 @@
   <p>Email Dirty: {{loginForm.get('email')?.dirty}}</p>
   <pre>{{ loginForm.value | json }}</pre>
   </div>
+
 </div>
+
+
+  
