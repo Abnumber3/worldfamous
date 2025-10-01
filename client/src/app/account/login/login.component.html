@@ -6,26 +6,11 @@
       </div>
 
       <!-- Email Floating Label -->
-      <div class="form-floating mb-3">
-        <input
-          formControlName="email"
-          type="email"
-          id="inputEmail"
-          class="form-control"
-          placeholder="Email address"
-        />
-        <label for="inputEmail">Email address</label>
-
-        <!-- Email errors -->
-        <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
-          <small class="text-danger" *ngIf="loginForm.get('email')?.hasError('required')">
-            Email is required
-          </small>
-          <small class="text-danger" *ngIf="loginForm.get('email')?.hasError('email')">
-            Must be a valid email
-          </small>
-        </div>
-      </div>
+      <app-text-input
+        formControlName="email"
+        type="email"
+        [label]="'Email'"
+      ></app-text-input>
 
       <!-- Password Floating Label + Eye -->
       <div class="form-floating mb-3 position-relative">
@@ -40,17 +25,28 @@
         />
         <label for="inputPassword">Password</label>
 
-        <!-- Password errors -->
-        <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
-          <small class="text-danger" *ngIf="loginForm.get('password')?.hasError('required')">
+        <!-- Validation messages -->
+        <div
+          *ngIf="
+            loginForm.get('password')?.touched &&
+            loginForm.get('password')?.invalid
+          "
+        >
+          <small
+            class="text-danger"
+            *ngIf="loginForm.get('password')?.hasError('required')"
+          >
             Password is required
           </small>
-          <small class="text-danger" *ngIf="loginForm.get('password')?.hasError('pattern')">
+          <small
+            class="text-danger"
+            *ngIf="loginForm.get('password')?.hasError('pattern')"
+          >
             Must include at least 6 characters, with letters and numbers
           </small>
         </div>
 
-        <!-- Eye icon -->
+        <!-- Eye toggle -->
         <span
           *ngIf="passwordHasValue"
           class="position-absolute top-50 translate-middle-y"
@@ -62,22 +58,31 @@
       </div>
 
       <!-- Submit -->
-      <button [disabled]="loginForm.invalid" class="btn btn-primary w-100" type="submit">
+      <button
+        [disabled]="loginForm.invalid"
+        class="btn btn-primary w-100"
+        type="submit"
+      >
         Sign in
       </button>
       <p class="mt-5 mb-3 text-muted text-center">© World Famous 2025</p>
     </form>
   </div>
 
+  <!-- Debug Panel (right side) -->
   <div class="col-4">
-  <p>Form Status: {{loginForm.status}}</p>
-  <p>Email Status: {{loginForm.get('email')?.status}}</p>
-  <p>Email Touched: {{loginForm.get('email')?.touched}}</p>
-  <p>Email Dirty: {{loginForm.get('email')?.dirty}}</p>
-  <pre>{{ loginForm.value | json }}</pre>
+    <p>Form Status: {{ loginForm.status }}</p>
+    <p>Email Status: {{ loginForm.get('email')?.status }}</p>
+    <p>Email Touched: {{ loginForm.get('email')?.touched }}</p>
+    <p>Email Dirty: {{ loginForm.get('email')?.dirty }}</p>
+    <pre>{{ loginForm.value | json }}</pre>
   </div>
-
 </div>
+
+
+
+
+
 
 
   

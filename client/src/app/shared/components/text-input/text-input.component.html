@@ -1,1 +1,22 @@
-<p>text-input works!</p>
+<div class="form-floating mb-3 position-relative">
+  <input
+    #input
+    [type]="type"
+    class="form-control"
+    id="{{ label }}"
+    placeholder="{{ label }}"
+    [ngClass]="{
+      'is-invalid': controlDir.invalid && (controlDir.dirty || controlDir.touched),
+      'is-valid': controlDir.valid && (controlDir.dirty || controlDir.touched)
+    }"
+    [value]="value"
+    (input)="handleInput($event)"
+    (blur)="onTouched()"
+  />
+  <label>{{ label }}</label>
+
+  <!-- ✅ Loop through all error messages -->
+  <div class="invalid-feedback" *ngIf="controlDir.invalid && (controlDir.dirty || controlDir.touched)">
+    <small *ngFor="let msg of errorMessages">{{ msg }}</small>
+  </div>
+</div>

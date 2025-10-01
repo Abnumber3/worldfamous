@@ -8,6 +8,7 @@ import { OrderToolsComponent } from './components/order-tools/order-tools.compon
 import { AddToCartToastComponent } from './components/add-to-cart-toast/add-to-cart-toast.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TextInputComponent } from './components/text-input/text-input.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     BreadcrumbComponent,
     OrderToolsComponent,
     AddToCartToastComponent,
+    TextInputComponent,
   ],
   imports: [
     CommonModule,
@@ -32,6 +34,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     ReactiveFormsModule,
     CarouselModule,
     BsDropdownModule,
+    TextInputComponent,
   ]
 })
 export class SharedModule {}
