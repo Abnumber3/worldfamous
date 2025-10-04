@@ -19,15 +19,22 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
 
   @Input() type = 'text';
   @Input() label = '';
-  @Input() toggleable = false;     // 👁️ enable password toggle if true
-  @Input() showErrors = false;     // 🔴 show invalid messages when true
-  @Input() showValid = false;      // ✅ allow green valid styling when true
-  @Input() isValid = false;        // ✅ whether this input is currently valid
 
-  value: any;
-  onChange = (value: any) => {};
-  onTouched = () => {};
-  showPassword = false;            // 👁️ state for password visibility
+  // extras used by your template
+  @Input() toggleable = false;
+  @Input() showErrors = false;
+  @Input() showValid = false;
+  @Input() isValid = false;
+
+  // explicitly control browser autofill
+  @Input() autocomplete: string = 'off';
+
+  value: any = '';
+  showPassword = false;
+
+  // ControlValueAccessor hooks
+  onChange: (value: any) => void = () => {};
+  onTouched: () => void = () => {};
 
   constructor(@Self() public controlDir: NgControl) {
     this.controlDir.valueAccessor = this;
@@ -37,14 +44,14 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
     const control = this.controlDir.control;
     const validators = control?.validator ? [control.validator] : [];
     const asyncValidators = control?.asyncValidator ? [control.asyncValidator] : [];
-
     control?.setValidators(validators);
     control?.setAsyncValidators(asyncValidators);
-    control?.updateValueAndValidity();
+    control?.updateValueAndValidity({ emitEvent: false });
   }
 
+  // CVA required methods
   writeValue(value: any): void {
-    this.value = value;
+    this.value = value ?? '';
   }
 
   registerOnChange(fn: any): void {
@@ -63,6 +70,7 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
     }
   }
 
+  // template handlers
   handleInput(event: Event) {
     const input = event.target as HTMLInputElement;
     this.value = input.value;
@@ -73,7 +81,7 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
     this.showPassword = !this.showPassword;
   }
 
-  // ✅ dynamic error messages
+  // dynamic error messages (used by your template)
   get errorMessages(): string[] {
     const control = this.controlDir.control;
     if (!control || !control.errors) return [];
@@ -81,19 +89,11 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
     const errors: ValidationErrors = control.errors;
     const messages: string[] = [];
 
-    if (errors['required']) {
-      messages.push('This field is required');
-    }
-    if (errors['email']) {
-      messages.push('Must be a valid email');
-    }
-    if (errors['minlength']) {
-      messages.push(`Minimum length is ${errors['minlength'].requiredLength}`);
-    }
-    if (errors['maxlength']) {
-      messages.push(`Maximum length is ${errors['maxlength'].requiredLength}`);
-    }
- 
+    if (errors['required']) messages.push('This field is required');
+    if (errors['email']) messages.push('Must be a valid email');
+    if (errors['minlength']) messages.push(`Minimum length is ${errors['minlength'].requiredLength}`);
+    if (errors['maxlength']) messages.push(`Maximum length is ${errors['maxlength'].requiredLength}`);
+    if (errors['usernameTaken']) messages.push('Username already taken');
 
     return messages;
   }

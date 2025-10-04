@@ -5,34 +5,62 @@
         <h1 class="h3 mb-3 font-weight-normal">Register</h1>
       </div>
 
-      <!-- Display Name -->
-      <app-text-input
-        formControlName="displayName"
-        type="text"
-        [label]="'Display Name'"
-        [showErrors]="submitted">
-      </app-text-input>
-
-      <!-- Email -->
+      <!-- ✅ Email -->
       <app-text-input
         formControlName="email"
         type="email"
         [label]="'Email'"
+        autocomplete="email"
         [showErrors]="submitted">
       </app-text-input>
 
-      <!-- Password -->
+      <!-- Email validation message -->
+      <div *ngIf="emailInvalid" class="email-invalid-msg">
+        Please use a valid email address.
+      </div>
+
+      <!-- ✅ Username -->
+      <app-text-input
+        formControlName="username"
+        type="text"
+        [label]="'Username'"
+        autocomplete="username"
+        [showErrors]="submitted">
+      </app-text-input>
+
+      <!-- Live username status -->
+      <div class="small mt-1" *ngIf="registerForm.get('username') as u">
+        <!-- Under 6 chars -->
+        <div *ngIf="usernameTooShort" class="username-too-short-msg">
+          Username must have at least 6 characters.
+        </div>
+
+        <!-- Unique check states (only when length >= 6) -->
+        <ng-container *ngIf="!usernameTooShort" [ngSwitch]="usernameStatus">
+          <div *ngSwitchCase="'checking'" class="text-muted">
+            Checking availability...
+          </div>
+          <div *ngSwitchCase="'taken'" class="taken-username">
+            ❌ Username already taken
+          </div>
+          <div *ngSwitchCase="'available'" class="text-success">
+            ✅ Unique username
+          </div>
+        </ng-container>
+      </div>
+
+      <!-- ✅ Password -->
       <app-text-input
         formControlName="password"
         type="password"
         [label]="'Password'"
+        autocomplete="new-password"
         [toggleable]="true"
         [showErrors]="submitted">
       </app-text-input>
 
       <!-- Password live requirements -->
       <div class="text-muted small" *ngIf="registerForm.get('password')?.value">
-        <!-- Show requirements only if some are missing -->
         <ng-container *ngIf="passwordErrors.length > 0; else allGood">
           <span>Password must contain:</span>
           <ul class="mb-1 mt-1">
@@ -40,19 +68,20 @@
           </ul>
         </ng-container>
 
-        <!-- Show ✅ when all requirements are satisfied -->
+        <!-- ✅ All good -->
         <ng-template #allGood>
           <div class="password-success">
-            <small>✅ All requirements met</small>
+            <small>✅ Password requirements met</small>
           </div>
         </ng-template>
       </div>
 
-      <!-- Confirm Password -->
+      <!-- ✅ Confirm Password -->
       <app-text-input
         formControlName="confirmPassword"
         type="password"
         [label]="'Confirm Password'"
+        autocomplete="new-password"
         [toggleable]="true"
         [showErrors]="submitted">
       </app-text-input>
@@ -67,25 +96,22 @@
         <small>Passwords must match</small>
       </div>
 
-<!-- Error feedback (single message or multiple) -->
-     <div *ngIf="errorMessage" class="text-danger text-center mt-2">
-  <small>{{ errorMessage }}</small>
-</div>
+      <!-- Error feedback (single or multiple) -->
+      <div *ngIf="errorMessage" class="text-danger text-center mt-2">
+        <small>{{ errorMessage }}</small>
+      </div>
 
-<!-- Show multiple errors as a list -->
-<ul class="text-danger mt-2" *ngIf="errors && errors.length > 0">
-  <li *ngFor="let error of errors">{{ error }}</li>
-</ul>
+      <ul class="text-danger mt-2" *ngIf="errors && errors.length > 0">
+        <li *ngFor="let error of errors">{{ error }}</li>
+      </ul>
 
-
-      <!-- Submit -->
+      <!-- ✅ Submit -->
       <button
-      
         class="btn btn-primary w-100 mt-3"
-        type="submit">
+        type="submit"
+        [disabled]="loading">
         {{ loading ? 'Signing up...' : 'Sign up' }}
       </button>
-      
 
       <p class="mt-5 mb-3 text-muted text-center">© World Famous 2025</p>
     </form>

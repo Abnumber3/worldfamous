@@ -6,6 +6,7 @@
       class="form-control pe-5"
       [id]="label"
       [placeholder]="label"
+      [autocomplete]="autocomplete"
       [ngClass]="{
         'is-invalid': showErrors && controlDir.invalid,
         'is-valid': showValid && isValid

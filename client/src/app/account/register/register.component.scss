@@ -1,11 +1,81 @@
 .valid-feedback {
   margin-bottom: 0.4rem;  // nudges it closer to the input
   font-size: 1rem;     // optional smaller size
+  
 }
 
 .password-success {
   margin-top: -0.25rem;   /* pull closer to input */
-  margin-bottom: 0.5rem;  /* add small gap to next field */
+  margin-bottom: 0.7rem;  /* add small gap to next field */
   color: #218f3a;         /* Bootstrap green */
   font-size: 1rem;      /* slightly smaller */
+}
+
+
+.text-success {
+   margin-top: -0.25rem;   /* pull closer to input */
+  margin-bottom: 0.7rem;  /* add small gap to next field */
+  color: #218f3a;         /* Bootstrap green */
+  font-size: 0.875rem;      /* slightly smaller */
+}
+
+
+.username-too-short-msg {
+  color: #dc3545;           // red error tone
+  font-size: 0.9rem;
+  font-weight: 500;
+     margin-top: -0.25rem;   /* pull closer to input */
+  margin-bottom: 0.7rem;
+  
+  letter-spacing: 0.3px;
+  animation: fadeIn 0.2s ease-in-out;
+
+  // optional: make it visually distinct from generic errors
+  &::before {
+    content: "⚠️ ";
+    font-size: 0.9rem;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-2px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.email-invalid-msg {
+  color: #dc3545; // red
+  font-size: 0.9rem;
+  font-weight: 500;
+   margin-top: -0.25rem;   /* pull closer to input */
+  margin-bottom: 0.7rem;
+  letter-spacing: 0.2px;
+  animation: fadeIn 0.25s ease-in-out;
+
+  &::before {
+    content: "⚠️ ";
+    font-size: 0.9rem;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-3px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+li{
+    list-style: none;
+}
+
+.taken-username {
+  color: #dc3545; // red
+  font-size: 0.9rem;
+  font-weight: 500;
+   margin-top: -0.25rem;   /* pull closer to input */
+  margin-bottom: 0.7rem;
+  letter-spacing: 0.2px;
+  animation: fadeIn 0.25s ease-in-out;
+
+  &::before {
+    content: "⚠️ ";
+    font-size: 0.9rem;
+  }
 }

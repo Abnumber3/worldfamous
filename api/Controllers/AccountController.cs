@@ -24,10 +24,10 @@ namespace api.Controllers
             ITokenService tokenService,
             IMapper mapper)
         {
-            _tokenService   = tokenService;
-            _signInManager  = signInManager;
-            _userManager    = userManager;
-            _mapper         = mapper;
+            _tokenService = tokenService;
+            _signInManager = signInManager;
+            _userManager = userManager;
+            _mapper = mapper;
         }
 
         [Authorize]
@@ -82,7 +82,7 @@ namespace api.Controllers
         }
 
 
-        
+
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
@@ -111,7 +111,7 @@ namespace api.Controllers
             {
                 DisplayName = registerDto.DisplayName,
                 Email = registerDto.Email,
-                UserName = registerDto.Email
+                UserName = registerDto.Username
             };
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
@@ -124,5 +124,12 @@ namespace api.Controllers
                 Email = user.Email
             };
         }
+        
+        [HttpGet("usernameexists")]
+        public async Task<ActionResult<bool>> CheckUsernameExistsAsync([FromQuery] string username)
+{
+        return await _userManager.FindByNameAsync(username) != null;
+}
+
     }
 }
