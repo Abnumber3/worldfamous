@@ -13,49 +13,12 @@
       ></app-text-input>
 
       <!-- Password Floating Label + Eye -->
-      <div class="form-floating mb-3 position-relative">
-        <input
-          formControlName="password"
-          [type]="showPassword ? 'text' : 'password'"
-          id="inputPassword"
-          class="form-control pe-5"
-          placeholder="Password"
-          (input)="onPasswordInput()"
-          autocomplete="current-password"
-        />
-        <label for="inputPassword">Password</label>
-
-        <!-- Validation messages -->
-        <div
-          *ngIf="
-            loginForm.get('password')?.touched &&
-            loginForm.get('password')?.invalid
-          "
-        >
-          <small
-            class="text-danger"
-            *ngIf="loginForm.get('password')?.hasError('required')"
-          >
-            Password is required
-          </small>
-          <small
-            class="text-danger"
-            *ngIf="loginForm.get('password')?.hasError('pattern')"
-          >
-            Must include at least 6 characters, with letters and numbers
-          </small>
-        </div>
-
-        <!-- Eye toggle -->
-        <span
-          *ngIf="passwordHasValue"
-          class="position-absolute top-50 translate-middle-y"
-          style="right: 1.2rem; z-index: 10; cursor: pointer; color: #6c757d;"
-          (click)="togglePassword()"
-        >
-          <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
-        </span>
-      </div>
+      <app-text-input
+        formControlName="password"
+        type="password"
+        [label]="'Password'"
+        [toggleable]="true">
+      </app-text-input>
 
       <!-- Submit -->
       <button

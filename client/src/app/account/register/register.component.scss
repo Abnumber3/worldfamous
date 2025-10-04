@@ -1,0 +1,11 @@
+.valid-feedback {
+  margin-bottom: 0.4rem;  // nudges it closer to the input
+  font-size: 1rem;     // optional smaller size
+}
+
+.password-success {
+  margin-top: -0.25rem;   /* pull closer to input */
+  margin-bottom: 0.5rem;  /* add small gap to next field */
+  color: #218f3a;         /* Bootstrap green */
+  font-size: 1rem;      /* slightly smaller */
+}

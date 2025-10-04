@@ -1,22 +1,35 @@
-<div class="form-floating mb-3 position-relative">
-  <input
-    #input
-    [type]="type"
-    class="form-control"
-    id="{{ label }}"
-    placeholder="{{ label }}"
-    [ngClass]="{
-      'is-invalid': controlDir.invalid && (controlDir.dirty || controlDir.touched),
-      'is-valid': controlDir.valid && (controlDir.dirty || controlDir.touched)
-    }"
-    [value]="value"
-    (input)="handleInput($event)"
-    (blur)="onTouched()"
-  />
-  <label>{{ label }}</label>
+<div class="mb-3">
+  <div class="form-floating position-relative">
+    <input
+      #input
+      [type]="toggleable && type === 'password' ? (showPassword ? 'text' : 'password') : type"
+      class="form-control pe-5"
+      [id]="label"
+      [placeholder]="label"
+      [ngClass]="{
+        'is-invalid': showErrors && controlDir.invalid,
+        'is-valid': showValid && isValid
+      }"
+      [value]="value"
+      (input)="handleInput($event)"
+      (blur)="onTouched()"
+    />
+    <label>{{ label }}</label>
 
-  <!-- ✅ Loop through all error messages -->
-  <div class="invalid-feedback" *ngIf="controlDir.invalid && (controlDir.dirty || controlDir.touched)">
+    <span
+      *ngIf="toggleable && type === 'password'"
+      class="password-toggle"
+      (click)="togglePasswordVisibility()"
+      role="button"
+      tabindex="0"
+      (keydown.enter)="togglePasswordVisibility()"
+      aria-label="Toggle password visibility">
+      <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+    </span>
+  </div>
+
+  <!-- show error messages only if you turn them on -->
+  <div class="invalid-feedback d-block mt-1" *ngIf="showErrors && controlDir.invalid">
     <small *ngFor="let msg of errorMessages">{{ msg }}</small>
   </div>
 </div>

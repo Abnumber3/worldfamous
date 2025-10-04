@@ -1,1 +1,81 @@
-<p>register works!</p>
+<div class="d-flex justify-content-center mt-5">
+  <div class="col-3">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form-signin">
+      <div class="text-center mb-4">
+        <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+      </div>
+
+      <!-- Display Name -->
+      <app-text-input
+        formControlName="displayName"
+        type="text"
+        [label]="'Display Name'"
+        [showErrors]="submitted">
+      </app-text-input>
+
+      <!-- Email -->
+      <app-text-input
+        formControlName="email"
+        type="email"
+        [label]="'Email'"
+        [showErrors]="submitted">
+      </app-text-input>
+
+      <!-- Password -->
+      <app-text-input
+        formControlName="password"
+        type="password"
+        [label]="'Password'"
+        [toggleable]="true"
+        [showErrors]="submitted">
+      </app-text-input>
+
+      <!-- Password live requirements -->
+      <div class="text-muted small" *ngIf="registerForm.get('password')?.value">
+        <!-- Show requirements only if some are missing -->
+        <ng-container *ngIf="passwordErrors.length > 0; else allGood">
+          <span>Password must contain:</span>
+          <ul class="mb-1 mt-1">
+            <li *ngFor="let err of passwordErrors" class="text-danger">{{ err }}</li>
+          </ul>
+        </ng-container>
+
+        <!-- Show ✅ when all requirements are satisfied -->
+        <ng-template #allGood>
+          <div class="password-success">
+            <small>✅ All requirements met</small>
+          </div>
+        </ng-template>
+      </div>
+
+      <!-- Confirm Password -->
+      <app-text-input
+        formControlName="confirmPassword"
+        type="password"
+        [label]="'Confirm Password'"
+        [toggleable]="true"
+        [showErrors]="submitted">
+      </app-text-input>
+
+      <!-- Passwords match success -->
+      <div class="password-success" *ngIf="passwordsMatch">
+        <small>✅ Passwords match</small>
+      </div>
+
+      <!-- Error feedback -->
+      <div *ngIf="errorMessage" class="text-danger text-center mt-2">
+        <small>{{ errorMessage }}</small>
+      </div>
+
+      <!-- Submit -->
+      <button
+        [disabled]="registerForm.invalid || loading"
+        class="btn btn-primary w-100 mt-3"
+        type="submit">
+        {{ loading ? 'Signing up...' : 'Sign up' }}
+      </button>
+
+      <p class="mt-5 mb-3 text-muted text-center">© World Famous 2025</p>
+    </form>
+  </div>
+</div>

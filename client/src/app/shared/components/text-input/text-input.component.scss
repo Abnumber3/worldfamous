@@ -1,0 +1,19 @@
+.password-toggle {
+  position: absolute;
+  top: 50%;              /* center vertically inside input */
+  right: 1.2rem;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #6c757d;
+  z-index: 2;
+}
+
+.form-control.is-invalid {
+  background-image: none !important;
+  background-repeat: unset !important;  /* optional cleanup */
+  background-position: unset !important;
+}
+
+.form-control.is-valid {
+  background-image: none !important; /* removes checkmark */
+}
