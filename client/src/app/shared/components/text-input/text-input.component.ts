@@ -93,11 +93,7 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
     if (errors['maxlength']) {
       messages.push(`Maximum length is ${errors['maxlength'].requiredLength}`);
     }
-    if (errors['pattern']) {
-      messages.push(
-        'Must contain one uppercase letter, one lowercase letter, one number, and one special character'
-      );
-    }
+ 
 
     return messages;
   }

@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
   submitted = false;
   loading = false;
   errorMessage: string | null = null;
+  errors: string[] | undefined;
 
   constructor(
     private fb: FormBuilder,
@@ -34,28 +35,30 @@ export class RegisterComponent implements OnInit {
       ]],
       password: ['', [
         Validators.required,
-        // ✅ At least one lowercase, one uppercase, one number, one special char, min 6 chars
         Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/)
       ]],
       confirmPassword: ['', Validators.required]
     }, { validator: this.passwordsMatchValidator });
   }
 
-  // ✅ custom validator for confirm password
   passwordsMatchValidator(form: FormGroup) {
     const password = form.get('password')?.value;
     const confirmPassword = form.get('confirmPassword')?.value;
     return password === confirmPassword ? null : { mismatch: true };
   }
 
-  // ✅ getter for green "Passwords match" message
   get passwordsMatch(): boolean {
     const pw = this.registerForm?.get('password')?.value || '';
     const cpw = this.registerForm?.get('confirmPassword')?.value || '';
     return pw.length > 0 && cpw.length > 0 && pw === cpw;
   }
 
-  // ✅ live password validation messages
+  get passwordsMismatch(): boolean {
+    const pw = this.registerForm?.get('password')?.value || '';
+    const cpw = this.registerForm?.get('confirmPassword')?.value || '';
+    return pw.length > 0 && cpw.length > 0 && pw !== cpw;
+  }
+
   get passwordErrors(): string[] {
     const pw = this.registerForm?.get('password')?.value || '';
     const messages: string[] = [];
@@ -72,20 +75,54 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    if (this.registerForm.invalid) {
-      this.registerForm.markAllAsTouched();
-      return;
-    }
+    if (this.registerForm.invalid) return;
 
     this.loading = true;
+    this.errorMessage = null;
+    this.errors = undefined;
+
     this.accountService.register(this.registerForm.value).subscribe({
       next: () => {
         this.router.navigateByUrl('/shop');
         this.loading = false;
       },
-      error: err => {
-        console.error(err);
-        this.errorMessage = err?.error?.message || 'Registration failed';
+      error: (err) => {
+        console.error('Registration error:', err);
+
+        // ✅ Case 1: backend sends errors at the root
+        if (Array.isArray(err.errors)) {
+          this.errors = err.errors;
+          this.errorMessage = null;
+        }
+        // ✅ Case 2: backend sends errors under err.error
+        else if (Array.isArray(err.error?.errors)) {
+          this.errors = err.error.errors;
+          this.errorMessage = null;
+        }
+        // ✅ Case 3: backend sends a single error string
+        else if (typeof err.errors === 'string') {
+          this.errorMessage = err.errors;
+          this.errors = undefined;
+        }
+        else if (typeof err.error?.errors === 'string') {
+          this.errorMessage = err.error.errors;
+          this.errors = undefined;
+        }
+        // ✅ Case 4: message property
+        else if (err.message) {
+          this.errorMessage = err.message;
+          this.errors = undefined;
+        }
+        else if (err.error?.message) {
+          this.errorMessage = err.error.message;
+          this.errors = undefined;
+        }
+        // ✅ Last fallback
+        else {
+          this.errorMessage = "An unknown error occurred. Please try again.";
+          console.log('raw err =', err);
+        }
+
         this.loading = false;
       }
     });

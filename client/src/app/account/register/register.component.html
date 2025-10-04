@@ -62,18 +62,30 @@
         <small>✅ Passwords match</small>
       </div>
 
-      <!-- Error feedback -->
-      <div *ngIf="errorMessage" class="text-danger text-center mt-2">
-        <small>{{ errorMessage }}</small>
+      <!-- Passwords mismatch error -->
+      <div class="text-danger small mt-0" *ngIf="passwordsMismatch">
+        <small>Passwords must match</small>
       </div>
+
+<!-- Error feedback (single message or multiple) -->
+     <div *ngIf="errorMessage" class="text-danger text-center mt-2">
+  <small>{{ errorMessage }}</small>
+</div>
+
+<!-- Show multiple errors as a list -->
+<ul class="text-danger mt-2" *ngIf="errors && errors.length > 0">
+  <li *ngFor="let error of errors">{{ error }}</li>
+</ul>
+
 
       <!-- Submit -->
       <button
-        [disabled]="registerForm.invalid || loading"
+      
         class="btn btn-primary w-100 mt-3"
         type="submit">
         {{ loading ? 'Signing up...' : 'Sign up' }}
       </button>
+      
 
       <p class="mt-5 mb-3 text-muted text-center">© World Famous 2025</p>
     </form>
