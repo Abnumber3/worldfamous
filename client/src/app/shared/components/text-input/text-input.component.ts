@@ -90,10 +90,10 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
     const messages: string[] = [];
 
     if (errors['required']) messages.push('This field is required');
-    if (errors['email']) messages.push('Must be a valid email');
-    if (errors['minlength']) messages.push(`Minimum length is ${errors['minlength'].requiredLength}`);
+    if (errors['email']) messages.push('Must be a valid email.');
+    // if (errors['minlength']) messages.push(`Minimum length is ${errors['minlength'].requiredLength}`);
     if (errors['maxlength']) messages.push(`Maximum length is ${errors['maxlength'].requiredLength}`);
-    if (errors['usernameTaken']) messages.push('Username already taken');
+ 
 
     return messages;
   }
