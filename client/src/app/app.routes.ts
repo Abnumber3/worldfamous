@@ -6,6 +6,7 @@ import { ProductDetailsComponent } from './shop/product-details/product-details.
 import { TestErrorComponent } from './core/test-error/test-error.component';
 import { ServerErrorComponent } from './core/server-error/server-error.component';
 import { NotFoundComponent } from './core/not-found/not-found.component';
+import { AuthGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -37,6 +38,7 @@ export const routes: Routes = [
 
   {
     path: 'checkout',
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./checkout/checkout.module').then(m => m.CheckoutModule),
     data: { breadcrumb: 'Checkout' } // ✅ Fixed capitalization
