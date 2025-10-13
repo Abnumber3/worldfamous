@@ -54,7 +54,7 @@ togglePassword(): void {
 }
 
 onPasswordInput(): void {
-  const value = this.loginForm.get('passwor')?.value;
+  const value = this.loginForm.get('password')?.value;
   this.passwordHasValue = !!value;
 }
 

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, map, ReplaySubject } from 'rxjs';
 import { IUser } from '../shared/models/user';
 import { Router } from '@angular/router';
 
@@ -9,11 +9,11 @@ import { Router } from '@angular/router';
 })
 export class AccountService {
   baseUrl = 'https://localhost:5187/api/'
-  private currentUserSource = new BehaviorSubject<IUser | null>(null);
+  private currentUserSource = new ReplaySubject<IUser | null>(1);
   currentUser$ = this.currentUserSource.asObservable();
-  getCurrentUserValue() {
-    return this.currentUserSource.value;
-  }
+
+
+
   
   constructor(private http: HttpClient, private router: Router) { }
 
