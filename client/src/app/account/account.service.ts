@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, map, Observable, of, ReplaySubject } from 'rxjs';
 import { IUser } from '../shared/models/user';
 import { Router } from '@angular/router';
 
@@ -17,7 +17,14 @@ export class AccountService {
   
   constructor(private http: HttpClient, private router: Router) { }
 
-  loadcurrentUser(token: string) {
+ loadcurrentUser(token: string | null): Observable<IUser | null> {
+  if (!token) {
+    this.currentUserSource.next(null);
+    return of(null);
+  }
+
+
+
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', `Bearer ${token}`);
 
