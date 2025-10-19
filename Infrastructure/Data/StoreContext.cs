@@ -20,7 +20,13 @@ namespace Infrastructure.Data
 
         public DbSet<Product>? Products {get; set;} 
 
-        public DbSet<ProductType>? ProductTypes {get; set;}
+        public DbSet<ProductType>? ProductTypes { get; set; }
+        
+        public DbSet<Order> Orders { get; set; }
+
+        public Dbset<OrderItem> OrderItems { get; set; }
+
+        public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

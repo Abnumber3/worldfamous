@@ -20,20 +20,31 @@ namespace Infrastructure.Data
             var products = JsonSerializer.Deserialize<List<Product>>(productsData);
             context.Products.AddRange(products);
         }
+
+
+            if (!context.ProductTypes.Any())
+            {
+                var typesData = File.ReadAllText("../Infrastructure/Data/SeedData/types.json");
+                var types = JsonSerializer.Deserialize<List<ProductType>>(typesData);
+
+                context.ProductTypes.AddRange(types);
+            }
+        
+          if(!context.DeliveryMethods.Any()){
+            var dmData = File.ReadAllText("../Infrastructure/Data/SeedData/delivery.json");
+            var methods = JsonSerializer.Deserialize<List<DeliveryMethods>>(dmData);
+            context.DeliveryMethods.AddRange(methods);
+        }
+
+
+
+            if (context.ChangeTracker.HasChanges())
+            {
+                await context.SaveChangesAsync();
+            }
+        
+       
     
-
-        if(!context.ProductTypes.Any()){
-            var typesData = File.ReadAllText("../Infrastructure/Data/SeedData/types.json");
-            var types = JsonSerializer.Deserialize<List<ProductType>>(typesData);
-            
-            context.ProductTypes.AddRange(types);
-        }
-        
-        
-
-        if(context.ChangeTracker.HasChanges()){
-            await context.SaveChangesAsync();
-        }
     }
 
 
