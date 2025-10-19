@@ -12,7 +12,7 @@ namespace Infrastructure.Data.Config
     {
         public void Configure(EntityTypeBuilder<Order> builder)
         {
-            builder.OwnsOne(o => o.ShipToAddress, async =>
+            builder.OwnsOne(o => o.ShipToAddress, a =>
             {
                 a.WithOwner();
                 
