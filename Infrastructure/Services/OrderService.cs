@@ -46,11 +46,13 @@ namespace Infrastructure.Services
             var subtotal = items.Sum(item => item.Price * item.Quantity);
 
             // create order
-            var order = new Order(items, buyerEmail);
 
+            var order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, subtotal);
 
             // save to db
+
             // return order
+            return order; 
         }
 
         public Task<IReadOnlyList<DeliveryMethod>> GetDeliveryMethodsAsync()
@@ -67,5 +69,7 @@ namespace Infrastructure.Services
         {
             throw new NotImplementedException();
         }
+
+
     }
 }

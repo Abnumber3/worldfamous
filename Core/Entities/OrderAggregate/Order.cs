@@ -5,8 +5,21 @@ namespace Core.Entities.OrderAggregate
 {
     public class Order : BaseEntity
     {
+        private List<OrderItem> items;
+        private Address shippingAddress;
+        private DeliveryMethod deliveryMethod;
+
         public Order()
         {
+        }
+
+        public Order(List<OrderItem> items, string buyerEmail, Address shippingAddress, DeliveryMethod deliveryMethod, decimal subtotal)
+        {
+            this.items = items;
+            BuyerEmail = buyerEmail;
+            this.shippingAddress = shippingAddress;
+            this.deliveryMethod = deliveryMethod;
+            Subtotal = subtotal;
         }
 
         public Order(IReadOnlyList<OrderItem> orderItems, string buyerEmail, DateTimeOffset orderDate,
