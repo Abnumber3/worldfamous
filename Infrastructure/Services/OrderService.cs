@@ -40,8 +40,11 @@ namespace Infrastructure.Services
                 var orderItem = new OrderItem(itemOrdered, productItem.Price, item.Quantity);
                 items.Add(orderItem);
             }
+
             //get delivery method from repo
             var deliveryMethod = await _dmRepo.GetByIdAsync(deliveryMethodId);
+
+            
             //calc subtotal
             var subtotal = items.Sum(item => item.Price * item.Quantity);
 
