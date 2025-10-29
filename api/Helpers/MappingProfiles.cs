@@ -24,6 +24,7 @@ namespace api.Helpers
 
             CreateMap<CustomerBasket, CustomerBasketDto>().ReverseMap();
             CreateMap<BasketItem, BasketItemDto>().ReverseMap();
+            CreateMap<AddressDto, Core.Entities.OrderAggregate.Address>().ReverseMap();
 
           
         }
