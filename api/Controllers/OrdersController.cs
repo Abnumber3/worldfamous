@@ -4,6 +4,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using api.Dtos;
+using api.Errors;
+using api.Extensions;
 using AutoMapper;
 using Core.Entities.OrderAggregate;
 using Core.Interfaces;
@@ -26,7 +28,14 @@ namespace api.Controllers
         [HttpPost]
         public async Task<ActionResult<Order>> CreateOrder(OrderDto orderDto)
         {
-            var email = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
+            var email = HttpContext.User.RetrieveEmailFromPrincipal();
+
+            var address = _mapper.Map<AddressDto, Address>(orderDto.ShipToAddress);
+
+            var order = await _orderService.CreateOrderAsync(email, orderDto.DeliveryMethodId, orderDto.BasketId, address);
+            if (order == null) return BadRequest(new ApiResponse(400, "Problem creating order"));
+            
+            return Ok(order);
         }
         
     }
