@@ -5,76 +5,112 @@
       "PackagePath": "staticwebassets\\.gitkeep"
     },
     {
-      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\boot-ang1.png",
-      "PackagePath": "staticwebassets\\images\\products\\boot-ang1.png"
+      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\hoodie_sk_beige.png",
+      "PackagePath": "staticwebassets\\images\\products\\hoodie_sk_beige.png"
     },
     {
-      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\boot-ang2.png",
-      "PackagePath": "staticwebassets\\images\\products\\boot-ang2.png"
+      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\hoodie_sk_black.png",
+      "PackagePath": "staticwebassets\\images\\products\\hoodie_sk_black.png"
     },
     {
-      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\boot-core1.png",
-      "PackagePath": "staticwebassets\\images\\products\\boot-core1.png"
+      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\hoodie_sk_grey.png",
+      "PackagePath": "staticwebassets\\images\\products\\hoodie_sk_grey.png"
     },
     {
-      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\boot-core2.png",
-      "PackagePath": "staticwebassets\\images\\products\\boot-core2.png"
+      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\hoodie_sk_pink.png",
+      "PackagePath": "staticwebassets\\images\\products\\hoodie_sk_pink.png"
     },
     {
-      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\boot-redis1.png",
-      "PackagePath": "staticwebassets\\images\\products\\boot-redis1.png"
+      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\hoodie_sk_red.png",
+      "PackagePath": "staticwebassets\\images\\products\\hoodie_sk_red.png"
     },
     {
-      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\glove-code1.png",
-      "PackagePath": "staticwebassets\\images\\products\\glove-code1.png"
+      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\hoodie_sk_white.png",
+      "PackagePath": "staticwebassets\\images\\products\\hoodie_sk_white.png"
     },
     {
-      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\glove-code2.png",
-      "PackagePath": "staticwebassets\\images\\products\\glove-code2.png"
+      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\hoodie_wflogo_beige.png",
+      "PackagePath": "staticwebassets\\images\\products\\hoodie_wflogo_beige.png"
     },
     {
-      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\glove-react1.png",
-      "PackagePath": "staticwebassets\\images\\products\\glove-react1.png"
+      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\hoodie_wflogo_blue.png",
+      "PackagePath": "staticwebassets\\images\\products\\hoodie_wflogo_blue.png"
     },
     {
-      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\glove-react2.png",
-      "PackagePath": "staticwebassets\\images\\products\\glove-react2.png"
+      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\hoodie_wflogo_grey.png",
+      "PackagePath": "staticwebassets\\images\\products\\hoodie_wflogo_grey.png"
     },
     {
-      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\hat-core1.png",
-      "PackagePath": "staticwebassets\\images\\products\\hat-core1.png"
+      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\hoodie_wflogo_pink.png",
+      "PackagePath": "staticwebassets\\images\\products\\hoodie_wflogo_pink.png"
     },
     {
-      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\hat-react1.png",
-      "PackagePath": "staticwebassets\\images\\products\\hat-react1.png"
+      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\hoodie_wflogo_red.png",
+      "PackagePath": "staticwebassets\\images\\products\\hoodie_wflogo_red.png"
     },
     {
-      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\hat-react2.png",
-      "PackagePath": "staticwebassets\\images\\products\\hat-react2.png"
+      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\hoodie_wflogo_white.png",
+      "PackagePath": "staticwebassets\\images\\products\\hoodie_wflogo_white.png"
     },
     {
-      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\sb-ang1.png",
-      "PackagePath": "staticwebassets\\images\\products\\sb-ang1.png"
+      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\longsleeve_sweatshirt_beige.png",
+      "PackagePath": "staticwebassets\\images\\products\\longsleeve_sweatshirt_beige.png"
     },
     {
-      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\sb-ang2.png",
-      "PackagePath": "staticwebassets\\images\\products\\sb-ang2.png"
+      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\longsleeve_sweatshirt_black.png",
+      "PackagePath": "staticwebassets\\images\\products\\longsleeve_sweatshirt_black.png"
     },
     {
-      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\sb-core1.png",
-      "PackagePath": "staticwebassets\\images\\products\\sb-core1.png"
+      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\longsleeve_sweatshirt_grey.png",
+      "PackagePath": "staticwebassets\\images\\products\\longsleeve_sweatshirt_grey.png"
     },
     {
-      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\sb-core2.png",
-      "PackagePath": "staticwebassets\\images\\products\\sb-core2.png"
+      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\longsleeve_sweatshirt_white.png",
+      "PackagePath": "staticwebassets\\images\\products\\longsleeve_sweatshirt_white.png"
     },
     {
-      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\sb-react1.png",
-      "PackagePath": "staticwebassets\\images\\products\\sb-react1.png"
+      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\tee_sk_beige.png",
+      "PackagePath": "staticwebassets\\images\\products\\tee_sk_beige.png"
     },
     {
-      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\sb-ts1.png",
-      "PackagePath": "staticwebassets\\images\\products\\sb-ts1.png"
+      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\tee_sk_black.png",
+      "PackagePath": "staticwebassets\\images\\products\\tee_sk_black.png"
+    },
+    {
+      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\tee_sk_blue.png",
+      "PackagePath": "staticwebassets\\images\\products\\tee_sk_blue.png"
+    },
+    {
+      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\tee_sk_brown.png",
+      "PackagePath": "staticwebassets\\images\\products\\tee_sk_brown.png"
+    },
+    {
+      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\tee_sk_grey.png",
+      "PackagePath": "staticwebassets\\images\\products\\tee_sk_grey.png"
+    },
+    {
+      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\tee_sk_red.png",
+      "PackagePath": "staticwebassets\\images\\products\\tee_sk_red.png"
+    },
+    {
+      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\tee_sk_white.png",
+      "PackagePath": "staticwebassets\\images\\products\\tee_sk_white.png"
+    },
+    {
+      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\tee_wflogo_beige.png",
+      "PackagePath": "staticwebassets\\images\\products\\tee_wflogo_beige.png"
+    },
+    {
+      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\tee_wflogo_green.png",
+      "PackagePath": "staticwebassets\\images\\products\\tee_wflogo_green.png"
+    },
+    {
+      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\tee_wflogo_grey.png",
+      "PackagePath": "staticwebassets\\images\\products\\tee_wflogo_grey.png"
+    },
+    {
+      "Id": "C:\\Users\\there\\OneDrive\\Desktop\\World Famous\\worldfamous\\api\\wwwroot\\images\\products\\tee_wflogo_white.png",
+      "PackagePath": "staticwebassets\\images\\products\\tee_wflogo_white.png"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.api.Microsoft.AspNetCore.StaticWebAssets.props",

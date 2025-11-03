@@ -1,129 +1,195 @@
 [
   {
-    "Name": "Angular Speedster Board 2000",
-    "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-    "Price": 200,
-    "PictureUrl": "images/products/sb-ang1.png",
-    "ProductTypeId": 1
+    "Name": "Beige Society Kills Performance Hoodie",
+    "Description": "Built for comfort and presence. World Famous blends premium cotton fleece with a relaxed, athletic fit that moves with you. Ribbed cuffs and waistband keep warmth in, while the soft brushed interior delivers all-day comfort. Finished with minimal branding for a clean, timeless look that works anywhere.",
+    "Price": 80,
+    "PictureUrl": "images/products/hoodie_sk_beige.png",
+    "ProductTypeId": 5
   },
   {
-    "Name": "Green Angular Board 3000",
-    "Description": "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
-    "Price": 150,
-    "PictureUrl": "images/products/sb-ang2.png",
-    "ProductTypeId": 1
+    "Name": "Black Society Kills Performance Hoodie",
+    "Description": "Built for comfort and presence. World Famous blends premium cotton fleece with a relaxed, athletic fit that moves with you. Ribbed cuffs and waistband keep warmth in, while the soft brushed interior delivers all-day comfort. Finished with minimal branding for a clean, timeless look that works anywhere.",
+    "Price": 80,
+    "PictureUrl": "images/products/hoodie_sk_black.png",
+    "ProductTypeId": 5
   },
   {
-    "Name": "Core Board Speed Rush 3",
-    "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
-    "Price": 180,
-    "PictureUrl": "images/products/sb-core1.png",
-    "ProductTypeId": 1
+     "Name": "Grey Society Kills Hoodie",
+    "Description": "Built for comfort and presence. World Famous blends premium cotton fleece with a relaxed, athletic fit that moves with you. Ribbed cuffs and waistband keep warmth in, while the soft brushed interior delivers all-day comfort. Finished with minimal branding for a clean, timeless look that works anywhere.",
+    "Price": 80,
+    "PictureUrl": "images/products/hoodie_sk_grey.png",
+    "ProductTypeId": 5
   },
   {
-    "Name": "Net Core Super Board",
-    "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
-    "Price": 300,
-    "PictureUrl": "images/products/sb-core2.png",
-    "ProductTypeId": 1
+     "Name": "Pink Society Kills Hoodie",
+    "Description": "Built for comfort and presence. World Famous blends premium cotton fleece with a relaxed, athletic fit that moves with you. Ribbed cuffs and waistband keep warmth in, while the soft brushed interior delivers all-day comfort. Finished with minimal branding for a clean, timeless look that works anywhere.",
+    "Price": 80,
+    "PictureUrl": "images/products/hoodie_sk_pink.png",
+    "ProductTypeId": 5
   },
   {
-    "Name": "React Board Super Whizzy Fast",
-    "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-    "Price": 250,
-    "PictureUrl": "images/products/sb-react1.png",
-    "ProductTypeId": 1
+      "Name": "Red Society Kills Hoodie",
+    "Description": "Built for comfort and presence. World Famous blends premium cotton fleece with a relaxed, athletic fit that moves with you. Ribbed cuffs and waistband keep warmth in, while the soft brushed interior delivers all-day comfort. Finished with minimal branding for a clean, timeless look that works anywhere.",
+    "Price": 80,
+    "PictureUrl": "images/products/hoodie_sk_red.png",
+    "ProductTypeId": 5
   },
   {
-    "Name": "Typescript Entry Board",
-    "Description": "Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.",
-    "Price": 120,
-    "PictureUrl": "images/products/sb-ts1.png",
-    "ProductTypeId": 1
+      "Name": "White Society Kills Hoodie",
+    "Description": "Built for comfort and presence. World Famous blends premium cotton fleece with a relaxed, athletic fit that moves with you. Ribbed cuffs and waistband keep warmth in, while the soft brushed interior delivers all-day comfort. Finished with minimal branding for a clean, timeless look that works anywhere.",
+    "Price": 80,
+    "PictureUrl": "images/products/hoodie_sk_white.png",
+    "ProductTypeId": 5
     
   },
   {
-    "Name": "Core Blue Hat",
-    "Description": "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-    "Price": 10,
-    "PictureUrl": "images/products/hat-core1.png",
-    "ProductTypeId": 2
+    "Name": "Beige World Famous Graphic Logo Style Hoodie",
+    "Description": "Built for comfort and presence. World Famous blends premium cotton fleece with a relaxed, athletic fit that moves with you. Ribbed cuffs and waistband keep warmth in, while the soft brushed interior delivers all-day comfort. Finished with minimal branding for a clean, timeless look that works anywhere.",
+    "Price": 80,
+    "PictureUrl": "images/products/hoodie_wflogo_beige.png",
+    "ProductTypeId": 5
   },
   {
-    "Name": "Green React Woolen Hat",
-    "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
-    "Price": 8,
-    "PictureUrl": "images/products/hat-react1.png",
-    "ProductTypeId": 2
+    "Name": "Blue World Famous Graphic Logo Style Hoodie",
+    "Description": "Built for comfort and presence. World Famous blends premium cotton fleece with a relaxed, athletic fit that moves with you. Ribbed cuffs and waistband keep warmth in, while the soft brushed interior delivers all-day comfort. Finished with minimal branding for a clean, timeless look that works anywhere.",
+    "Price": 80,
+    "PictureUrl": "images/products/hoodie_wflogo_blue.png",
+    "ProductTypeId": 5
   },
   {
-    "Name": "Purple React Woolen Hat",
-    "Description": "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-    "Price": 15,
-    "PictureUrl": "images/products/hat-react2.png",
-    "ProductTypeId": 2
+     "Name": "Grey World Famous Graphic Logo Style Hoodie",
+    "Description": "Built for comfort and presence. World Famous blends premium cotton fleece with a relaxed, athletic fit that moves with you. Ribbed cuffs and waistband keep warmth in, while the soft brushed interior delivers all-day comfort. Finished with minimal branding for a clean, timeless look that works anywhere.",
+    "Price": 80,
+    "PictureUrl": "images/products/hoodie_wflogo_grey.png",
+    "ProductTypeId": 5
   },
   {
-    "Name": "Blue Code Gloves",
-    "Description": "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
-    "Price": 18,
-    "PictureUrl": "images/products/glove-code1.png",
-    "ProductTypeId": 4
+     "Name": "Pink World Famous Graphic Logo Style Hoodie",
+    "Description": "Built for comfort and presence. World Famous blends premium cotton fleece with a relaxed, athletic fit that moves with you. Ribbed cuffs and waistband keep warmth in, while the soft brushed interior delivers all-day comfort. Finished with minimal branding for a clean, timeless look that works anywhere.",
+    "Price": 80,
+    "PictureUrl": "images/products/hoodie_wflogo_pink.png",
+    "ProductTypeId": 5
   },
   {
-    "Name": "Green Code Gloves",
-    "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
-    "Price": 15,
-    "PictureUrl": "images/products/glove-code2.png",
-    "ProductTypeId": 4
+    "Name": "Red World Famous Graphic Logo Style Hoodie",
+    "Description": "Built for comfort and presence. World Famous blends premium cotton fleece with a relaxed, athletic fit that moves with you. Ribbed cuffs and waistband keep warmth in, while the soft brushed interior delivers all-day comfort. Finished with minimal branding for a clean, timeless look that works anywhere.",
+    "Price": 80,
+    "PictureUrl": "images/products/hoodie_wflogo_red.png",
+    "ProductTypeId": 5
   },
   {
-    "Name": "Purple React Gloves",
-    "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa.",
-    "Price": 16,
-    "PictureUrl": "images/products/glove-react1.png",
-    "ProductTypeId": 4
+     "Name": "White World Famous Graphic Logo Style Hoodie",
+    "Description": "Built for comfort and presence. World Famous blends premium cotton fleece with a relaxed, athletic fit that moves with you. Ribbed cuffs and waistband keep warmth in, while the soft brushed interior delivers all-day comfort. Finished with minimal branding for a clean, timeless look that works anywhere.",
+    "Price": 80,
+    "PictureUrl": "images/products/hoodie_wflogo_white.png",
+    "ProductTypeId": 5
   },
   {
-    "Name": "Green React Gloves",
-    "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
-    "Price": 14,
-    "PictureUrl": "images/products/glove-react2.png",
-    "ProductTypeId": 4
+     "Name": "Beige Society Kills Sweatshirt",
+    "Description": "Designed for layering or solo wear, the World Famous Sweatshirt brings understated edge to cooler days. Smooth cotton fabric, ribbed cuffs, and a tailored drape make it the perfect mix of comfort and street-ready detail.",
+    "Price": 50,
+    "PictureUrl": "images/products/longsleeve_sweatshirt_beige.png",
+    "ProductTypeId": 7
   },
   {
-    "Name": "Redis Red Boots",
-    "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
-    "Price": 250,
-    "PictureUrl": "images/products/boot-redis1.png",
-    "ProductTypeId": 3
+      "Name": "Black Society Kills Sweatshirt",
+    "Description": "Designed for layering or solo wear, the World Famous Sweatshirt brings understated edge to cooler days. Smooth cotton fabric, ribbed cuffs, and a tailored drape make it the perfect mix of comfort and street-ready detail.",
+    "Price": 50,
+    "PictureUrl": "images/products/longsleeve_sweatshirt_black.png",
+    "ProductTypeId": 7
   },
   {
-    "Name": "Core Red Boots",
-    "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-    "Price": 189.99,
-    "PictureUrl": "images/products/boot-core2.png",
-    "ProductTypeId": 3
+      "Name": "Grey Society Kills Sweatshirt",
+    "Description": "Designed for layering or solo wear, the World Famous Sweatshirt brings understated edge to cooler days. Smooth cotton fabric, ribbed cuffs, and a tailored drape make it the perfect mix of comfort and street-ready detail.",
+    "Price": 50,
+    "PictureUrl": "images/products/longsleeve_sweatshirt_grey.png",
+    "ProductTypeId": 7
   },
   {
-    "Name": "Core Purple Boots",
-    "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
-    "Price": 199.99,
-    "PictureUrl": "images/products/boot-core1.png",
-    "ProductTypeId": 3
+      "Name": "White Society Kills Sweatshirt",
+    "Description": "Designed for layering or solo wear, the World Famous Sweatshirt brings understated edge to cooler days. Smooth cotton fabric, ribbed cuffs, and a tailored drape make it the perfect mix of comfort and street-ready detail.",
+    "Price": 50,
+    "PictureUrl": "images/products/longsleeve_sweatshirt_white.png",
+    "ProductTypeId": 7
   },
   {
-    "Name": "Angular Purple Boots",
-    "Description": "Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.",
-    "Price": 150,
-    "PictureUrl": "images/products/boot-ang2.png",
-    "ProductTypeId": 3
+      "Name": "Beige Society Kills T-Shirt",
+    "Description": "Effortless, sharp, and made to last. The World Famous Tee is crafted from heavyweight combed cotton that keeps its shape wear after wear. Tailored to sit just right on the shoulders and chest — never boxy, never tight — it’s a staple you’ll reach for every day.",
+    "Price": 45,
+    "PictureUrl": "images/products/tee_sk_beige.png",
+    "ProductTypeId": 6
   },
   {
-    "Name": "Angular Blue Boots",
-    "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
-    "Price": 180,
-    "PictureUrl": "images/products/boot-ang1.png",
-    "ProductTypeId": 3
+     "Name": "Black Society Kills T-Shirt",
+    "Description": "Effortless, sharp, and made to last. The World Famous Tee is crafted from heavyweight combed cotton that keeps its shape wear after wear. Tailored to sit just right on the shoulders and chest — never boxy, never tight — it’s a staple you’ll reach for every day.",
+    "Price": 45,
+    "PictureUrl": "images/products/tee_sk_black.png",
+    "ProductTypeId": 6
+  },
+
+    {
+     "Name": "Blue Society Kills T-Shirt",
+    "Description": "Effortless, sharp, and made to last. The World Famous Tee is crafted from heavyweight combed cotton that keeps its shape wear after wear. Tailored to sit just right on the shoulders and chest — never boxy, never tight — it’s a staple you’ll reach for every day.",
+    "Price": 45,
+    "PictureUrl": "images/products/tee_sk_blue.png",
+    "ProductTypeId": 6
+  },
+
+      {
+     "Name": "Grey Society Kills T-Shirt",
+    "Description": "Effortless, sharp, and made to last. The World Famous Tee is crafted from heavyweight combed cotton that keeps its shape wear after wear. Tailored to sit just right on the shoulders and chest — never boxy, never tight — it’s a staple you’ll reach for every day.",
+    "Price": 45,
+    "PictureUrl": "images/products/tee_sk_grey.png",
+    "ProductTypeId": 6
+  },
+
+        {
+     "Name": "Red Society Kills T-Shirt",
+    "Description": "Effortless, sharp, and made to last. The World Famous Tee is crafted from heavyweight combed cotton that keeps its shape wear after wear. Tailored to sit just right on the shoulders and chest — never boxy, never tight — it’s a staple you’ll reach for every day.",
+    "Price": 45,
+    "PictureUrl": "images/products/tee_sk_red.png",
+    "ProductTypeId": 6
+  },
+
+        {
+     "Name": "White Society Kills T-Shirt",
+    "Description": "Effortless, sharp, and made to last. The World Famous Tee is crafted from heavyweight combed cotton that keeps its shape wear after wear. Tailored to sit just right on the shoulders and chest — never boxy, never tight — it’s a staple you’ll reach for every day.",
+    "Price": 45,
+    "PictureUrl": "images/products/tee_sk_white.png",
+    "ProductTypeId": 6
+  },
+
+        {
+     "Name": "Beige World Famous Graphic Style T-Shirt",
+    "Description": "Effortless, sharp, and made to last. The World Famous Tee is crafted from heavyweight combed cotton that keeps its shape wear after wear. Tailored to sit just right on the shoulders and chest — never boxy, never tight — it’s a staple you’ll reach for every day.",
+    "Price": 45,
+    "PictureUrl": "images/products/tee_wflogo_beige.png",
+    "ProductTypeId": 6
+  },
+
+          {
+     "Name": "Green World Famous Graphic Style T-Shirt",
+    "Description": "Effortless, sharp, and made to last. The World Famous Tee is crafted from heavyweight combed cotton that keeps its shape wear after wear. Tailored to sit just right on the shoulders and chest — never boxy, never tight — it’s a staple you’ll reach for every day.",
+    "Price": 45,
+    "PictureUrl": "images/products/tee_wflogo_green.png",
+    "ProductTypeId": 6
+  },
+
+            {
+     "Name": "Grey World Famous Graphic Style T-Shirt",
+    "Description": "Effortless, sharp, and made to last. The World Famous Tee is crafted from heavyweight combed cotton that keeps its shape wear after wear. Tailored to sit just right on the shoulders and chest — never boxy, never tight — it’s a staple you’ll reach for every day.",
+    "Price": 45,
+    "PictureUrl": "images/products/tee_wflogo_grey.png",
+    "ProductTypeId": 6
+  },
+
+
+            {
+     "Name": "White World Famous Graphic Style T-Shirt",
+    "Description": "Effortless, sharp, and made to last. The World Famous Tee is crafted from heavyweight combed cotton that keeps its shape wear after wear. Tailored to sit just right on the shoulders and chest — never boxy, never tight — it’s a staple you’ll reach for every day.",
+    "Price": 45,
+    "PictureUrl": "images/products/tee_wflogo_white.png",
+    "ProductTypeId": 6
   }
+
 ]

@@ -1,14 +1,5 @@
 [
-  {
-    "Name": "Boards"
-  },
-  {
-    "Name": "Hats"
-  },
-  {
-    "Name": "Boots"
-  },
-  {
-    "Name": "Gloves"
-  }
+  { "Name": "Hoodies" },
+  { "Name": "T-Shirts" },
+  { "Name": "Long Sleeves" }
 ]

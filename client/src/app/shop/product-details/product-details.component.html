@@ -1,50 +1,71 @@
 <div class="container mt-5">
   <div *ngIf="product">
-    <div class="row">
+    <div class="row align-items-start">
       <!-- Product Image -->
-      <div class="col-6">
-        <img [src]="product.pictureUrl" [alt]="product.name" class="img-fluid w-100" />
+      <div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
+        <img
+          [src]="product.pictureUrl"
+          [alt]="product.name"
+          class="img-fluid w-100 rounded shadow-sm"
+          style="max-height: 600px; object-fit: contain;"
+        />
       </div>
 
-      <!-- Product Details & Controls -->
-      <div class="col-6 d-flex flex-column">
-        <h3>{{ product.name }}</h3>
+      <!-- Product Details -->
+      <div class="col-lg-6 col-md-12">
+        <h2 class="fw-bold mb-3" style="font-size: 1.9rem;">
+          {{ product.name }}
+        </h2>
 
-        <!-- Real-Time Price -->
-        <p>Total: {{ product.price * quantity | currency }}</p>
-        <p class="text-muted" style="font-size: 0.9em;">Unit Price: {{ product.price | currency }}</p>
+        <!-- Pricing -->
+        <p class="fw-semibold mb-1" style="font-size: 1.1rem;">
+          Total: {{ product.price * quantity | currency }}
+        </p>
+        <p class="text-muted mb-3" style="font-size: 1rem;">
+          Unit Price: {{ product.price | currency }}
+        </p>
 
-        <!-- Quantity Controls + Add to Cart -->
-        <div class="d-flex align-items-center mb-3 mt-3">
-          <!-- Minus Icon -->
-          <i (click)="decrementQuantity()" class="fas fa-minus-circle text-warning" style="cursor: pointer; font-size: 1.5em;"></i>
+        <!-- Description -->
+        <p
+          class="product-description mb-4"
+          style="
+            color: #222;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            max-width: 500px;
+            text-align: justify;
+          "
+        >
+          {{ product.description }}
+        </p>
 
-          <!-- Quantity Display -->
-          <span class="fw-bold mx-2" style="font-size: 1.5em;">{{ quantity }}</span>
+        <!-- Quantity + Add to Cart -->
+        <div class="d-flex align-items-center mb-3">
+          <i
+            (click)="decrementQuantity()"
+            class="fas fa-minus-circle text-warning"
+            style="cursor: pointer; font-size: 1.8em;"
+          ></i>
 
-          <!-- Plus Icon -->
-          <i (click)="incrementQuantity()" class="fas fa-plus-circle text-warning" style="cursor: pointer; font-size: 1.5em;"></i>
+          <span class="fw-bold mx-3" style="font-size: 1.5em;">{{ quantity }}</span>
 
-          <!-- Add to Cart Button -->
+          <i
+            (click)="incrementQuantity()"
+            class="fas fa-plus-circle text-warning"
+            style="cursor: pointer; font-size: 1.8em;"
+          ></i>
+
           <button
-           (click)="addItemToBasket()"
-            class="btn btn-outline-primary btn-sm ms-3"
+            (click)="addItemToBasket()"
+            class="btn btn-outline-primary btn-lg ms-4 px-4"
             [disabled]="isAdding"
-            >
-             {{ isAdding ? 'Adding...' : 'Add to Cart' }}
+          >
+            {{ isAdding ? 'Adding...' : 'Add to Cart' }}
           </button>
         </div>
       </div>
     </div>
-
-    <!-- Description -->
-    <div class="row mt-5">
-      <div class="col-12">
-        <h4>Description</h4>
-        <p>{{ product.description }}</p>
-      </div>
-    </div>
   </div>
 </div>
-<app-add-to-cart-toast #toast></app-add-to-cart-toast>
 
+<app-add-to-cart-toast #toast></app-add-to-cart-toast>
