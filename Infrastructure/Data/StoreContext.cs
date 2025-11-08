@@ -7,33 +7,27 @@ using Core.Entities;
 using Core.Entities.OrderAggregate;
 using Microsoft.EntityFrameworkCore;
 
-
-// These are all the database tables I am using for my project. They will be listed here 
-
-
 namespace Infrastructure.Data
 {
     public class StoreContext : DbContext
     {
-        public StoreContext(DbContextOptions options) : base(options)
-        {      
+        public StoreContext(DbContextOptions<StoreContext> options) : base(options)
+        {
         }
 
-        public DbSet<Product>? Products {get; set;} 
-
-        public DbSet<ProductType>? ProductTypes { get; set; }
-        
-        public DbSet<Order> Orders { get; set; }
-
-        public DbSet<OrderItem> OrderItems { get; set; }
-
-        public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
+        // --- Database Tables ---
+        public DbSet<Product> Products { get; set; } = null!;
+        public DbSet<ProductType> ProductTypes { get; set; } = null!;
+        public DbSet<Order> Orders { get; set; } = null!;
+        public DbSet<OrderItem> OrderItems { get; set; } = null!;
+        public DbSet<DeliveryMethod> DeliveryMethods { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            base.OnModelCreating(modelBuilder);
             
+            // Apply all entity configurations automatically
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
-
     }
 }
