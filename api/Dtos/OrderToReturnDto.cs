@@ -23,6 +23,8 @@ namespace api.Dtos
 
         public decimal Subtotal { get; set; }
 
-        public OrderStatus Status { get; set; } = OrderStatus.Pending;
+        public decimal Total { get; set; }
+
+        public string Status { get; set; } 
     }
 }
