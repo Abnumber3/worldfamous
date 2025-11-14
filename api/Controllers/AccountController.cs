@@ -28,6 +28,7 @@ namespace api.Controllers
             _signInManager = signInManager;
             _userManager = userManager;
             _mapper = mapper;
+            
         }
 
         [Authorize]
@@ -42,6 +43,7 @@ namespace api.Controllers
                 Email = user.Email,
                 Token = _tokenService.CreateToken(user),
                 DisplayName = user.DisplayName
+                
             };
         }
 

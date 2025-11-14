@@ -9,6 +9,7 @@ import { AddToCartToastComponent } from './components/add-to-cart-toast/add-to-c
 import { ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TextInputComponent } from './components/text-input/text-input.component';
+import { CdkStepperModule } from '@angular/cdk/stepper';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { TextInputComponent } from './components/text-input/text-input.component
     // ⬇️ feature-level imports (NO .forRoot() here)
     CarouselModule,
     BsDropdownModule,
+    CdkStepperModule
   ],
   exports: [
     PaginationControlsComponent,
