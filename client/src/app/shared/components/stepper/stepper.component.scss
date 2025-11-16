@@ -1,0 +1,49 @@
+.stepper-headers {
+  display: flex;
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  gap: 2rem;
+}
+
+.step-header {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #888;
+  position: relative;
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.step-header:hover {
+  color: #333;
+}
+
+.step-header.active {
+  color: #000;
+  font-weight: 600;
+}
+
+.step-header.active::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #000;
+  border-radius: 2px;
+  animation: underlineIn 0.2s ease-out forwards;
+}
+
+@keyframes underlineIn {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}

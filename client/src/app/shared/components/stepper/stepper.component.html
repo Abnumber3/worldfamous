@@ -1,1 +1,23 @@
-<p>stepper works!</p>
+<div class="stepper">
+<!-- headers -->
+ <div class="stepper-headers">
+  <button
+    *ngFor="let step of _steps; let i = index"
+    type="button"
+    class="step-header"
+    [class.active]="selectedIndex === i"
+    (click)="onStepHeaderClick(i)">
+    {{ step.label }}
+  </button>
+</div>
+
+
+  <!-- Active step content -->
+  <div class="mt-3">
+    <ng-container *ngIf="selected">
+      <ng-container [ngTemplateOutlet]="selected.content"></ng-container>
+    </ng-container>
+  </div>
+
+</div>
+
