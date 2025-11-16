@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TextInputComponent } from './components/text-input/text-input.component';
 import { CdkStepperModule } from '@angular/cdk/stepper';
+import { StepperComponent } from './components/stepper/stepper.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,8 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
     OrderToolsComponent,
     AddToCartToastComponent,
     TextInputComponent,
+    StepperComponent
+    
   ],
   imports: [
     CommonModule,
@@ -37,6 +40,9 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
     CarouselModule,
     BsDropdownModule,
     TextInputComponent,
+    CdkStepperModule,
+    StepperComponent
+    
   ]
 })
 export class SharedModule {}
