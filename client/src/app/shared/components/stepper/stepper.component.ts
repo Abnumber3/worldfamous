@@ -13,7 +13,7 @@ import { CdkStepper } from '@angular/cdk/stepper';
     }
   ]
 })
-export class StepperComponent extends CdkStepper {
+export class StepperComponent extends CdkStepper  {
 
   // 👇 This is what your template is binding to
   @Input() linearModeSelected: boolean = false;

@@ -19,7 +19,8 @@ import { StepperComponent } from './components/stepper/stepper.component';
     OrderToolsComponent,
     AddToCartToastComponent,
     TextInputComponent,
-    StepperComponent
+    StepperComponent,
+  
     
   ],
   imports: [
@@ -29,7 +30,7 @@ import { StepperComponent } from './components/stepper/stepper.component';
     // ⬇️ feature-level imports (NO .forRoot() here)
     CarouselModule,
     BsDropdownModule,
-    CdkStepperModule
+    CdkStepperModule,
   ],
   exports: [
     PaginationControlsComponent,
