@@ -1,7 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { StepperComponent } from '../shared/components/stepper/stepper.component';
-import { OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms'; 
 
 @Component({
   selector: 'app-checkout',
@@ -10,34 +9,67 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   styleUrl: './checkout.component.scss'
 })
 export class CheckoutComponent implements OnInit {
-  checkoutForm: FormGroup | undefined;
+
+  // Main checkout form
+  checkoutForm!: FormGroup;
+
+  // Step labels – grouped so it's obvious what they are
+  readonly stepLabels = {
+    address: 'Address',
+    delivery: 'Delivery',
+    review: 'Review',
+    payment: 'Payment'
+  };
+
+  @ViewChild('appStepper') appStepper!: StepperComponent;
 
   constructor(private fb: FormBuilder) {}
 
-  ngOnInit(){
-
+  ngOnInit(): void {
+    this.buildCheckoutForm();
   }
-  Address = 'Address';
-  Delivery = 'Delivery';
-  Review  = 'Review';
-  Payment = 'Payment';
 
-  @ViewChild('appStepper') appStepper?: StepperComponent;
+  // --- Form setup ----------------------------------------------------------
 
-
-
-createCheckoutForm() {
+  private buildCheckoutForm(): void {
     this.checkoutForm = this.fb.group({
-      // Define your form controls here
+      addressForm: this.fb.group({
+        firstName: [null, Validators.required],
+        lastName: [null, Validators.required],
+        street: [null, Validators.required],
+        city: [null, Validators.required],
+        state: [null, Validators.required],
+        zipCode: [null, Validators.required],
+      }),
+      deliveryForm: this.fb.group({
+        deliveryMethod: [null, Validators.required]
+      }),
+      paymentForm: this.fb.group({
+        nameOnCard: [null, Validators.required]
+      })
     });
   }
 
+  // Optional: convenience getters if you want them in template/children
+  get addressForm(): FormGroup {
+    return this.checkoutForm.get('addressForm') as FormGroup;
+  }
 
-  goNextStep() {
+  get deliveryForm(): FormGroup {
+    return this.checkoutForm.get('deliveryForm') as FormGroup;
+  }
+
+  get paymentForm(): FormGroup {
+    return this.checkoutForm.get('paymentForm') as FormGroup;
+  }
+
+  // --- Stepper controls ----------------------------------------------------
+
+  nextStep(): void {
     this.appStepper?.next();
   }
 
-  goPreviousStep() {
+  previousStep(): void {
     this.appStepper?.previous();
   }
 }

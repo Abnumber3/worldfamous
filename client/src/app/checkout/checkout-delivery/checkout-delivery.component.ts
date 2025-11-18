@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-checkout-delivery',
-  imports: [],
+  standalone: false,
   templateUrl: './checkout-delivery.component.html',
   styleUrl: './checkout-delivery.component.scss'
 })
 export class CheckoutDeliveryComponent {
+  @Input() checkoutForm!: FormGroup;
+
 
 }

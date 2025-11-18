@@ -10,16 +10,17 @@ import { CheckoutPaymentComponent } from "./checkout-payment/checkout-payment.co
 
 @NgModule({
   declarations: [
-    CheckoutComponent      // 
+    CheckoutComponent,
+    CheckoutAddressComponent,
+    CheckoutDeliveryComponent,
+    CheckoutReviewComponent,
+    CheckoutPaymentComponent,     // 
   ],
   imports: [
     CommonModule,
     CheckoutRoutingModule,
     SharedModule,
-    CheckoutAddressComponent,
-    CheckoutDeliveryComponent,
-    CheckoutReviewComponent,
-    CheckoutPaymentComponent,
+  
   
 ]
 })

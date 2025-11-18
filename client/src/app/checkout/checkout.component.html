@@ -1,22 +1,37 @@
 <div class="container mt-5">
-<div class="row">
+  <div class="row">
     <div class="col-8">
-        <app-stepper [linearModeSelected]="false" #appStepper>
-            <cdk-step [label]="Address">
-               <app-checkout-address></app-checkout-address>
-            </cdk-step>
-            <cdk-step [label]="Delivery">
-                <app-checkout-delivery></app-checkout-delivery>
-            </cdk-step>
-            <cdk-step [label]="Review">
-                <app-checkout-review></app-checkout-review>
-            </cdk-step>
-             <cdk-step [label]="Payment">
-                <app-checkout-payment></app-checkout-payment>
-            </cdk-step>
-        </app-stepper>
+      <app-stepper [linearModeSelected]="false" #appStepper>
+
+        <cdk-step [label]="stepLabels.address">
+          <app-checkout-address
+            [checkoutForm]="checkoutForm">
+          </app-checkout-address>
+        </cdk-step>
+
+        <cdk-step [label]="stepLabels.delivery">
+          <app-checkout-delivery
+            [checkoutForm]="checkoutForm">
+          </app-checkout-delivery>
+        </cdk-step>
+
+        <cdk-step [label]="stepLabels.review">
+          <app-checkout-review
+            [checkoutForm]="checkoutForm">
+          </app-checkout-review>
+        </cdk-step>
+
+        <cdk-step [label]="stepLabels.payment">
+          <app-checkout-payment
+            [checkoutForm]="checkoutForm">
+          </app-checkout-payment>
+        </cdk-step>
+
+      </app-stepper>
     </div>
+
     <div class="col-4">
-        <app-order-tools></app-order-tools>
-</div>
+      <app-order-tools></app-order-tools>
+    </div>
+  </div>
 </div>

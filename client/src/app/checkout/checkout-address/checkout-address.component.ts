@@ -1,11 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-checkout-address',
-  imports: [],
+  standalone: false,
   templateUrl: './checkout-address.component.html',
-  styleUrl: './checkout-address.component.scss'
+  styleUrls: ['./checkout-address.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CheckoutAddressComponent {
 
+  // Parent passes in the main checkout form
+  @Input() checkoutForm!: FormGroup;
+  
+
+  // Optional convenience getter if you ever need addressForm in TS
+  get addressForm(): FormGroup {
+    return this.checkoutForm.get('addressForm') as FormGroup;
+  }
 }

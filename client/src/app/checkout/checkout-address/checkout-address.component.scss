@@ -1,0 +1,55 @@
+.checkout-card {
+  max-width: 720px;
+  margin: 0 auto 2rem;
+  border-radius: 18px;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);
+}
+
+.checkout-card .card-header {
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+.checkout-card h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.checkout-card p.small {
+  color: #6b7280; /* muted gray */
+}
+
+/* Button: sharper, more modern */
+.checkout-card .btn-outline-primary.btn-sm {
+  border-radius: 999px;
+  padding-inline: 1rem;
+  font-weight: 500;
+}
+
+/* Scope styles to inputs inside the card */
+.checkout-card .form-control {
+  border-radius: 10px;
+  border-color: #e5e7eb;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+  background-color: #f9fafb;
+}
+
+.checkout-card .form-control:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.3);
+  background-color: #ffffff;
+}
+
+/* Optional: label styling inside app-text-input if it uses .form-label */
+.checkout-card .form-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #4b5563;
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.02em;
+}
+
+/* Helper text line at bottom */
+.checkout-card .small.text-muted {
+  color: #9ca3af !important;
+}
