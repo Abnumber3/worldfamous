@@ -11,6 +11,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TextInputComponent } from './components/text-input/text-input.component';
 import { CdkStepperModule } from '@angular/cdk/stepper';
 import { StepperComponent } from './components/stepper/stepper.component';
+import { CheckoutModule } from '../checkout/checkout.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { StepperComponent } from './components/stepper/stepper.component';
     CarouselModule,
     BsDropdownModule,
     CdkStepperModule,
+
   ],
   exports: [
     PaginationControlsComponent,

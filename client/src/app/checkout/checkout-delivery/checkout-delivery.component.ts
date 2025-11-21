@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { DeliveryMethod } from '../../shared/models/deliveryMethod';
 
 @Component({
   selector: 'app-checkout-delivery',
@@ -9,6 +10,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class CheckoutDeliveryComponent {
   @Input() checkoutForm!: FormGroup;
+  deliveryMethods: DeliveryMethod [] = [];
 
 
 }

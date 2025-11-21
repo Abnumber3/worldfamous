@@ -18,7 +18,7 @@ export class CheckoutComponent implements OnInit {
     address: 'Address',
     delivery: 'Delivery',
     review: 'Review',
-    payment: 'Payments'
+    payment: 'Payment'
   };
 
   @ViewChild('appStepper') appStepper!: StepperComponent;
