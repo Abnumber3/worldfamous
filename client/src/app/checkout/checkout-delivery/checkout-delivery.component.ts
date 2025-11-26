@@ -17,11 +17,11 @@ export class CheckoutDeliveryComponent implements OnInit {
 
   constructor(private checkoutService: CheckoutService) {}
   
-//   ngOnInit(): void {
-//       this.checkoutService.getDeliveryMethods().subscribe({
-//         next :  dm => this.deliveryMethods = dm
-//   });
+  ngOnInit(): void {
+      this.checkoutService.getDeliveryMethods().subscribe({
+        next :  dm => this.deliveryMethods = dm
+  });
 
-// }
+}
 
 }
