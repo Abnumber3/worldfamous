@@ -13,6 +13,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { BasketModule } from "./basket/basket.module";
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { JwtInterceptor } from "./core/Interceptors/jwt.interceptor";
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,6 +33,7 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     provideHttpClient(withInterceptorsFromDi()),
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }, // <-- ADD THIS LINE
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
 })
