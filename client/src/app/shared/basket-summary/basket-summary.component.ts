@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { IBasketItem } from '../models/basket';
+import { BasketService } from '../../basket/basket.service';
 
 @Component({
   selector: 'app-basket-summary',
@@ -10,6 +11,8 @@ import { IBasketItem } from '../models/basket';
 export class BasketSummaryComponent {
   @Output() addItem = new EventEmitter<IBasketItem>();
   @Output() removeItem = new EventEmitter<{id: number, quantity: number}>();
+
+  constructor(public basketService: BasketService) { }
 
   addBasketItem(item: IBasketItem){
     this.addItem.emit(item);
