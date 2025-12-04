@@ -12,6 +12,7 @@ import { TextInputComponent } from './components/text-input/text-input.component
 import { CdkStepperModule } from '@angular/cdk/stepper';
 import { StepperComponent } from './components/stepper/stepper.component';
 import { CheckoutModule } from '../checkout/checkout.module';
+import { BasketSummaryComponent } from './basket-summary/basket-summary.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { CheckoutModule } from '../checkout/checkout.module';
     AddToCartToastComponent,
     TextInputComponent,
     StepperComponent,
+    BasketSummaryComponent
   
     
   ],
@@ -44,7 +46,8 @@ import { CheckoutModule } from '../checkout/checkout.module';
     BsDropdownModule,
     TextInputComponent,
     CdkStepperModule,
-    StepperComponent
+    StepperComponent,
+    BasketSummaryComponent
     
   ]
 })

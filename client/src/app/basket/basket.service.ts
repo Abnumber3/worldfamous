@@ -41,28 +41,44 @@ getCurrentBasketValue() {
   return this.basketSource.value;
 }
 
-incrementItemQuantity(item: IBasketItem) {
-  const basket = this.getCurrentBasketValue();
-  const foundItemIndex = basket?.items.findIndex(x => x.id === item.id);
-  basket!.items[foundItemIndex!].quantity++;
-  this.setBasket(basket!);
-}
+  incrementItemQuantity(item: IBasketItem) {
+    const basket = this.getCurrentBasketValue();
+    if (!basket) { return; }
 
-decrementItemQuantity(item: IBasketItem) {
-  const basket = this.getCurrentBasketValue();
-  const foundItemIndex = basket?.items.findIndex(x => x.id === item.id);
-  if(basket!.items[foundItemIndex!].quantity > 1) {
-    basket!.items[foundItemIndex!].quantity--;
-    this.setBasket(basket!);
-  } else {
-    this.removeItemFromBasket(item);
+    const foundItemIndex = basket.items.findIndex(x => x.id === item.id);
+    if (foundItemIndex === -1) { return; }
+
+    basket.items[foundItemIndex].quantity++;
+    this.setBasket(basket);
   }
-}
 
-removeItemFromBasket(item: IBasketItem) {
-  const basket = this.getCurrentBasketValue();
-  if (basket?.items.some(x => x.id === item.id)) {
-    basket.items = basket.items.filter(i => i.id !== item.id);
+// decrementItemQuantity(item: IBasketItem) {
+//   const basket = this.getCurrentBasketValue();
+//   const foundItemIndex = basket?.items.findIndex(x => x.id === item.id);
+//   if(basket!.items[foundItemIndex!].quantity > 1) {
+//     basket!.items[foundItemIndex!].quantity--;
+//     this.setBasket(basket!);
+//   } else {
+//     this.removeItemFromBasket(item);
+//   }
+// }
+
+  removeItemFromBasket(id: number, quantity: number = 1) {
+    const basket = this.getCurrentBasketValue();
+    if (!basket) { return; }
+
+    const item = basket.items.find(x => x.id === id);
+    if (!item) { return; }
+
+    // reduce quantity
+    item.quantity -= quantity;
+
+    // if item has zero or less, remove it
+    if (item.quantity <= 0) {
+      basket.items = basket.items.filter(i => i.id !== id);
+    }
+
+    // if basket still has items, persist; otherwise reset to empty
     if (basket.items.length > 0) {
       this.setBasket(basket);
     } else {
@@ -70,7 +86,8 @@ removeItemFromBasket(item: IBasketItem) {
       this.basketTotalSource.next({ shipping: 0, subtotal: 0, total: 0 });
     }
   }
-}
+
+
 
 deleteBasket(basket: IBasket) {
   return this.http.delete(this.baseUrl + 'basket?id=' + basket.id).subscribe(() => {
