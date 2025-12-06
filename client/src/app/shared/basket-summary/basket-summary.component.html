@@ -1,6 +1,6 @@
 <div class="table-responsive" *ngIf="(basketService.basket$ | async) as basket">
               <table class="table">
-                <thead>
+                <thead class="text-uppercase" [class.bg-light]="isBasket">
                   <tr>
                     <th class="border-0 bg-light p-0">
                       <div class="p-3 px-4 text-uppercase fs-5">Product</div>
@@ -14,7 +14,7 @@
                     <th class="border-0 bg-light p-0">
                       <div class="p-3 px-4 text-uppercase fs-5">Total</div>
                     </th>
-                    <th class="border-0 bg-light p-0">
+                    <th *ngIf="isBasket" class="border-0 bg-light p-0">
                       <div class="p-3 px-4 text-uppercase text-center fs-5">Remove</div>
                     </th>
                   </tr>
@@ -45,11 +45,12 @@
 
                     <td class="align-middle p-0">
                       <div class="p-3 px-4 d-flex align-items-center">
-                        <i (click)="removeBasketItem(item.id, 1)" class="fas fa-minus-circle text-warning" style="cursor:pointer; font-size:2em;"></i>
+                        <i *ngIf="isBasket"
+                        (click)="removeBasketItem(item.id, 1)" class="fas fa-minus-circle text-warning" style="cursor:pointer; font-size:2em;"></i>
                         <span class="fw-bold mx-3" style="font-size:1.3em;">
                           {{ item.quantity }}
                         </span>
-                        <i (click)="addBasketItem(item)" class="fas fa-plus-circle text-warning" style="cursor:pointer; font-size:2em;"></i>
+                        <i *ngIf="isBasket"  (click)="addBasketItem(item)" class="fas fa-plus-circle text-warning" style="cursor:pointer; font-size:2em;"></i>
                       </div>
                     </td>
 
@@ -59,7 +60,7 @@
                       </div>
                     </td>
 
-                    <td class="align-middle p-0">
+                    <td *ngIf="isBasket" class="align-middle p-0">
                       <div class="d-flex justify-content-center align-items-center p-3 px-4">
                         <a class="text-danger" style="cursor:pointer;">
                           <i (click)="removeBasketItem(item.id, item.quantity)" class="fa fa-trash" style="font-size:2.2em; cursor: pointer"></i>
