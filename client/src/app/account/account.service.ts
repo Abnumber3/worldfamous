@@ -2,7 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, of, ReplaySubject } from 'rxjs';
 import { IUser } from '../shared/models/user';
+import { IAddress } from '../shared/models/address';
 import { Router } from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root'
@@ -75,4 +77,11 @@ export class AccountService {
   checkUsernameExists(username: string) {
   return this.http.get<boolean>(this.baseUrl + 'account/usernameexists?username=' + username);
 }
+  getUserAddress() {
+    return this.http.get<IAddress>(this.baseUrl + 'account/address');
+  }
+
+  updateUserAddress(address: IAddress) {
+    return this.http.get(this.baseUrl + 'account/address')
+  }
 }
