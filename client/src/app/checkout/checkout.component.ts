@@ -1,6 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { StepperComponent } from '../shared/components/stepper/stepper.component';
+import { AccountService } from '../account/account.service';
 
 @Component({
   selector: 'app-checkout',
@@ -23,7 +24,11 @@ export class CheckoutComponent implements OnInit {
 
   @ViewChild('appStepper') appStepper!: StepperComponent;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private accountService: AccountService
+  
+  ) {}
 
   ngOnInit(): void {
     this.buildCheckoutForm();
