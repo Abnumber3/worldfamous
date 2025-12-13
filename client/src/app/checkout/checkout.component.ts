@@ -68,6 +68,15 @@ export class CheckoutComponent implements OnInit {
     return this.checkoutForm.get('paymentForm') as FormGroup;
   }
 
+
+  getAddressFormValues() { 
+    this.accountService.getUserAddress().subscribe({
+      next: (address) => {
+        address && this.checkoutForm.get('addressForm')?.patchValue(address);
+      }
+    })
+  }
+
   // --- Stepper controls ----------------------------------------------------
 
   nextStep(): void {
