@@ -32,6 +32,7 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildCheckoutForm();
+    this.getAddressFormValues();
   }
 
   // --- Form setup ----------------------------------------------------------
