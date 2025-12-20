@@ -12,6 +12,7 @@ import { CheckoutService } from '../checkout.service';
 export class CheckoutDeliveryComponent implements OnInit {
   @Input() checkoutForm!: FormGroup;
   deliveryMethods: DeliveryMethod [] = [];
+  basketService: any;
   
 
 
@@ -23,5 +24,8 @@ export class CheckoutDeliveryComponent implements OnInit {
   });
 
 }
+  setShippingPrice(deliveryMethod: DeliveryMethod ){
+    this.basketService.setShippingPrice(deliveryMethod);
+  }
 
 }
