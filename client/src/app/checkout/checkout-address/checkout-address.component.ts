@@ -30,7 +30,10 @@ constructor(
 
   saveUserAddress(){
     this.accountService.updateUserAddress(this.checkoutForm.get('addressForm')?.value).subscribe({
-      next: () => this.toastr.success('Address saved successfully'),
+      next: () => {
+      this.toastr.success('Address saved successfully')
+      this.checkoutForm?.get('addressForm')?.reset();
+      }
     })
   }
 }

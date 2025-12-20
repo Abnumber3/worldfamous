@@ -9,7 +9,9 @@
         </p>
       </div>
 
-      <button
+      <button 
+        (click)="saveUserAddress()"
+        [disabled]="!checkoutForm.get('addressForm')?.valid || !checkoutForm.get('addressForm')?.dirty"
         type="button"
         class="btn btn-outline-primary btn-sm mb-2 mb-sm-0"
       >
