@@ -5,25 +5,34 @@ namespace Core.Entities.OrderAggregate
 {
     public class Order : BaseEntity
     {
-        private List<OrderItem> items;
-        private Address shippingAddress;
-        private DeliveryMethod deliveryMethod;
-
+        // Parameterless constructor required by EF
         public Order()
         {
         }
 
-        public Order(List<OrderItem> items, string buyerEmail, Address shippingAddress, DeliveryMethod deliveryMethod, decimal subtotal)
+        // Constructor used when creating a new order
+        public Order(
+            List<OrderItem> items,
+            string buyerEmail,
+            Address shippingAddress,
+            DeliveryMethod deliveryMethod,
+            decimal subtotal)
         {
-            this.items = items;
+            OrderItems = items;
             BuyerEmail = buyerEmail;
-            this.shippingAddress = shippingAddress;
-            this.deliveryMethod = deliveryMethod;
+            ShipToAddress = shippingAddress;
+            DeliveryMethod = deliveryMethod;
             Subtotal = subtotal;
         }
 
-        public Order(IReadOnlyList<OrderItem> orderItems, string buyerEmail, DateTimeOffset orderDate,
-            Address shipToAddress, DeliveryMethod deliveryMethod, decimal subtotal)
+        // Alternative constructor (used by specs / projections)
+        public Order(
+            IReadOnlyList<OrderItem> orderItems,
+            string buyerEmail,
+            DateTimeOffset orderDate,
+            Address shipToAddress,
+            DeliveryMethod deliveryMethod,
+            decimal subtotal)
         {
             BuyerEmail = buyerEmail;
             OrderDate = orderDate;
@@ -47,7 +56,8 @@ namespace Core.Entities.OrderAggregate
 
         public OrderStatus Status { get; set; } = OrderStatus.Pending;
 
-        public string PaymentIntentId { get; set; }
+        // Stripe will populate this later — nullable is correct
+        public string? PaymentIntentId { get; set; }
 
         public decimal GetTotal()
         {

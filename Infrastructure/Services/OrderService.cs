@@ -27,6 +27,8 @@ namespace Infrastructure.Services
         {
             //get basket form repo
             var basket = await _basketRepo.GetBasketAsync(basketId);
+            if (basket == null)
+            throw new Exception("Basket not found");
 
             //get items from product repo
             var items = new List<OrderItem>();
@@ -48,7 +50,18 @@ namespace Infrastructure.Services
 
             // create order
 
-            var order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, subtotal);
+            var order = new Order(
+                items,
+                buyerEmail,
+                shippingAddress,
+                deliveryMethod,
+                subtotal
+                )
+            {
+                PaymentIntentId = "pending"
+                
+            };
+                
             _unitOfWork.Repository<Order>().Add(order);
 
             // save to db

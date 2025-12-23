@@ -31,21 +31,37 @@ namespace api.Middleware
                 await _next(context);
             }
             catch (Exception ex)
-            {
-                _logger.LogError(ex, ex.Message);
-                context.Response.ContentType = "application/json";
-                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+{
+    var innerMessage = ex.InnerException?.Message;
 
-                var response = _env.IsDevelopment()
-                    ? new ApiException((int)HttpStatusCode.InternalServerError, ex.Message, ex.StackTrace.ToString())
-                    : new ApiException((int)HttpStatusCode.InternalServerError);
+    _logger.LogError(ex, ex.Message);
 
-                var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+    if (!string.IsNullOrEmpty(innerMessage))
+    {
+        _logger.LogError("INNER EXCEPTION: {InnerMessage}", innerMessage);
+    }
 
-                var json = JsonSerializer.Serialize(response, options);
+    context.Response.ContentType = "application/json";
+    context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-                await context.Response.WriteAsync(json);
-            }
+    var response = _env.IsDevelopment()
+        ? new ApiException(
+            (int)HttpStatusCode.InternalServerError,
+            ex.Message,
+            innerMessage   // 👈 THIS is what we need
+        )
+        : new ApiException((int)HttpStatusCode.InternalServerError);
+
+    var options = new JsonSerializerOptions
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    };
+
+    var json = JsonSerializer.Serialize(response, options);
+
+    await context.Response.WriteAsync(json);
+}
+
         }
     }
    

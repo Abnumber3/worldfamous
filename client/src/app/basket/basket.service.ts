@@ -98,12 +98,18 @@ getCurrentBasketValue() {
 
 deleteBasket(basket: IBasket) {
   return this.http.delete(this.baseUrl + 'basket?id=' + basket.id).subscribe(() => {
-    this.basketSource.next(null);
-    this.basketTotalSource.next(null);
-    localStorage.removeItem('basket_id');
-  }, error => {
+   next: () => {
+    this.deleteLocalBasket();
+  } 
+},error => {
     console.log(error);
   });
+}
+
+deleteLocalBasket(){
+  this.basketSource.next(null);
+  this.basketTotalSource.next(null);
+  localStorage.removeItem('basket_id');
 }
 
 private calculateTotals() {

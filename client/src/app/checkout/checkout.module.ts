@@ -7,6 +7,7 @@ import { CheckoutAddressComponent } from "./checkout-address/checkout-address.co
 import { CheckoutDeliveryComponent } from "./checkout-delivery/checkout-delivery.component";
 import { CheckoutReviewComponent } from "./checkout-review/checkout-review.component";
 import { CheckoutPaymentComponent } from "./checkout-payment/checkout-payment.component";
+import { CheckoutSuccessComponent } from './checkout-success/checkout-success.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { CheckoutPaymentComponent } from "./checkout-payment/checkout-payment.co
     CheckoutAddressComponent,
     CheckoutDeliveryComponent,
     CheckoutReviewComponent,
-    CheckoutPaymentComponent,     // 
+    CheckoutPaymentComponent,
+    CheckoutSuccessComponent     // 
   ],
   imports: [
     CommonModule,

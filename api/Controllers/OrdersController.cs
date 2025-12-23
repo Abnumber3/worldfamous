@@ -29,6 +29,8 @@ namespace api.Controllers
         public async Task<ActionResult<Order>> CreateOrder(OrderDto orderDto)
         {
             var email = HttpContext.User.RetrieveEmailFromPrincipal();
+            if (string.IsNullOrEmpty(email))
+                return Unauthorized("Email claim missing on token");
 
             var address = _mapper.Map<AddressDto, Address>(orderDto.ShipToAddress);
 
