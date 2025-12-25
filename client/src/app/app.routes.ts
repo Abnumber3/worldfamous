@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { ShopComponent } from './shop/shop.component';
-import { ProductDetailsComponent } from './shop/product-details/product-details.component';
 import { TestErrorComponent } from './core/test-error/test-error.component';
 import { ServerErrorComponent } from './core/server-error/server-error.component';
 import { NotFoundComponent } from './core/not-found/not-found.component';
@@ -64,6 +62,13 @@ export const routes: Routes = [
   {
     path: '**',
     redirectTo: 'not-found'
+  },
+
+  {
+    path: 'orders',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./orders/orders.module').then(mod => mod.OrdersModule),
+    data: {breadcrumb: 'Orders'}
   }
 ];
 

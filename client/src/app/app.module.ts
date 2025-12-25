@@ -14,6 +14,7 @@ import { BasketModule } from "./basket/basket.module";
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { JwtInterceptor } from "./core/Interceptors/jwt.interceptor";
+import { OrdersModule } from "./orders/orders.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +26,7 @@ import { JwtInterceptor } from "./core/Interceptors/jwt.interceptor";
     ShopModule,
     HomeModule,
     BasketModule,
+    OrdersModule,
     NgxSpinnerModule,
     BsDropdownModule.forRoot(),
     CarouselModule.forRoot(),
