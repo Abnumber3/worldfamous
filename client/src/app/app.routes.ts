@@ -70,6 +70,8 @@ export const routes: Routes = [
     loadChildren: () => import('./orders/orders.module').then(mod => mod.OrdersModule),
     data: {breadcrumb: 'Orders'}
   }
+
+  
 ];
 
 
