@@ -7,6 +7,7 @@ import {
   Router
 } from '@angular/router';
 import { BehaviorSubject, filter } from 'rxjs';
+import { Order } from '../../shared/models/order';
 
 export interface Breadcrumb {
   label: string;
@@ -33,11 +34,11 @@ export class BreadcrumbService {
   /**
    * Public method to set a dynamic label.
    */
-  set(alias: string, label: string) {
-    console.log('[BreadcrumbService] set:', alias, '→', label);
-    this.labelMap.set(alias, label);
-    this.recomputeBreadcrumbs();
-  }
+set(alias: string, label: string): void {
+  console.log('[BreadcrumbService] set:', alias, '→', label);
+  this.labelMap.set(alias, label);
+  this.recomputeBreadcrumbs();
+}
 
   /**
    * Rebuilds the entire breadcrumb trail from the root.

@@ -12,7 +12,7 @@ export interface OrderItem {
     productName: string;
     picureurl: string;
     price: number;
-    quntity: number;    
+    quantity: number;    
 }
 
 
