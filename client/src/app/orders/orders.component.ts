@@ -15,13 +15,21 @@ export class OrdersComponent {
   constructor(private orderService: OrdersService) {}
 
   ngOnInit(): void {
-    this.getOrders();;
+    this.getOrders();
   }
 
-  getOrders() {
+  // getOrders() {
+  //   this.orderService.getOrdersForUser().subscribe({
+  // next: orders => this.orders = orders
+  //   });
+  // }
+
+  getOrders(){
     this.orderService.getOrdersForUser().subscribe({
-  next: orders => this.orders = orders
-    });
+      next: (orders) =>{
+        this.orders = orders;
+      }
+    })
   }
 
 }
