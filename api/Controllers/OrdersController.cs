@@ -25,20 +25,28 @@ namespace api.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Order>> CreateOrder(OrderDto orderDto)
-        {
-            var email = HttpContext.User.RetrieveEmailFromPrincipal();
-            if (string.IsNullOrEmpty(email))
-                return Unauthorized("Email claim missing on token");
+[HttpPost]
+public async Task<ActionResult<OrderToReturnDto>> CreateOrder(OrderDto orderDto)
+{
+    var email = HttpContext.User.RetrieveEmailFromPrincipal();
+    if (string.IsNullOrEmpty(email))
+        return Unauthorized("Email claim missing on token");
 
-            var address = _mapper.Map<AddressDto, Address>(orderDto.ShipToAddress);
+    var address = _mapper.Map<AddressDto, Address>(orderDto.ShipToAddress);
 
-            var order = await _orderService.CreateOrderAsync(email, orderDto.DeliveryMethodId, orderDto.BasketId, address);
-            if (order == null) return BadRequest(new ApiResponse(400, "Problem creating order"));
+    var order = await _orderService.CreateOrderAsync(
+        email,
+        orderDto.DeliveryMethodId,
+        orderDto.BasketId,
+        address
+    );
 
-            return Ok(order);
-        }
+    if (order == null)
+        return BadRequest(new ApiResponse(400, "Problem creating order"));
+
+    return Ok(_mapper.Map<OrderToReturnDto>(order));
+}
+
 
 
 

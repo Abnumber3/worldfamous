@@ -10,7 +10,7 @@ export interface OrderToCreate {
 export interface OrderItem {
     productId: number;
     productName: string;
-    picureurl: string;
+    pictureUrl: string;
     price: number;
     quantity: number;    
 }

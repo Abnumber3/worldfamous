@@ -8,6 +8,7 @@ import { OrderDetailedComponent } from "../order-detailed/order-detailed.compone
 
 
 
+
 @NgModule({
   declarations: [OrdersComponent, OrderDetailedComponent],
   imports: [

@@ -16,7 +16,7 @@ baseUrl = 'https://localhost:5187/api/'
     return this.http.get<Order[]>(this.baseUrl + 'orders');
   }
 
-  getOrderDetails(id: number){
+  getOrderDetailed(id: number){
     return this.http.get<Order>(this.baseUrl + 'orders/' + id);
   }
 

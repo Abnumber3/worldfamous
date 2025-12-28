@@ -4,19 +4,17 @@ import { Routes, RouterModule } from '@angular/router';
 import { OrdersComponent } from './orders.component';
 import { OrderDetailedComponent } from '../order-detailed/order-detailed.component';
 
-
-const routes: Routes =[
-{path: '', component: OrdersComponent},
-{path: 'id', component: OrderDetailedComponent, data: {breadcrumb: {alias: 'OrderDetailed'}}}
-]
-
+const routes: Routes = [
+  { path: '', component: OrdersComponent },
+  { path: ':id', component: OrderDetailedComponent, data: { breadcrumb:  '@orderDetailed'  }
+  }
+];
 
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forChild(routes)
   ],
   exports: [RouterModule]
 })
-export class OrdersRoutingModule { }
+export class OrdersRoutingModule {}

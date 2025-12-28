@@ -59,17 +59,20 @@ export const routes: Routes = [
   },
 
 
-  {
-    path: '**',
-    redirectTo: 'not-found'
-  },
+
 
   {
     path: 'orders',
     canActivate: [AuthGuard],
     loadChildren: () => import('./orders/orders.module').then(mod => mod.OrdersModule),
     data: {breadcrumb: 'Orders'}
-  }
+  },
+
+
+    {
+    path: '**',
+    redirectTo: 'not-found'
+  },
 
   
 ];
