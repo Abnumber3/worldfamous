@@ -19,11 +19,13 @@ builder.Services.AddEndpointsApiExplorer();
 // builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerServices();  // <— use extension method
 
+
 // ✅ Register Identity/JWT ONCE using the real configuration
 builder.Services.AddIdentityServices(builder.Configuration);
 
 // ✅ Token service to create JWTs with 'iss'
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
 
 // DbContexts
 builder.Services.AddDbContext<AppIdentityDbContext>(x =>
