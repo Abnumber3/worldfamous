@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.Entities;
+using Core.Entities.OrderAggregate;
 using Core.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Stripe;
+using Product = Core.Entities.Product;
 
 namespace Infrastructure.Services
 {
@@ -36,6 +38,33 @@ namespace Infrastructure.Services
 
             var basket = await _basketRepository.GetBasketAsync(basketId);
             var shippingPrice = 0m;
+
+
+            if(basket.DeliveryMethodId.HasValue)
+            {
+                var DeliveryMethodId = await _unitOfWork.Repository<DeliveryMethod>().GetByIdAsync((int)basket.DeliveryMethodId);
+
+                shippingPrice = DeliveryMethodId.Price;
+            }
+
+            foreach (var item in basket.Items)
+            {
+                var product = await _unitOfWork.Repository<Product>().GetByIdAsync(item.Id);
+
+                if (item.Price != product.Price)
+                {
+                    item.Price = product.Price;
+                }
+            }
+
+            var service = new PaymentIntentService();
+
+            PaymentIntent intent;
+
+            if(string.IsNullOrEmpty(basket.PaymentIntentId))
+            {
+                
+            }
         }
     }
 }
