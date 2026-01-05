@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Entities;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,6 +19,9 @@ namespace api.Controllers
 
         [Authorize]
         [HttpPost("{basketId}")]
-        public async Task<>
+        public async Task<ActionResult<CustomerBasket>> CreateOrUpdatePaymentIntent(string basketId)
+        {
+            return await _paymentService.CreateOrUpdatePaymentIntent(basketId);
+        }
     }
 }
