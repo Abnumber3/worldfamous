@@ -2,6 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { StepperComponent } from '../shared/components/stepper/stepper.component';
 import { AccountService } from '../account/account.service';
+import { BasketService } from '../basket/basket.service';
 
 @Component({
   selector: 'app-checkout',
@@ -26,13 +27,15 @@ export class CheckoutComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private basketService: BasketService
   
   ) {}
 
   ngOnInit(): void {
     this.buildCheckoutForm();
     this.getAddressFormValues();
+    this.getdeliveryMethodValue();
   }
 
   // --- Form setup ----------------------------------------------------------
@@ -87,4 +90,13 @@ export class CheckoutComponent implements OnInit {
   previousStep(): void {
     this.appStepper?.previous();
   }
+
+  getdeliveryMethodValue() {
+    const basket = this.basketService.getCurrentBasketValue();
+    if(basket && basket.deliveryMethodId) {
+      this.checkoutForm.get('deliveryForm')?.get('deliveryMethod')?.patchValue(basket.deliveryMethodId);
+    }
+  }
+
+
 }
