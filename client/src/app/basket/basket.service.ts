@@ -21,6 +21,17 @@ shipping = 0;
 
   constructor(private http: HttpClient) { }
 
+
+  createPaymentIntent() {
+    return this.http.post<Basket>(this.baseUrl + 'payments/' + this.getCurrentBasketValue()?.id, {})
+    .pipe(
+      map(basket => {
+        this.basketSource.next(basket)
+        console.log(basket);
+      })
+    )
+  }
+
   setShippingPrice(deliveryMethod: DeliveryMethod) {
     const basket = this.getCurrentBasketValue();
     this.shipping = deliveryMethod.price;
