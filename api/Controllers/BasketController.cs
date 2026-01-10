@@ -7,6 +7,7 @@ using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
 using Infrastructure.Data;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
@@ -16,11 +17,14 @@ namespace api.Controllers
         private readonly IBasketRepository _basketRepository;
         private readonly IMapper _mapper;
 
+        private readonly IPaymentService _paymentService;
 
-        public BasketController(IBasketRepository basketRepository, IMapper mapper)
+
+        public BasketController(IBasketRepository basketRepository, IMapper mapper, IPaymentService paymentService)
         {
             _basketRepository = basketRepository;
             _mapper = mapper;
+        
 
         }
 
@@ -40,6 +44,7 @@ namespace api.Controllers
             var updatedBasket = await _basketRepository.UpdateBasketAsync(customerBasket);
             return Ok(updatedBasket);
         }
+
         
 
         [HttpDelete]

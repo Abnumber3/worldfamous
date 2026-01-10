@@ -23,14 +23,19 @@ shipping = 0;
 
 
   createPaymentIntent() {
-    return this.http.post<Basket>(this.baseUrl + 'payments/' + this.getCurrentBasketValue()?.id, {})
-    .pipe(
-      map(basket => {
-        this.basketSource.next(basket)
-        console.log(basket);
-      })
-    )
-  }
+  const id = this.getCurrentBasketValue()?.id;
+  const url = this.baseUrl + 'payments/' + id;
+
+  console.log('PAYMENT URL:', url);
+
+  return this.http.post<Basket>(url, {}).pipe(
+    map(basket => {
+      this.basketSource.next(basket);
+      return basket;
+    })
+  );
+}
+
 
   setShippingPrice(deliveryMethod: DeliveryMethod) {
     const basket = this.getCurrentBasketValue();

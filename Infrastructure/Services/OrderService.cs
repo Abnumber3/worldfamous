@@ -58,7 +58,8 @@ namespace Infrastructure.Services
                 subtotal
                 )
             {
-                PaymentIntentId = "pending"
+                PaymentIntentId = basket.PaymentIntentId
+
                 
             };
                 
