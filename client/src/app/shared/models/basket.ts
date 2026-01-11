@@ -1,3 +1,4 @@
+import { NumberValueAccessor } from '@angular/forms';
 import { v4 as uuid, UUIDTypes } from 'uuid';
 
 
@@ -9,6 +10,7 @@ export interface IBasket {
   clientSecret?: string
   paymentIntentId?: string
   deliveryMethodId?: number
+  shippingPrice: number;
 }
 
 export interface IBasketItem {
@@ -24,6 +26,7 @@ export interface IBasketItem {
 export class Basket implements IBasket {
   id =  uuid();
   items: IBasketItem[] = [];
+  shippingPrice = 0;
 }
 
 export interface IBasketTotals {
