@@ -49,14 +49,7 @@ export class BasketService {
     });
   }
 
-  createPaymentIntent() {
-    const id = this.getCurrentBasketValue()?.id;
-    if (!id) throw new Error('Cannot create payment intent without basket');
-
-    return this.http.post<IBasket>(this.baseUrl + 'payments/' + id, {}).pipe(
-      tap(basket => this.basketSource.next(basket))
-    );
-  }
+  
 
   // -------------------- STATE --------------------
 

@@ -1,38 +1,53 @@
-<div class="mt-4" *ngIf="checkoutForm" [formGroup]="checkoutForm">
+<div class="payment-section" *ngIf="checkoutForm" [formGroup]="checkoutForm">
+  
+  <!-- Payment Details Card -->
+  <div class="payment-card">
+    <h3 class="payment-title">Payment Details</h3>
+    
+    <div formGroupName="paymentForm">
+      <!-- Name on Card -->
+      <div class="form-group">
+        <app-text-input
+          [label]="'Name on card'"
+          formControlName="nameOnCard">
+        </app-text-input>
+      </div>
 
-    <div class="row">
-        <div class="form-group col-12" fromGroup="paymentForm">
-            <app-text-input [label]="'Name on card'" formControlName="nameOnCard"></app-text-input>
+      <!-- Card Number -->
+      <div class="form-group">
+        <div class="stripe-field">
+          <label class="stripe-label">Card Number</label>
+          <div class="stripe-input" #cardNumber></div>
         </div>
+      </div>
+
+      <!-- Expiry & CVC Row -->
+      <div class="form-row">
+        <div class="form-group form-group-half">
+          <div class="stripe-field">
+            <label class="stripe-label">Expiration Date</label>
+            <div class="stripe-input" #cardExpiry></div>
+          </div>
+        </div>
+
+        <div class="form-group form-group-half">
+          <div class="stripe-field">
+            <label class="stripe-label">CVC</label>
+            <div class="stripe-input" #cardCvc></div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="row mb-3">
-        <div class="col-6">
-            <div class="form-floating">
-                <div class="form-control" #cardNumber></div>
-                <label>Card Number</label>
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="form-floating">
-                <div class="form-control" #cardExpiry></div>
-                <label>Card Expiry</label>
-            </div>
-            <div class="col-3">
-            <div class="form-floating">
-                <div class="form-control" #cardCvc></div>
-                <label>Card CVC</label>
-            </div>
-        </div>
-        </div>
-    </div>
-</div>
+  </div>
 
+  <!-- Action Buttons -->
+  <div class="action-buttons">
+     <button class="btn btn-outline-primary" routerLink="/basket">
+    <i class="fa fa-angle-left"></i> Back to Review
+  </button>
+   <button class="btn btn-primary" cdkStepperNext>
+   Submit Payment <i class="fa fa-angle-right"></i> 
+  </button>
+  </div>
 
-<div class="d-flex justify-content-between flex-flow mb-5">
-    <button class="btn btn-outline-primary" cdkStepperPrevious> 
-        <i class="fa fa-angle-left"></i> Back to review
-    </button>
-    <button class="btn btn-primary" (click)="submitOrder()">
-        Submit order <i class="fa fa-angle-right"></i>
-    </button>
 </div>

@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { BasketService } from '../../basket/basket.service';
 import { ToastrService } from 'ngx-toastr';
+import { PaymentService } from '../../basket/payment.service';
 
 @Component({
   selector: 'app-checkout-review',
@@ -16,15 +17,32 @@ export class CheckoutReviewComponent {
 
   constructor(
     private basketService: BasketService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private paymentService: PaymentService
   ){}
 
-  createPaymentIntent(){
-    this.basketService.createPaymentIntent().subscribe({
-      next: () => this.toastr.success('Payment intent created'),
-      error: error => this.toastr.error(error.message)
-    })
+  createPaymentIntent() {
+    const basket = this.basketService.getCurrentBasketValue();
+
+    if (!basket) {
+      this.toastr.error('No basket found');
+      return;
+    }
+
+    this.paymentService.createPaymentIntent(basket.id).subscribe({
+      next: updatedBasket => {
+        this.basketService.setBasket(updatedBasket).subscribe();
+        this.toastr.success('Payment intent created');
+      },
+      error: error => {
+        this.toastr.error(error.message || 'Failed to create payment intent');
+      }
+    });
   }
-
-
 }
+
+   
+
+
+
+

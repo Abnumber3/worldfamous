@@ -53,3 +53,9 @@
 .checkout-card .small.text-muted {
   color: #9ca3af !important;
 }
+
+/* Add this to constrain the button container width */
+.checkout-buttons {
+  max-width: 720px;
+  margin: 0 auto 2rem;
+}
