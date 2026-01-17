@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { BasketService } from '../../basket/basket.service';
 import { ToastrService } from 'ngx-toastr';
 import { PaymentService } from '../../basket/payment.service';
+import { CdkStepper } from '@angular/cdk/stepper';
 
 @Component({
   selector: 'app-checkout-review',
@@ -13,6 +14,7 @@ import { PaymentService } from '../../basket/payment.service';
 export class CheckoutReviewComponent {
 
   @Input() checkoutForm!: FormGroup;
+  @Input() appStepper?: CdkStepper;
 
 
   constructor(
@@ -23,6 +25,7 @@ export class CheckoutReviewComponent {
 
   createPaymentIntent() {
     const basket = this.basketService.getCurrentBasketValue();
+    this.appStepper?.next();
 
     if (!basket) {
       this.toastr.error('No basket found');
