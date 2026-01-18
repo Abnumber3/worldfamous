@@ -47,7 +47,10 @@
      <button class="btn btn-outline-primary" routerLink="/basket">
     <i class="fa fa-angle-left"></i> Back to Review
   </button>
-   <button class="btn btn-primary" cdkStepperNext>
+   <button
+   (click)="submitOrder()"
+    class="btn btn-primary"
+    cdkStepperNext>
    Submit Payment <i class="fa fa-angle-right"></i> 
   </button>
   </div>
