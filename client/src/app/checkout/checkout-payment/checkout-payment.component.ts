@@ -89,6 +89,8 @@ export class CheckoutPaymentComponent implements OnInit {
             const navigationExtras: NavigationExtras = {state: order};
             this.router.navigate(['/checkout/success'], navigationExtras);
         console.log(order)
+          } else {
+            this.toastr.error(result.error.message);
           }
         })            
       }
