@@ -6,6 +6,7 @@ using Core.Entities;
 using Core.Entities.OrderAggregate;
 using Core.Interfaces;
 using Core.Specifications;
+using Stripe.V2.Core;
 
 namespace Infrastructure.Services
 {
@@ -43,14 +44,29 @@ namespace Infrastructure.Services
             //get delivery method from repo
             var deliveryMethod = await _unitOfWork.Repository<DeliveryMethod>().GetByIdAsync(deliveryMethodId);
 
-            
+            //check to see if order exists
+
+            var spec = new OrderByPaymentIntentIdSpecification(basket.PaymentIntentId);
+            var order = await _unitOfWork.Repository<Order>().GetEntityWithSpec(spec);
+
+        
             
             //calc subtotal
             var subtotal = items.Sum(item => item.Price * item.Quantity);
 
-            // create order
 
-            var order = new Order(
+                if(order != null)
+            {
+                order.ShipToAddress = shippingAddress;
+                order.DeliveryMethod = deliveryMethod;
+                order.Subtotal = subtotal;
+                _unitOfWork.Repository<Order>().Update(order);
+            }
+            else
+            {
+                // create order
+
+             order = new Order(
                 items,
                 buyerEmail,
                 shippingAddress,
@@ -64,6 +80,10 @@ namespace Infrastructure.Services
             };
                 
             _unitOfWork.Repository<Order>().Add(order);
+            
+            }
+
+            
 
             // save to db
             var result = await _unitOfWork.Complete();

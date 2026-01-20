@@ -32,7 +32,9 @@ namespace Core.Entities.OrderAggregate
             DateTimeOffset orderDate,
             Address shipToAddress,
             DeliveryMethod deliveryMethod,
-            decimal subtotal)
+            decimal subtotal,
+            string paymentIntentId
+            )
         {
             BuyerEmail = buyerEmail;
             OrderDate = orderDate;
@@ -40,6 +42,7 @@ namespace Core.Entities.OrderAggregate
             DeliveryMethod = deliveryMethod;
             OrderItems = orderItems;
             Subtotal = subtotal;
+            PaymentIntentId = paymentIntentId;
         }
 
         public string BuyerEmail { get; set; }
