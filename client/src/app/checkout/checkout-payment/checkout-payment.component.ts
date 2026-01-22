@@ -7,6 +7,7 @@ import { IAddress } from '../../shared/models/address';
 import { NavigationExtras } from '@angular/router';
 import { Router } from '@angular/router';
 import { loadStripe, Stripe, StripeCardNumberElement, StripeCardCvcElement, StripeCardExpiryElement } from '@stripe/stripe-js';
+import { Basket } from '../../shared/models/basket';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class CheckoutPaymentComponent implements OnInit {
   cardExpiry?: StripeCardExpiryElement;
   cardCvc?: StripeCardCvcElement;
   cardErrors: any;
+  loading = false;
 
 
   constructor(
@@ -67,14 +69,20 @@ export class CheckoutPaymentComponent implements OnInit {
   }
 
 
-  submitOrder() {
+  async submitOrder() {
+    this.loading = true;
     const basket = this.basketService.getCurrentBasketValue(); 
+
+    try {
+      const createdOrder = this.createOrder(basket)
+    } catch (error) {
+      
+    }
     if (!basket) return;
     const orderToCreate = this.getOrderToCreate(basket)
     if(!orderToCreate) return;
     this.checkoutService.createOrder(orderToCreate).subscribe({
       next: (order) =>{
-        this.toastr.success('Order created successfully')
         this.stripe?.confirmCardPayment(basket.clientSecret!, {
           payment_method: {
             card: this.cardNumber!,
@@ -96,8 +104,14 @@ export class CheckoutPaymentComponent implements OnInit {
       }
     })
 
-    console.log('order submitted')
+    
+
+    console.log('order submitted');
   }
+
+  private createOrder(basket: Basket | null){
+      throw new Error('Method not implemented')
+    }
 
   private getOrderToCreate(basket: any) {
     const deliveryMethod = this.checkoutForm?.get('deliveryForm')?.get('deliveryMethod')?.value;
