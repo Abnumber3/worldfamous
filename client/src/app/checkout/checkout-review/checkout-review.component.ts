@@ -35,7 +35,8 @@ export class CheckoutReviewComponent {
     this.paymentService.createPaymentIntent(basket.id).subscribe({
       next: updatedBasket => {
         this.basketService.setBasket(updatedBasket).subscribe();
-        this.toastr.success('Payment intent created');
+        
+        // this.toastr.success('Payment intent created');
       },
       error: error => {
         this.toastr.error(error.message || 'Failed to create payment intent');

@@ -16,6 +16,12 @@
   position: relative;
   cursor: pointer;
   transition: color 0.25s ease;
+
+  &:disabled:not(.active){
+    cursor: default;
+    color: #333;
+    background: none;
+  }
 }
 
 .step-header:hover {

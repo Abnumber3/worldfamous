@@ -48,12 +48,20 @@
     <i class="fa fa-angle-left"></i> Back to Review
   </button>
    <button
-   (click)="submitOrder()"
-    class="btn btn-primary"
-    cdkStepperNext>
-   Submit Payment <i class="fa fa-angle-right"></i> 
-   <i *ngIf="loading" class="fa fa-spinner fa-spin"></i>
-  </button>
-  </div>
+   [disabled]="loading || !paymentFormComplete"
+  (click)="submitOrder()"
+  class="btn btn-primary"
+  cdkStepperNext>
+
+  <ng-container *ngIf="!loading; else loadingTpl">
+    Submit Payment <i class="fa fa-angle-right"></i>
+  </ng-container>
+
+  <ng-template #loadingTpl>
+    Submit Payment <i class="fa fa-spinner fa-spin"></i>
+  </ng-template>
+
+</button>
+
 
 </div>

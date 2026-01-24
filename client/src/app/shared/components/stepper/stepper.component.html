@@ -2,6 +2,7 @@
 <!-- headers -->
  <div class="stepper-headers">
   <button
+    [disabled]="true"
     *ngFor="let step of _steps; let i = index"
     type="button"
     class="step-header"
