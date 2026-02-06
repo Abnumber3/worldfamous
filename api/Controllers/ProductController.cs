@@ -100,6 +100,7 @@ public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts(
 
 
         // Get all items by specific Id
+        [CachedAtribute(600)]
         [ProducesResponseType(typeof(ProductToReturnDto), 200)]
         [ProducesResponseType(404)]
         [HttpGet("{id}")]
