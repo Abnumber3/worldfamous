@@ -62,7 +62,7 @@ namespace api.Controllers
     
 //     return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products));
 // }
-
+[CachedAtribute(600)]
 [HttpGet]
 public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts(
     string? sort = null, 
