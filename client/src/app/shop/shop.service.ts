@@ -12,6 +12,7 @@ import { ShopParams } from '../shared/models/shopParams';
 export class ShopService {
 
   baseUrl = 'https://localhost:5187/api/';
+  products: IProduct[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -35,7 +36,8 @@ export class ShopService {
     return this.http.get<IPagination>(this.baseUrl + 'Product', { observe: 'response', params })
     .pipe(
       map(response => {
-        return response.body
+        this.products = response.body?.data || [];
+        return response.body;
       })
     );
   }
