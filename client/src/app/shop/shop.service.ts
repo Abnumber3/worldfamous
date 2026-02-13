@@ -14,6 +14,7 @@ export class ShopService {
 
   baseUrl = 'https://localhost:5187/api/';
   products: IProduct[] = [];
+  types : IType[]= [];
 
   constructor(private http: HttpClient) { }
 
@@ -52,6 +53,10 @@ export class ShopService {
   }
 
   getTypes(){
-    return this.http.get<IType[]>(this.baseUrl + 'product/types');
+
+    if(this.types.length > 0) return of(this.types);
+    return this.http.get<IType[]>(this.baseUrl + 'product/types').pipe(
+      map(types => this.types = types)
+    )
   }
 }
