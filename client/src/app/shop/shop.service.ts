@@ -5,6 +5,7 @@ import { IProduct } from '../shared/models/product';
 import { IType } from '../shared/models/productType';
 import { delay, map } from 'rxjs/operators';
 import { ShopParams } from '../shared/models/shopParams';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,11 @@ export class ShopService {
     );
   }
   getProduct(id: number) {
+
+    const product = this.products.find(p => p.id === id);
+
+    if(product) return of(product);
+
     return this.http.get<IProduct>(this.baseUrl + 'product/' + id);
   }
 
