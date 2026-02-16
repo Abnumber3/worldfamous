@@ -15,6 +15,8 @@ export class ShopService {
   baseUrl = 'https://localhost:5187/api/';
   products: IProduct[] = [];
   types : IType[]= [];
+  pagination?: IPagination<IProduct[]>;
+  shopParams = new ShopParams();
 
   constructor(private http: HttpClient) { }
 
@@ -35,7 +37,7 @@ export class ShopService {
     params = params.append('pageIndex', shopParams.pageNumber.toString()); // <-- backend expects 'pageIndex'
     params = params.append('pageSize', shopParams.pageSize.toString());
 
-    return this.http.get<IPagination>(this.baseUrl + 'Product', { observe: 'response', params })
+    return this.http.get<IPagination<IProduct[]>>(this.baseUrl + 'Product', { observe: 'response', params })
     .pipe(
       map(response => {
         this.products = response.body?.data || [];
