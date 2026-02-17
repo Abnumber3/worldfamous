@@ -40,7 +40,9 @@ export class ShopService {
     return this.http.get<IPagination<IProduct[]>>(this.baseUrl + 'Product', { observe: 'response', params })
     .pipe(
       map(response => {
-        this.products = response.body?.data || [];
+        // this.products = response.body?.data || [];
+        this.products = [...this.products, ...response.body?.data || []];
+        this.pagination = response.body || undefined;
         return response.body;
       })
     );
