@@ -20,7 +20,7 @@ export class ShopComponent implements OnInit {
   @ViewChild('search') search!: ElementRef;
   products: IProduct[] = [];
   productType: IType[] = [];
-  shopParams  = new ShopParams();
+  shopParams: ShopParams;
   totalCount: number = 0;
   sortOptions = [
     {name: 'Alphabetical', value: 'name'},
@@ -34,7 +34,9 @@ export class ShopComponent implements OnInit {
   constructor(
     private shopService: ShopService,
     private searchNormalizer: SearchNormalizerService
-  ) { }
+  ) { 
+    this.shopParams = this.shopService.getShopParams();
+  }
 
   ngOnInit() {
    this.getproducts();
@@ -43,11 +45,9 @@ export class ShopComponent implements OnInit {
   }
 
   getproducts() {
-    this.shopService.getProducts(this.shopParams).subscribe({
+    this.shopService.getProducts().subscribe({
       next: (response) => {
         this.products = response!.data;
-        this.shopParams.pageNumber = response!.pageIndex;
-        this.shopParams.pageSize = response!.pageSize;
         this.totalCount = response!.count;
       },
       error: (error) => {
@@ -64,17 +64,20 @@ export class ShopComponent implements OnInit {
     })
   }
 
-  onTypeSelected(typeId: number) {
-    this.shopParams.typeId = typeId;
-    console.log(typeId);
-    this.shopParams.search = '';
-    this.shopParams.pageNumber = 1; // reset page when filtering
-    this.hasSearched = false;
-    this.getproducts();
-  
+ onTypeSelected(typeId: number) {
+  const params = this.shopService.getShopParams();
 
-   
-  }
+  params.typeId = typeId;
+  params.search = '';
+  params.pageNumber = 1;
+
+  this.shopService.setShopParams(params);
+  this.shopParams = params;
+
+  this.hasSearched = false;
+  this.getproducts();
+}
+
 
 
 
@@ -88,22 +91,32 @@ toggleFilterPanel() {
 onSortSelected(event: Event) {
   const selectElement = event.target as HTMLSelectElement;
   const value = selectElement.value;
-  this.shopParams.sort = value;
-  this.shopParams.pageNumber = 1;
-  this.getproducts();
-  
 
-          
-  console.log('Sort value:', value);
+  const params = this.shopService.getShopParams();
+
+  params.sort = value;
+  params.pageNumber = 1;
+
+  this.shopService.setShopParams(params);
+  this.shopParams = params;
+
+  this.getproducts();
 }
+
 
 onPageChanged(page: number) {
-  if (page === this.shopParams.pageNumber) return;
+  const params = this.shopService.getShopParams();
 
-  this.shopParams.pageNumber = page;
-  console.log('Page clicked:', page);
+  if (page === params.pageNumber) return;
+
+  params.pageNumber = page;
+
+  this.shopService.setShopParams(params);
+  this.shopParams = params;
+
   this.getproducts();
 }
+
 
 
 
@@ -119,14 +132,20 @@ getDisplayedCount(): number {
 onSearch() {
   const searchTerm = this.search.nativeElement.value.trim();
   const normalizedTerm = this.searchNormalizer.normalize(searchTerm);
-  this.hasSearched = true;
-  this.shopParams.search = normalizedTerm;
-  this.shopParams.pageNumber = 1;
 
-  // Only reset typeId (search globally) IF there's actually a search term
+  const params = this.shopService.getShopParams();
+
+  params.search = normalizedTerm;
+  params.pageNumber = 1;
+
   if (normalizedTerm.length > 0) {
-    this.shopParams.typeId = 0;
+    params.typeId = 0;
   }
+
+  this.shopService.setShopParams(params);
+  this.shopParams = params;
+
+  this.hasSearched = true;
   this.getproducts();
 }
 
@@ -135,12 +154,16 @@ onSearch() {
 
 
 
-onClear(){
-  this.shopParams.search = '';
+onClear() {
+  const params = new ShopParams();
+
+  this.shopService.setShopParams(params);
+  this.shopParams = params;
+
   this.hasSearched = false;
-  this.shopParams = new ShopParams();
-  this.getproducts();
   this.search.nativeElement.value = '';
-  this.shopParams.pageNumber = 1; // reset page when filtering
+
+  this.getproducts();
 }
+
 }

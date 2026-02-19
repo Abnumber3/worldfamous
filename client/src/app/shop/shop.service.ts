@@ -20,22 +20,22 @@ export class ShopService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(shopParams:ShopParams) {
+  getProducts() {
     let params = new HttpParams();
 
-    if (shopParams.typeId) {
-      params = params.append('typeId', shopParams.typeId.toString());
+    if (this.shopParams.typeId) {
+      params = params.append('typeId', this.shopParams.typeId.toString());
     }
 
-    if(shopParams.sort) {
-      params = params.append('sort', shopParams.sort);
+    if(this.shopParams.sort) {
+      params = params.append('sort', this.shopParams.sort);
     }
 
-    if(shopParams.search){
-      params = params.append('search', shopParams.search);
+    if(this.shopParams.search){
+      params = params.append('search', this.shopParams.search);
     }
-    params = params.append('pageIndex', shopParams.pageNumber.toString()); // <-- backend expects 'pageIndex'
-    params = params.append('pageSize', shopParams.pageSize.toString());
+    params = params.append('pageIndex', this.shopParams.pageNumber.toString()); // <-- backend expects 'pageIndex'
+    params = params.append('pageSize', this.shopParams.pageSize.toString());
 
     return this.http.get<IPagination<IProduct[]>>(this.baseUrl + 'Product', { observe: 'response', params })
     .pipe(
@@ -47,6 +47,16 @@ export class ShopService {
       })
     );
   }
+
+  setShopParams(params: ShopParams){
+    this.shopParams = params;
+  }
+
+
+  getShopParams(){
+    return this.shopParams;
+  }
+
   getProduct(id: number) {
 
     const product = this.products.find(p => p.id === id);
