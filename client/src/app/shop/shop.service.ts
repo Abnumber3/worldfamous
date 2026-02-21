@@ -17,10 +17,23 @@ export class ShopService {
   types : IType[]= [];
   pagination?: IPagination<IProduct[]>;
   shopParams = new ShopParams();
+  productCache = new Map();
 
   constructor(private http: HttpClient) { }
 
-  getProducts() {
+  getProducts(useCache = true) {
+
+    
+    if(!useCache) this.productCache = new Map();
+
+    if(this.productCache.size > 0 && useCache){
+      if(this.productCache.has(Object.values(this.shopParams).join('-'))){
+        this.pagination = this.productCache.get(Object.values(this.shopParams).join('-'));
+        return of(this.pagination);
+      }
+    }
+
+    
     let params = new HttpParams();
 
     if (this.shopParams.typeId) {
