@@ -5,7 +5,7 @@ import { IProduct } from '../shared/models/product';
 import { IType } from '../shared/models/productType';
 import { delay, map } from 'rxjs/operators';
 import { ShopParams } from '../shared/models/shopParams';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,8 @@ export class ShopService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(useCache = true) {
+  getProducts(useCache = true): Observable<IPagination<IProduct[]>>
+   {
 
     
     if(!useCache) this.productCache = new Map();
@@ -29,7 +30,7 @@ export class ShopService {
     if(this.productCache.size > 0 && useCache){
       if(this.productCache.has(Object.values(this.shopParams).join('-'))){
         this.pagination = this.productCache.get(Object.values(this.shopParams).join('-'));
-        return of(this.pagination);
+       if(this.pagination)return of(this.pagination);
       }
     }
 
@@ -54,6 +55,9 @@ export class ShopService {
     .pipe(
       map(response => {
         // this.products = response.body?.data || [];
+        if(!response.body){
+          throw new Error('No response body returned');
+        }
         this.products = [...this.products, ...response.body?.data || []];
         this.pagination = response.body || undefined;
         return response.body;
