@@ -76,7 +76,7 @@ export class ShopService {
 
   getProduct(id: number) {
 
-    const product = this.products.find(p => p.id === id);
+    const product = [...this.productCache.values()]
 
     if(product) return of(product);
 
