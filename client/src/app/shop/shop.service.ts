@@ -58,7 +58,7 @@ export class ShopService {
         if(!response.body){
           throw new Error('No response body returned');
         }
-        this.products = [...this.products, ...response.body?.data || []];
+      
         this.pagination = response.body || undefined;
         return response.body;
       })
