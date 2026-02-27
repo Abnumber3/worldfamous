@@ -78,7 +78,8 @@ export class ShopService {
 
     const product = [...this.productCache.values()]
 
-    if(product) return of(product);
+    // if(product) return of(product);
+    console.log(product);
 
     return this.http.get<IProduct>(this.baseUrl + 'product/' + id);
   }
