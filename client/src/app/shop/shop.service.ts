@@ -77,6 +77,9 @@ export class ShopService {
   getProduct(id: number) {
 
     const product = [...this.productCache.values()]
+    .reduce((acc, paginatedResult)=>{
+      
+    }, {})
 
     // if(product) return of(product);
     console.log(product);
