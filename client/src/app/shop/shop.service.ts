@@ -17,7 +17,7 @@ export class ShopService {
   types : IType[]= [];
   pagination?: IPagination<IProduct[]>;
   shopParams = new ShopParams();
-  productCache = new Map();
+  productCache = new Map<string, IPagination<IProduct[]>>();
 
   constructor(private http: HttpClient) { }
 
@@ -78,10 +78,12 @@ export class ShopService {
 
     const product = [...this.productCache.values()]
     .reduce((acc, paginatedResult)=>{
+      return {...acc, ...paginatedResult.data.find(x => x.id === id) }
       
-    }, {})
+    }, {} as IProduct)
+     
 
-    // if(product) return of(product);
+    if(Object.keys(product)) return of(product);
     console.log(product);
 
     return this.http.get<IProduct>(this.baseUrl + 'product/' + id);

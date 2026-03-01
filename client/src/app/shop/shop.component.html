@@ -13,6 +13,7 @@
     <h5 class="text-warning">Sort</h5>
     <select class="form-select mb-3" (change)="onSortSelected($event)">
       <option *ngFor="let sort of sortOptions"
+      [selected]="shopParams.sort == sort.value"
       [value]="sort.value"
       >
        {{sort.name}}
@@ -38,6 +39,7 @@
       <h5 class="text-warning ms-3">Sort</h5>
       <select class="custom-select mb-4 w-100" (change)="onSortSelected($event)">
         <option *ngFor="let sort of sortOptions"
+        [selected]="shopParams.sort == sort.value"
         [value]="sort.value">
       {{sort.name}}
       </option>

@@ -157,7 +157,7 @@ onSearch() {
 onClear() {
   const params = new ShopParams();
 
-  this.shopService.setShopParams(params);
+  this.shopService.setShopParams(this.shopParams);
   this.shopParams = params;
 
   this.hasSearched = false;
