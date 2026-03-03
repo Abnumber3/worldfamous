@@ -50,3 +50,13 @@ section {
   padding: 0.5rem 1rem;
   width: auto;
 }
+
+.list-group-item{
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.1em;
+
+  &.active{
+    border-radius: 10px;
+  }
+}
