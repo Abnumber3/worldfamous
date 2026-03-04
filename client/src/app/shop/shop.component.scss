@@ -59,4 +59,8 @@ section {
   &.active{
     border-radius: 10px;
   }
+
+  &:not(.active):hover{
+    background-color: #afacac;
+  }
 }
