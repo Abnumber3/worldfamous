@@ -11,9 +11,9 @@ export class LoadingInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    if(req.method === 'POST' && req.url.includes('orders')) {
-      return next.handle(req);
-    }
+   if (req.method === 'POST' && req.url.includes('orders') || req.method === 'DELETE') {
+  return next.handle(req);
+}
     this.busyService.busy();
     return next.handle(req).pipe(
       delay(1000), // Optional: delay the response for 1 second
