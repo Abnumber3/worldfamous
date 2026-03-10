@@ -62,21 +62,24 @@ addItemToBasket() {
   }
 
   loadProduct() {
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
-    if (id === null) {
-      console.error('No ID in route');
-      return;
-    }
+  const id = this.activatedRoute.snapshot.paramMap.get('id');
 
-    this.shopService.getProduct(+id).subscribe({
-      next: (product) => {
-        this.product = product;
-        // Only set breadcrumb after product successfully loaded
-        this.bcService.set('@productDetail', product.name);
-      },
-      error: (error) => {
-        console.error('Error loading product:', error);
-      }
-    });
+  console.log('Route ID:', id);
+
+  if (id === null) {
+    console.error('No ID in route');
+    return;
   }
+
+  this.shopService.getProduct(+id).subscribe({
+    next: (product) => {
+      console.log('PRODUCT FROM API:', product);   // <-- add this
+      this.product = product;
+      this.bcService.set('@productDetail', product.name);
+    },
+    error: (error) => {
+      console.error('Error loading product:', error);
+    }
+  });
+}
 }

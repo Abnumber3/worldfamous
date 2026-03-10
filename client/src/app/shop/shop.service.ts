@@ -83,7 +83,8 @@ export class ShopService {
     }, {} as IProduct)
      
 
-    if(Object.keys(product)) return of(product);
+    // if(Object.keys(product)) return of(product);
+    if (Object.keys(product).length > 0) return of(product);
     console.log(product);
 
     return this.http.get<IProduct>(this.baseUrl + 'product/' + id);
