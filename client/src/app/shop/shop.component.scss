@@ -57,11 +57,11 @@ section {
   font-size: 1.1em;
 
   &.active{
-    border-radius: 10px;
+    border-radius: 11px;
   }
 
   &:not(.active):hover{
-    background-color: #afacac;
+    background-color: #8a8181;
     border-radius: 10px;
   }
 }
