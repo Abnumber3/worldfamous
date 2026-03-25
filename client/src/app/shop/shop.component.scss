@@ -35,7 +35,7 @@
   .active-page {
     font-weight: 600;
     font-size: 18px; // ← Even bigger for the active page
-    color: #007bff;
+    color: #364c64;
     transform: scale(1.2);
   }
 }
@@ -61,7 +61,7 @@ section {
   }
 
   &:not(.active):hover{
-    background-color: #867b7b;
+    background-color: #a99d9d;
     border-radius: 10px;
   }
 }
