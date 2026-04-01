@@ -1,39 +1,43 @@
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-8">
-      <app-stepper #appStepper>
+<div class="container checkout-page mt-5">
+  <div class="row g-4 checkout-layout">
+    <div class="col-12 col-lg-8">
+      <div class="checkout-main">
+        <app-stepper #appStepper>
 
-        <cdk-step [label]="stepLabels.address" [completed]="checkoutForm.get('addressForm')?.valid">
-          <app-checkout-address
-            [checkoutForm]="checkoutForm">
-          </app-checkout-address>
-        </cdk-step>
+          <cdk-step [label]="stepLabels.address" [completed]="checkoutForm.get('addressForm')?.valid">
+            <app-checkout-address
+              [checkoutForm]="checkoutForm">
+            </app-checkout-address>
+          </cdk-step>
 
-        <cdk-step [label]="stepLabels.delivery" [completed]="checkoutForm.get('deliveryForm')?.valid">
-          <app-checkout-delivery
-            [checkoutForm]="checkoutForm">
-          </app-checkout-delivery>
-        </cdk-step>
+          <cdk-step [label]="stepLabels.delivery" [completed]="checkoutForm.get('deliveryForm')?.valid">
+            <app-checkout-delivery
+              [checkoutForm]="checkoutForm">
+            </app-checkout-delivery>
+          </cdk-step>
 
-        <cdk-step [label]="stepLabels.review">
-          <app-checkout-review
-            [checkoutForm]="checkoutForm"
-            [appStepper]="appStepper"
-            >
-          </app-checkout-review>
-        </cdk-step>
+          <cdk-step [label]="stepLabels.review">
+            <app-checkout-review
+              [checkoutForm]="checkoutForm"
+              [appStepper]="appStepper"
+              >
+            </app-checkout-review>
+          </cdk-step>
 
-        <cdk-step [label]="stepLabels.payment" [completed]="checkoutForm.get('paymentForm')?.valid">
-          <app-checkout-payment
-            [checkoutForm]="checkoutForm">
-          </app-checkout-payment >
-        </cdk-step>
+          <cdk-step [label]="stepLabels.payment" [completed]="checkoutForm.get('paymentForm')?.valid">
+            <app-checkout-payment
+              [checkoutForm]="checkoutForm">
+            </app-checkout-payment >
+          </cdk-step>
 
-      </app-stepper>
+        </app-stepper>
+      </div>
     </div>
 
-    <div class="col-4">
-      <app-order-tools></app-order-tools>
+    <div class="col-12 col-lg-4">
+      <aside class="checkout-summary-panel">
+        <app-order-tools></app-order-tools>
+      </aside>
     </div>
   </div>
 </div>

@@ -1,80 +1,208 @@
-.form-label-group {
-  position: relative;
-  margin-bottom: 1rem;
+.login-page {
+  background: #ffffff;
 }
 
-.form-label-group > input,
-.form-label-group > label {
-  height: 3.125rem;
-  padding: .75rem;
+.login-page__container {
+  padding-bottom: 3rem;
 }
 
-.form-label-group > label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  width: 100%;
-  margin-bottom: 0; /* Override default `<label>` margin */
-  line-height: 1.5;
-  color: #495057;
-  pointer-events: none;
-  cursor: text; /* Match the input under the label */
-  border: 1px solid transparent;
-  border-radius: .25rem;
-  transition: all .1s ease-in-out;
+.login-page__intro,
+.login-card {
+  height: 100%;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  box-shadow: 0 22px 48px rgba(15, 23, 42, 0.08);
 }
 
-.form-label-group input::-webkit-input-placeholder {
-  color: transparent;
+.login-page__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  padding: 2rem;
+  border-radius: 24px;
 }
 
-.form-label-group input:-ms-input-placeholder {
-  color: transparent;
+.login-page__eyebrow,
+.login-card__eyebrow {
+  color: #c2410c;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
 }
 
-.form-label-group input::-ms-input-placeholder {
-  color: transparent;
+.login-page__title {
+  margin: 0;
+  color: #111111;
+  font-size: clamp(2.1rem, 4vw, 3.3rem);
+  font-weight: 900;
+  line-height: 0.96;
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
 }
 
-.form-label-group input::-moz-placeholder {
-  color: transparent;
+.login-page__copy {
+  margin: 0;
+  color: #5f6368;
+  font-size: 1rem;
+  line-height: 1.8;
 }
 
-.form-label-group input::placeholder {
-  color: transparent;
+.login-page__feature-list {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: auto;
 }
 
-.form-label-group input:not(:placeholder-shown) {
-  padding-top: 1.25rem;
-  padding-bottom: .25rem;
+.login-page__feature {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1rem 1.1rem;
+  border-radius: 18px;
+  background: #f7f7f5;
+  border: 1px solid #ececec;
 }
 
-.form-label-group input:not(:placeholder-shown) ~ label {
-  padding-top: .25rem;
-  padding-bottom: .25rem;
-  font-size: 12px;
-  color: #777;
+.login-page__feature-label {
+  color: #111111;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
 }
 
-/* Fallback for Edge
--------------------------------------------------- */
-@supports (-ms-ime-align: auto) {
-  .form-label-group > label {
-    display: none;
+.login-page__feature strong {
+  color: #5f6368;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.login-card {
+  display: grid;
+  gap: 1.35rem;
+  padding: 2rem;
+  border-radius: 24px;
+}
+
+.login-card__header {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.login-card__title {
+  margin: 0;
+  color: #111111;
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.login-card__subtitle {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.login-card__fields {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.login-card__submit {
+  min-height: 56px;
+  border: 1px solid #111111;
+  border-radius: 14px;
+  background: #111111;
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.login-card__submit:hover:not(:disabled) {
+  background: #000000;
+  transform: translateY(-1px);
+}
+
+.login-card__submit:disabled {
+  opacity: 0.68;
+}
+
+.login-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid #ececec;
+  color: #6b7280;
+  font-size: 0.92rem;
+}
+
+.login-card__footer a {
+  color: #111111;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.login-card__footer a:hover {
+  text-decoration: underline;
+}
+
+:host ::ng-deep app-text-input .form-floating > .form-control {
+  min-height: 58px;
+  border-radius: 14px;
+  border-color: #d1d5db;
+  box-shadow: none;
+}
+
+:host ::ng-deep app-text-input .form-floating > .form-control:focus {
+  border-color: #111111;
+  box-shadow: 0 0 0 0.16rem rgba(17, 17, 17, 0.08);
+}
+
+:host ::ng-deep app-text-input .form-floating > label {
+  color: #6b7280;
+  font-weight: 600;
+}
+
+:host ::ng-deep app-text-input .password-toggle {
+  right: 1rem;
+}
+
+@media (max-width: 991.98px) {
+  .login-page__intro,
+  .login-card {
+    padding: 1.5rem;
   }
-  .form-label-group input::-ms-input-placeholder {
-    color: #777;
-  }
 }
 
-/* Fallback for IE
--------------------------------------------------- */
-@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-  .form-label-group > label {
-    display: none;
+@media (max-width: 575.98px) {
+  .login-page__container {
+    padding-inline: 0.55rem;
   }
-  .form-label-group input:-ms-input-placeholder {
-    color: #777;
+
+  .login-page__intro,
+  .login-card {
+    padding: 1.15rem;
+    border-radius: 18px;
+  }
+
+  .login-page__title {
+    font-size: 1.9rem;
+  }
+
+  .login-card__title {
+    font-size: 1.6rem;
+  }
+
+  .login-card__footer {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

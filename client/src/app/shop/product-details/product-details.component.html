@@ -1,67 +1,106 @@
-<div class="container mt-5">
-  <div *ngIf="product">
-    <div class="row align-items-start">
-      <!-- Product Image -->
-      <div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
-        <img
-          [src]="product.pictureUrl"
-          [alt]="product.name"
-          class="img-fluid w-100 rounded shadow-sm"
-          style="max-height: 600px; object-fit: contain;"
-        />
-      </div>
+<div class="product-detail-page">
+  <div class="container product-detail-page__container mt-5">
+    <div *ngIf="product" class="product-detail">
+      <div class="row align-items-start g-4 product-detail__grid">
+        <div class="col-lg-6 col-md-12">
+          <div class="product-detail__media">
+            <span class="product-detail__type">{{ product.productType }}</span>
+            <div class="product-detail__image-frame">
+              <img
+                [src]="product.pictureUrl"
+                [alt]="product.name"
+                class="product-detail__image"
+              />
+            </div>
+            <div class="product-detail__media-caption">
+              <span>World Famous Cut</span>
+              <strong>{{ product.productType }}</strong>
+            </div>
+          </div>
+        </div>
 
-      <!-- Product Details -->
-      <div class="col-lg-6 col-md-12">
-        <h2 class="fw-bold mb-3" style="font-size: 1.9rem;">
-          {{ product.name }}
-        </h2>
+        <div class="col-lg-6 col-md-12">
+          <div class="product-detail__content">
+            <div class="product-detail__header">
+              <span class="product-detail__eyebrow">WorldFamous Uniform</span>
+              <span class="product-detail__collection">Modern street essentials</span>
 
-        <!-- Pricing -->
-        <p class="fw-semibold mb-1" style="font-size: 1.1rem;">
-          Total: {{ product.price * quantity | currency }}
-        </p>
-        <p class="text-muted mb-3" style="font-size: 1rem;">
-          Unit Price: {{ product.price | currency }}
-        </p>
+              <h1 class="product-detail__title">
+                {{ product.name }}
+              </h1>
 
-        <!-- Description -->
-        <p
-          class="product-description mb-4"
-          style="
-            color: #343232;
-            font-size: 1.4rem;
-            line-height: 1.4;
-            max-width: 500px;
-            text-align: justify;
-          "
-        >
-          {{ product.description }}
-        </p>
+              <div class="product-detail__meta">
+                <span class="product-detail__meta-pill">{{ product.productType }}</span>
+                <span class="product-detail__meta-pill">Built for everyday wear</span>
+              </div>
+            </div>
 
-        <!-- Quantity + Add to Cart -->
-        <div class="d-flex align-items-center mb-3">
-          <i
-            (click)="decrementQuantity()"
-            class="fas fa-minus-circle text-warning"
-            style="cursor: pointer; font-size: 1.8em;"
-          ></i>
+            <div class="product-detail__story">
+              <span class="product-detail__section-label">Product Details</span>
+              <p class="product-detail__description">
+                {{ product.description }}
+              </p>
+            </div>
 
-          <span class="fw-bold mx-3" style="font-size: 1.5em;">{{ quantity }}</span>
+            <div class="product-detail__purchase-panel">
+              <div class="product-detail__panel-header">
+                <span class="product-detail__section-label">Order Setup</span>
+                <span class="product-detail__panel-note">Change quantity before adding to cart</span>
+              </div>
 
-          <i
-            (click)="incrementQuantity()"
-            class="fas fa-plus-circle text-warning"
-            style="cursor: pointer; font-size: 1.8em;"
-          ></i>
+              <div class="product-detail__pricing">
+                <div class="product-detail__pricing-row">
+                  <span>Unit Price</span>
+                  <strong>{{ product.price | currency }}</strong>
+                </div>
 
-          <button
-            (click)="addItemToBasket()"
-            class="btn btn-outline-primary btn-lg ms-4 px-4"
-            [disabled]="isAdding"
-          >
-            {{ isAdding ? 'Adding...' : 'Add to Cart' }}
-          </button>
+                <div class="product-detail__pricing-row">
+                  <span>Selected Quantity</span>
+                  <strong>{{ quantity }}</strong>
+                </div>
+
+                <div class="product-detail__pricing-row product-detail__pricing-row--total">
+                  <span>Total</span>
+                  <strong>{{ product.price * quantity | currency }}</strong>
+                </div>
+              </div>
+
+              <div class="product-detail__purchase">
+                <div class="product-detail__quantity-block">
+                  <span class="product-detail__quantity-label">Quantity</span>
+                  <div class="product-detail__quantity">
+                    <button
+                      type="button"
+                      class="product-detail__quantity-button"
+                      (click)="decrementQuantity()"
+                      aria-label="Decrease quantity"
+                    >
+                      <i class="fas fa-minus"></i>
+                    </button>
+
+                    <span class="product-detail__quantity-value">{{ quantity }}</span>
+
+                    <button
+                      type="button"
+                      class="product-detail__quantity-button"
+                      (click)="incrementQuantity()"
+                      aria-label="Increase quantity"
+                    >
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <button
+                  (click)="addItemToBasket()"
+                  class="btn product-detail__add-button"
+                  [disabled]="isAdding"
+                >
+                  {{ isAdding ? 'Adding...' : 'Add to Cart' }}
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

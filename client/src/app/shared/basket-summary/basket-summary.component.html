@@ -22,19 +22,21 @@
                 <tbody>
                   <tr *ngFor="let item of basket.items">
                     <td class="p-0">
-                      <div class="p-3 px-4 d-flex align-items-center">
-                        <img [src]="item.pictureUrl" [alt]="item.productName" class="img-fluid" style="max-height:70px;" />
+                      <a
+                        class="p-3 px-4 d-flex align-items-center basket-product-cell basket-product-link"
+                        [routerLink]="['/shop', item.id]"
+                        [attr.aria-label]="'View ' + item.productName"
+                      >
+                        <img [src]="item.pictureUrl" [alt]="item.productName" class="img-fluid basket-product-image" />
                         <div class="ms-4">
-                          <h5 class="mb-0 fs-5">
-                            <a [routerLink]="'/shop/' + item.id" class="text-dark">
-                              {{ item.productName }}
-                            </a>
+                          <h5 class="mb-0 fs-5 basket-product-title">
+                            {{ item.productName }}
                           </h5>
                           <small class="text-muted fst-italic fs-6">
                             Type: {{ item.type }}
                           </small>
                         </div>
-                      </div>
+                      </a>
                     </td>
 
                     <td class="align-middle p-0">
@@ -44,7 +46,7 @@
                     </td>
 
                     <td class="align-middle p-0">
-                      <div class="p-3 px-4 d-flex align-items-center">
+                      <div class="p-3 px-4 d-flex align-items-center basket-quantity-cell">
                         <i *ngIf="isBasket"
                         (click)="removeBasketItem(item.id, 1)" class="fas fa-minus-circle text-warning" style="cursor:pointer; font-size:2em;"></i>
                         <span class="fw-bold mx-3" style="font-size:1.3em;">

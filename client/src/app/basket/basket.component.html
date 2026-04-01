@@ -13,7 +13,7 @@
   <ng-template #basketTable>
     <div class="pb-5">
       <div class="container">
-        <div class="row">
+        <div class="row g-4">
           <div class="col-12 py-5 mb-1">
             <app-basket-summary
               (addItem)="incrementQuanity($event)"
@@ -22,11 +22,32 @@
           </div>
 
           <!-- Summary / Checkout -->
-          <div class="col-6 offset-6">
+          <div class="col-12 col-lg-6 offset-lg-6">
             <app-order-tools></app-order-tools>
-            <a routerLink="/checkout" class="btn btn-outline-primary py-2 w-100">
-              Proceed to checkout
-            </a>
+            <ng-container *ngIf="currentUser$ | async; else guestCheckoutActions">
+              <a routerLink="/checkout" class="btn btn-outline-primary py-2 w-100">
+                Proceed to checkout
+              </a>
+            </ng-container>
+
+            <ng-template #guestCheckoutActions>
+              <div class="d-grid gap-2">
+                <a
+                  routerLink="/account/register"
+                  [queryParams]="checkoutQueryParams"
+                  class="btn btn-primary py-2 w-100"
+                >
+                  Register before checkout
+                </a>
+                <a
+                  routerLink="/account/login"
+                  [queryParams]="checkoutQueryParams"
+                  class="btn btn-outline-primary py-2 w-100"
+                >
+                  Login to proceed
+                </a>
+              </div>
+            </ng-template>
           </div>
 
         </div> <!-- row -->

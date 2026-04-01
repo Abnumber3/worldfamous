@@ -13,6 +13,10 @@ using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var conn = builder.Configuration.GetConnectionString("DefaultConnection");
+Console.WriteLine("=== ACTIVE DEFAULT CONNECTION STRING ===");
+Console.WriteLine(conn);
+
 // Services
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
 builder.Services.AddEndpointsApiExplorer();
@@ -30,12 +34,16 @@ builder.Services.AddScoped<IPaymentService, PaymentService>();
 // DbContexts
 builder.Services.AddDbContext<AppIdentityDbContext>(x =>
 {
-    x.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection"));
+    x.UseSqlServer(
+        builder.Configuration.GetConnectionString("IdentityConnection"),
+        sqlOptions => sqlOptions.EnableRetryOnFailure());
 });
 
 builder.Services.AddDbContext<StoreContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        sqlOptions => sqlOptions.EnableRetryOnFailure());
 });
 
 // Redis

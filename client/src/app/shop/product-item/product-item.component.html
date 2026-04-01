@@ -1,37 +1,51 @@
-<div class="card h-100 shadow-sm">
-  <div
-   class="position-relative image" style="cursor: pointer;"
-     style="cursor: pointer;" 
-  [routerLink]="'/shop/' + product.id"
-   >
-      <img
-        [src]="product.pictureUrl"
-        [alt]="product.name"
-        class="card-img-top bg-light"
-      />
+<div class="card product-card h-100 shadow-sm border-0">
+  <div class="product-card__media image">
+    <span class="product-card__type-badge">{{ product.productType }}</span>
 
+    <a
+      class="product-card__image-link"
+      [routerLink]="['/shop', product.id]"
+      [attr.aria-label]="'View ' + product.name"
+    >
+      <div class="product-card__image-frame bg-light">
+        <img
+          [src]="product.pictureUrl"
+          [alt]="product.name"
+          class="product-card__image"
+        />
+      </div>
+    </a>
 
-    <div class="hover-overlay d-flex justify-content-center align-items-end gap-2 p-2 pt-5"
+    <div
+      class="hover-overlay d-flex justify-content-center align-items-end gap-2 p-3"
     >
       <button
-      [routerLink]="'/shop/' + product.id"
-        type="button" 
-        class="btn btn-primary btn-sm custom-btn">
+        type="button"
+        class="btn btn-primary btn-sm custom-btn"
+        [routerLink]="['/shop', product.id]"
+        [attr.aria-label]="'View ' + product.name"
+      >
         <i class="fa-solid fa-cart-shopping"></i>
       </button>
 
-      <button 
-        type="button" 
+      <button
+        type="button"
         class="btn btn-primary btn-sm custom-btn"
-        [routerLink]="'/shop/' + product.id">
+        [routerLink]="['/shop', product.id]"
+      >
         View
       </button>
     </div>
-
   </div>
 
-  <div class="card-body d-flex flex-column">
-    <a [routerLink]="'/shop/' + product.id">
-      <h6 class="text-uppercase mb-1">{{ product.name }}</h6>
+  <div class="card-body product-card__body">
+    <span class="product-card__type">{{ product.productType }}</span>
+    <a
+      class="product-card__name-link"
+      [routerLink]="['/shop', product.id]"
+    >
+      <h6 class="product-card__name text-uppercase mb-0">{{ product.name }}</h6>
     </a>
-    <span class="mb-3">{{ product.price | currency }}</span>
+    <span class="product-card__price">{{ product.price | currency }}</span>
+  </div>
+</div>

@@ -1,51 +1,77 @@
-<div class="d-flex justify-content-center mt-5">
-  <div class="col-3">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-signin">
-      <div class="text-center mb-4">
-        <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+<div class="login-page">
+  <div class="container login-page__container mt-5">
+    <div class="row g-4 align-items-stretch justify-content-center">
+      <div class="col-12 col-lg-5">
+        <section class="login-page__intro">
+          <span class="login-page__eyebrow">Member Access</span>
+          <h1 class="login-page__title">Sign in and keep your rotation moving.</h1>
+          <p class="login-page__copy">
+            Get back to your cart, track orders, and check out faster with your
+            World Famous account.
+          </p>
+
+          <div class="login-page__feature-list">
+            <div class="login-page__feature">
+              <span class="login-page__feature-label">Fast Checkout</span>
+              <strong>Saved account flow for repeat orders.</strong>
+            </div>
+            <div class="login-page__feature">
+              <span class="login-page__feature-label">Order Tracking</span>
+              <strong>See your latest purchases and status updates.</strong>
+            </div>
+            <div class="login-page__feature">
+              <span class="login-page__feature-label">Streetwear Ready</span>
+              <strong>Stay locked in for new drops and essentials.</strong>
+            </div>
+          </div>
+        </section>
       </div>
 
-      <!-- Email Floating Label -->
-      <app-text-input
-        formControlName="email"
-        type="email"
-        [label]="'Email'"
-      ></app-text-input>
+      <div class="col-12 col-lg-5 col-xl-4">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-card">
+          <div class="login-card__header">
+            <span class="login-card__eyebrow">Welcome Back</span>
+            <h2 class="login-card__title">Login</h2>
+            <p class="login-card__subtitle">
+              Enter your email and password to continue.
+            </p>
+          </div>
 
-      <!-- Password Floating Label + Eye -->
-      <app-text-input
-        formControlName="password"
-        type="password"
-        [label]="'Password'"
-        [toggleable]="true">
-      </app-text-input>
+          <div class="login-card__fields">
+            <app-text-input
+              formControlName="email"
+              type="email"
+              [label]="'Email'"
+            ></app-text-input>
 
-      <!-- Submit -->
-      <button
-        [disabled]="loginForm.invalid"
-        class="btn btn-primary w-100"
-        type="submit"
-      >
-        Sign in
-      </button>
-      <p class="mt-5 mb-3 text-muted text-center">© World Famous 2025</p>
-    </form>
-  </div>
+            <app-text-input
+              formControlName="password"
+              type="password"
+              [label]="'Password'"
+              [toggleable]="true"
+            >
+            </app-text-input>
+          </div>
 
-  <!-- Debug Panel (right side) -->
-  <div class="col-4">
-    <p>Form Status: {{ loginForm.status }}</p>
-    <p>Email Status: {{ loginForm.get('email')?.status }}</p>
-    <p>Email Touched: {{ loginForm.get('email')?.touched }}</p>
-    <p>Email Dirty: {{ loginForm.get('email')?.dirty }}</p>
-    <pre>{{ loginForm.value | json }}</pre>
+          <button
+            [disabled]="loginForm.invalid"
+            class="login-card__submit"
+            type="submit"
+          >
+            Sign in
+          </button>
+
+          <div class="login-card__footer">
+            <span>Need an account?</span>
+            <a
+              routerLink="/account/register"
+              [queryParams]="{ returnUrl: returnUrl }"
+            >
+              Create one
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
-
-
-
-
-
-
-
-  

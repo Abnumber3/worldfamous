@@ -8,13 +8,14 @@
     class="step-header"
     [class.active]="selectedIndex === i"
     (click)="onStepHeaderClick(i)">
-    {{ step.label }}
+    <span class="step-number">{{ i + 1 }}</span>
+    <span class="step-label">{{ step.label }}</span>
   </button>
 </div>
 
 
   <!-- Active step content -->
-  <div class="mt-3">
+  <div class="stepper-body mt-3">
     <ng-container *ngIf="selected">
       <ng-container [ngTemplateOutlet]="selected.content"></ng-container>
     </ng-container>

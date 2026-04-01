@@ -1,7 +1,7 @@
 <section class="py-4" style="margin-top: 75px; background-color: #f5f5f5;">
   <div class="container">
-    <div class="row d-flex align-items-center">
-      <div class="col-8">
+    <div class="row d-flex align-items-center g-3">
+      <div class="col-12 col-md-8">
         <ng-container *ngIf="breadcrumbs$ | async as crumbs">
           <h1 *ngIf="crumbs.length > 0">
             {{ crumbs[crumbs.length - 1].label }}
@@ -9,7 +9,7 @@
           <!-- optional fallback: <h1>&nbsp;</h1> -->
         </ng-container>
       </div>
-      <div class="col-4 text-end">
+      <div class="col-12 col-md-4 text-md-end">
         <app-breadcrumb></app-breadcrumb>
       </div>
     </div>

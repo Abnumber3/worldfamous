@@ -1,4 +1,7 @@
 <div class="payment-section" *ngIf="checkoutForm" [formGroup]="checkoutForm">
+  <div class="payment-summary-mobile d-lg-none">
+    <app-order-tools></app-order-tools>
+  </div>
   
   <!-- Payment Details Card -->
   <div class="payment-card">
@@ -44,7 +47,7 @@
 
   <!-- Action Buttons -->
   <div class="action-buttons">
-     <button class="btn btn-outline-primary" routerLink="/basket">
+     <button class="btn btn-outline-primary" cdkStepperPrevious>
     <i class="fa fa-angle-left"></i> Back to Review
   </button>
    <button
