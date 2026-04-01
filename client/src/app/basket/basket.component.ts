@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component } from '@angular/core';
 import { BasketService } from './basket.service';
-import { IBasket, IBasketItem } from '../shared/models/basket';
+import { IBasketItem } from '../shared/models/basket';
+import { AccountService } from '../account/account.service';
 
 @Component({
   selector: 'app-basket',
@@ -10,9 +10,15 @@ import { IBasket, IBasketItem } from '../shared/models/basket';
   styleUrl: './basket.component.scss'
 })
 export class BasketComponent {
+  readonly currentUser$;
+  readonly checkoutQueryParams = { returnUrl: '/checkout' };
 
-
-constructor(public basketService: BasketService) {}
+  constructor(
+    public basketService: BasketService,
+    private accountService: AccountService
+  ) {
+    this.currentUser$ = this.accountService.currentUser$;
+  }
 
 
 

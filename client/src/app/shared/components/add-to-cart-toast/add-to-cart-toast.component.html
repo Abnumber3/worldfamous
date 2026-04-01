@@ -1,16 +1,45 @@
-<!-- Blocks entire screen (for background dimming + interaction lock) -->
 <div class="toast-overlay" *ngIf="visible">
-  <!-- Toast box (floats top-right) -->
-  <div class="toast-flyout">
-    <div class="d-flex">
-      <img [src]="product.pictureUrl" alt="product" width="100" class="me-3" />
-      <div>
-        <strong>{{ product.name }}</strong><br>
-        <span>Qty: {{ quantity }}</span><br>
-        <span>Price: {{ product.price * quantity | currency }}</span>
-        <div class="mt-2">
-          <button class="btn btn-sm btn-outline-secondary me-2" (click)="hide()">Keep Shopping</button>
-          <button class="btn btn-sm btn-primary" routerLink="/basket">Checkout</button>
+  <div class="toast-flyout" role="status" aria-live="polite" aria-atomic="true">
+    <button
+      type="button"
+      class="toast-flyout__close"
+      aria-label="Close confirmation"
+      (click)="hide()"
+    >
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <div class="toast-flyout__header">
+      <span class="toast-flyout__eyebrow">Added to cart</span>
+      <strong class="toast-flyout__title">Item ready for checkout</strong>
+    </div>
+
+    <div class="toast-flyout__content">
+      <div class="toast-flyout__image-frame">
+        <img [src]="product.pictureUrl" [alt]="product.name" class="toast-flyout__image" />
+      </div>
+
+      <div class="toast-flyout__details">
+        <h3 class="toast-flyout__product-name">{{ product.name }}</h3>
+
+        <div class="toast-flyout__meta">
+          <div class="toast-flyout__meta-row">
+            <span>Qty</span>
+            <strong>{{ quantity }}</strong>
+          </div>
+          <div class="toast-flyout__meta-row">
+            <span>Total</span>
+            <strong>{{ product.price * quantity | currency }}</strong>
+          </div>
+        </div>
+
+        <div class="toast-flyout__actions">
+          <button type="button" class="toast-flyout__ghost" (click)="hide()">
+            Keep Shopping
+          </button>
+          <a class="toast-flyout__primary" routerLink="/basket">
+            Checkout
+          </a>
         </div>
       </div>
     </div>

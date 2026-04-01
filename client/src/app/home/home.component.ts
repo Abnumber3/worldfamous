@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,16 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent  {
+  constructor(private router: Router) {}
+
+  goToShop() {
+    this.router.navigate(['/shop']);
+  }
+
+  goToRegister() {
+    this.router.navigate(['/account/register']);
+  }
+
   // slides = [
   //   '/WF-Images/man-1.png',
   //   '/WF-Images/man-2.png',

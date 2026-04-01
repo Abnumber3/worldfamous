@@ -1,128 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>WorldFamous Landing</title>
-
-  <!-- Import a clean serif for the tagline -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root { --nav-height: 56px; }
-
-    *, *::before, *::after { box-sizing: border-box; }
-
-    html, body {
-      margin: 0; padding: 0;
-      height: 100%; overflow: hidden;
-      font-family: sans-serif;
-    }
-
-    .hero-container {
-      height: 100vh; height: 100dvh;
-      max-height: 100vh; max-height: 100dvh;
-      width: 100vw; overflow: hidden;
-      position: relative;
-    }
-
-    .hero-container img {
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
-    }
-
-    /* Tagline + subhead */
-    .hero-copy {
-      position: absolute;
-      top: 38%; right: 5%;
-      transform: translateY(-50%);
-      max-width: 360px;
-      color: #0f1100;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
-      font-family: 'Playfair Display', serif;
-      z-index: 10;
-    }
-    .hero-copy h1 {
-      margin: 0 0 0.5rem;
-      font-size: 5.9rem;
-      line-height: 1.1;
-      font-weight: 700;
-    }
-    .hero-copy p {
-      margin: 0;
-      font-size: 1.2rem;
-      font-weight: 400;
-    }
-
-    /* Buttons stack horizontally beneath the copy */
-    .hero-buttons {
-      position: absolute;
-      top: 68%; right: 5%;
-      transform: translateY(-50%);
-      display: flex;
-      gap: 1.5rem;
-      z-index: 10;
-    }
-
-    .hero-btn {
-      padding: 1rem 2.4rem;
-      font-size: 1.1rem;
-      font-weight: 600;
-      border-radius: 6px;
-      text-decoration: none;
-      border: 3px solid #000102;
-      transition: all 0.25s ease;
-      text-align: center;
-    }
-    .hero-btn--filled {
-      background: #f0f5c4de;
-      color: #140000;
-    }
-    .hero-btn--filled:hover {
-      background: #0056b3;
-      border-color: #000102;
-      color: #fff;
-    }
-    .hero-btn--outline {
-      background: transparent;
-      color: #000913;
-      border-color: #00050a;
-    }
-    .hero-btn--outline:hover {
-      background: rgba(0, 123, 255, 0.1);
-    }
-
-    @media (max-width: 768px) {
-      .hero-copy {
-        top: 30%; right: 50%;
-        transform: translateX(50%) translateY(-50%);
-        text-align: center;
-      }
-      .hero-buttons {
-        top: 50%; right: 50%;
-        transform: translate(50%, -50%);
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="hero-container">
-    <img src="/WF-Images/girl-2-updated.jpg" alt="Landing Hero Image" />
-
-    <!-- Tagline area -->
+<section class="home-hero">
+  <div class="hero-shell">
     <div class="hero-copy">
+      <p class="hero-kicker">Streetwear. Motion. Identity.</p>
       <h1>World Famous</h1>
-      <p>For those who conquer the world.</p>
+      <p class="hero-description">
+        Built for the ones who move different. Premium everyday pieces with a bold,
+        city-first attitude.
+      </p>
+
+      <div class="hero-actions">
+        <button type="button" class="hero-btn hero-btn--primary" (click)="goToShop()">Shop Now</button>
+        <button type="button" class="hero-btn hero-btn--secondary" (click)="goToRegister()">Create Account</button>
+      </div>
     </div>
 
-    <!-- CTA Buttons -->
-    <div class="hero-buttons">
-      <a href="/shop"     class="hero-btn hero-btn--filled">Shop Now</a>
-      <a href="/register" class="hero-btn hero-btn--outline">Create Account</a>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="hero-image-frame">
+        <img src="/WF-Images/man-2.png" alt="Model wearing World Famous streetwear" />
+      </div>
+      <div class="hero-badge">
+        <span>New Season</span>
+        <strong>Urban essentials for every fit.</strong>
+      </div>
     </div>
   </div>
-</body>
-</html>
+</section>

@@ -1,117 +1,132 @@
-<nav class="navbar navbar-expand-lg bg-dark p-3 fixed-top shadow-sm border-bottom border-secondary" data-bs-theme="dark">
-  <div class="container-fluid">
-
-    <!-- Brand -->
-    <div class="d-flex align-items-center">
+<nav class="wf-navbar" [class.is-mobile-open]="isMobileMenuOpen">
+  <div class="wf-navbar__inner">
+    <a class="wf-navbar__brand" routerLink="/" (click)="closeMobileMenu()">
       <img
         src="/WF-Images/globe.png"
         alt="WorldFamous logo"
-        width="42" height="42"
-        class="me-2"
-        routerLink="/"
+        width="42"
+        height="42"
       />
-      <a class="navbar-brand text-white fs-5" routerLink="/">WorldFamous LLC</a>
-    </div>
+      <span class="wf-navbar__brand-text">WorldFamous LLC</span>
+    </a>
 
-    <!-- Toggler -->
     <button
-      class="navbar-toggler"
+      class="wf-navbar__toggle"
       type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarCollapse"
-      aria-controls="navbarCollapse"
-      aria-expanded="false"
+      [attr.aria-expanded]="isMobileMenuOpen"
+      aria-controls="wf-navbar-panel"
       aria-label="Toggle navigation"
+      (click)="toggleMobileMenu($event)"
     >
-      <span class="navbar-toggler-icon"></span>
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
 
-    <!-- Collapsible -->
-    <div id="navbarCollapse" class="collapse navbar-collapse justify-content-between">
-
-      <!-- Center Nav -->
-      <ul class="navbar-nav mx-auto text-uppercase fw-semibold gap-lg-4 gap-2">
-        <li class="nav-item">
+    <div
+      id="wf-navbar-panel"
+      class="wf-navbar__panel"
+      [class.is-open]="isMobileMenuOpen"
+    >
+      <ul class="wf-navbar__links">
+        <li>
           <a
-            class="nav-link text-white"
+            class="wf-navbar__link"
             routerLink="/"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
+            (click)="closeMobileMenu()"
           >Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" routerLink="/shop" routerLinkActive="active">Shop</a>
+        <li>
+          <a
+            class="wf-navbar__link"
+            routerLink="/shop"
+            routerLinkActive="active"
+            (click)="closeMobileMenu()"
+          >Shop</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" routerLink="/test-error" routerLinkActive="active">Errors</a>
+        <li>
+          <a
+            class="wf-navbar__link"
+            routerLink="/test-error"
+            routerLinkActive="active"
+            (click)="closeMobileMenu()"
+          >Errors</a>
         </li>
       </ul>
 
-      <!-- Right Side -->
-      <div class="d-flex align-items-center gap-2">
-
-        <!-- Cart -->
-        <a routerLink="/basket" class="position-relative me-3" aria-label="View basket">
-          <i class="fa fa-shopping-cart fa-lg text-white"></i>
+      <div class="wf-navbar__actions">
+        <a
+          routerLink="/basket"
+          class="wf-navbar__cart"
+          aria-label="View basket"
+          (click)="closeMobileMenu()"
+        >
+          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
           <span
-            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+            class="wf-navbar__cart-badge"
             aria-live="polite"
             aria-atomic="true"
-            style="font-size:.7rem"
           >
             <ng-container *ngIf="(basket$ | async) as basket">{{ basket.items.length }}</ng-container>
           </span>
         </a>
 
-        <!-- Auth: Logged out -->
         <ng-container *ngIf="(currentUser$ | async) === null">
-          <a
-            routerLink="/account/login"
-            class="btn btn-outline-light btn-sm px-3"
-            routerLinkActive="active"
-          >Login</a>
-          <a
-            routerLink="/account/register"
-            class="btn btn-light btn-sm px-3"
-            routerLinkActive="active"
-          >Register</a>
+          <div class="wf-navbar__guest-actions">
+            <a
+              routerLink="/account/login"
+              class="wf-navbar__auth-button wf-navbar__auth-button--login"
+              routerLinkActive="active"
+              (click)="closeMobileMenu()"
+            >
+              <span class="wf-navbar__auth-label">Login</span>
+            </a>
+            <a
+              routerLink="/account/register"
+              class="wf-navbar__auth-button wf-navbar__auth-button--register"
+              routerLinkActive="active"
+              (click)="closeMobileMenu()"
+            >
+              <span class="wf-navbar__auth-label">Register</span>
+            </a>
+          </div>
         </ng-container>
 
-        <!-- Auth: Logged in -->
         <ng-container *ngIf="currentUser$ | async as user">
-          <div class="dropdown ms-3 me-5">
+          <div class="dropdown wf-navbar__user-menu">
             <a
               id="userDropdown"
-              class="dropdown-toggle text-white text-decoration-none"
+              class="dropdown-toggle wf-navbar__user-toggle"
               href="#"
               role="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Welcome {{ user.displayName }}!
+              <span class="wf-navbar__user-label">Hello, {{ user.displayName }}</span>
             </a>
 
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
               <li>
-                <a class="dropdown-item d-flex align-items-center py-2" routerLink="/basket">
+                <a class="dropdown-item d-flex align-items-center py-2" routerLink="/basket" (click)="closeMobileMenu()">
                   <i class="fa fa-shopping-cart me-2"></i> View Basket
                 </a>
               </li>
               <li>
-                <a class="dropdown-item d-flex align-items-center py-2" routerLink="/orders">
+                <a class="dropdown-item d-flex align-items-center py-2" routerLink="/orders" (click)="closeMobileMenu()">
                   <i class="fa fa-history me-2"></i> View Orders
                 </a>
               </li>
               <li><hr class="dropdown-divider" /></li>
               <li>
-                <a class="dropdown-item d-flex align-items-center py-2 "style="cursor: pointer;" (click)="logout()">
-                  <i class="fa fa-sign-out me-2" ></i> Logout
+                <a class="dropdown-item d-flex align-items-center py-2" style="cursor: pointer;" (click)="logout()">
+                  <i class="fa fa-sign-out me-2"></i> Logout
                 </a>
               </li>
             </ul>
           </div>
         </ng-container>
-
       </div>
     </div>
   </div>

@@ -1,3 +1,11 @@
+.register-page {
+  padding-inline: 0.75rem;
+}
+
+.form-signin {
+  width: 100%;
+}
+
 .valid-feedback {
   margin-bottom: 0.4rem;  // nudges it closer to the input
   font-size: 1rem;     // optional smaller size
@@ -76,5 +84,15 @@ li{
 
   &::before {
     font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .password-success,
+  .text-success,
+  .username-too-short-msg,
+  .email-invalid-msg,
+  .taken-username {
+    font-size: 0.85rem;
   }
 }

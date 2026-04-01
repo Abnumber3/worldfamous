@@ -1,114 +1,132 @@
-
-<div class="container">
-<div class="container-fluid mt-5">
-  <!-- Mobile Filter/Sort Button -->
-  <div class="d-flex justify-content-end mb-3 d-md-none">
-    <button class="btn btn-outline-primary" (click)="toggleFilterPanel()">
-      Filter / Sort
-    </button>
-  </div>
-
-  <!-- Mobile Filter Panel (toggleable) -->
-  <div class="card mb-3 p-3 d-md-none" *ngIf="showFilterPanel">
-    <h5 class="text-warning">Sort</h5>
-    <select class="form-select mb-3" (change)="onSortSelected($event)">
-      <option *ngFor="let sort of sortOptions"
-      [selected]="shopParams.sort == sort.value"
-      [value]="sort.value"
-      >
-       {{sort.name}}
-      </option>
-    </select>
-
-    <h5 class="text-warning">Clothing Types</h5>
-    <ul class="list-group" style="padding-left: 0rem">
-      <li 
-        class="list-group-item"
-        *ngFor="let productTypes of productType"
-        [class.active]="productTypes.id === shopParams.typeId"
-        (click)="onTypeSelected(productTypes.id)">
-        {{ productTypes.name }}
-      </li>
-    </ul>
-  </div>
-
-  <div class="row gy-4">
-
-    <!-- Desktop Sidebar Filters -->
-    <section class="col-md-3 d-none d-md-block"> 
-      <h5 class="text-warning ms-3">Sort</h5>
-      <select class="custom-select mb-4 w-100" (change)="onSortSelected($event)">
-        <option *ngFor="let sort of sortOptions"
-        [selected]="shopParams.sort == sort.value"
-        [value]="sort.value">
-      {{sort.name}}
-      </option>
-       
-      </select>
-
-      <h5 class="text-warning mb-3">Clothing Types</h5>
-      <ul class="list-group" style="padding-left: 0;">
-        <li 
-          class="list-group-item"
-          *ngFor="let productTypes of productType"
-          [class.active]="productTypes.id === shopParams.typeId"
-          (click)="onTypeSelected(productTypes.id)">
-          {{ productTypes.name }}
-        </li>
-      </ul>
-    </section>
-
-    <!-- Product Section -->
-    <section class="col-12 col-md-9">
-
-      <!-- Search Bar (mobile-friendly layout) -->
-      <div class="mb-3">
-        <div class="d-flex flex-sm-row flex-column align-items-stretch gap-2 w-100" style="max-width: 550px;">
-          <input 
-            (keyup.enter)="onSearch()" 
-            #search 
-            type="text" 
-            class="form-control" 
-            placeholder="Search items..." />
-        
-          <button (click)="onSearch()" class="btn btn-primary" type="button">
-            Search
-          </button>
-        
-          <button  (click)="onClear()" class="btn btn-outline-secondary" type="button">
-            Clear 
-          </button>
+<div class="shop-page">
+  <div class="container-fluid shop-page__shell mt-5">
+    <div class="shop-page__intro">
+      <span class="shop-page__eyebrow">WorldFamous Catalog</span>
+      <div class="shop-page__intro-row">
+        <div>
+          <h2 class="shop-page__title">Streetwear rotation</h2>
+          <p class="shop-page__subtitle">
+            Clean silhouettes, heavyweight layers, and everyday essentials.
+          </p>
         </div>
+
+        <button
+          class="btn shop-page__mobile-toggle d-md-none"
+          type="button"
+          (click)="toggleFilterPanel()"
+        >
+          Filter / Sort
+        </button>
+      </div>
+    </div>
+
+    <div class="shop-mobile-panel d-md-none" *ngIf="showFilterPanel">
+      <div class="shop-mobile-panel__section">
+        <h5 class="shop-sidebar__heading">Sort</h5>
+        <select class="shop-sidebar__select" (change)="onSortSelected($event)">
+          <option
+            *ngFor="let sort of sortOptions"
+            [selected]="shopParams.sort == sort.value"
+            [value]="sort.value"
+          >
+            {{ sort.name }}
+          </option>
+        </select>
       </div>
 
-      <!-- Result Count -->
-      <div class="mb-3 text-muted">
-        Showing <strong>{{ getDisplayedCount() }}</strong> of <strong>{{ totalCount }}</strong> result{{ totalCount === 1 ? '' : 's' }}
+      <div class="shop-mobile-panel__section">
+        <h5 class="shop-sidebar__heading">Clothing Types</h5>
+        <ul class="shop-sidebar__list">
+          <li
+            class="shop-sidebar__item"
+            *ngFor="let productTypes of productType"
+            [class.active]="productTypes.id === shopParams.typeId"
+            (click)="onTypeSelected(productTypes.id)"
+          >
+            {{ productTypes.name }}
+          </li>
+        </ul>
       </div>
-      
+    </div>
 
-      <!-- Product Grid (2x2 on mobile, 3 on desktop) -->
-      <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3 g-3 my-3">
-        <div class="col" *ngFor="let item of products">
-          <app-product-item [product]="item"></app-product-item>
+    <div class="row gy-4 shop-layout">
+      <section class="col-md-3 d-none d-md-block">
+        <div class="shop-sidebar">
+          <div class="shop-sidebar__section">
+            <h5 class="shop-sidebar__heading">Sort</h5>
+            <select class="shop-sidebar__select" (change)="onSortSelected($event)">
+              <option
+                *ngFor="let sort of sortOptions"
+                [selected]="shopParams.sort == sort.value"
+                [value]="sort.value"
+              >
+                {{ sort.name }}
+              </option>
+            </select>
+          </div>
+
+          <div class="shop-sidebar__section">
+            <h5 class="shop-sidebar__heading">Clothing Types</h5>
+            <ul class="shop-sidebar__list">
+              <li
+                class="shop-sidebar__item"
+                *ngFor="let productTypes of productType"
+                [class.active]="productTypes.id === shopParams.typeId"
+                (click)="onTypeSelected(productTypes.id)"
+              >
+                {{ productTypes.name }}
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
+      </section>
 
-      <div class="text-center text-muted mt-4" *ngIf="hasSearched && products.length === 0">
-        😕 0 matches found
-      </div>
+      <section class="col-12 col-md-9">
+        <div class="shop-toolbar">
+          <div class="shop-search">
+            <input
+              (keyup.enter)="onSearch()"
+              #search
+              type="text"
+              class="form-control shop-search__input"
+              placeholder="Search the drop..."
+            />
 
+            <button (click)="onSearch()" class="btn shop-search__primary" type="button">
+              Search
+            </button>
 
-<!-- Pagination Controls -->
-<app-pagination-controls 
-*ngIf="!hasSearched && totalCount > 9"
-[pageNumber]="shopParams.pageNumber"
-[pageSize]="shopParams.pageSize"
-[totalCount]="totalCount"
-(pageChanged)="onPageChanged($event)">
-</app-pagination-controls>
+            <button (click)="onClear()" class="btn shop-search__secondary" type="button">
+              Clear
+            </button>
+          </div>
 
-    </section>
+          <div class="shop-results-count">
+            Showing <strong>{{ getDisplayedCount() }}</strong> of
+            <strong>{{ totalCount }}</strong>
+            result{{ totalCount === 1 ? '' : 's' }}
+          </div>
+        </div>
+
+        <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3 g-4 shop-grid">
+          <div class="col" *ngFor="let item of products">
+            <app-product-item [product]="item"></app-product-item>
+          </div>
+        </div>
+
+        <div class="shop-empty-state" *ngIf="hasSearched && products.length === 0">
+          No matches found for this search.
+        </div>
+
+        <app-pagination-controls
+          *ngIf="!hasSearched && totalCount > 9"
+          [pageNumber]="shopParams.pageNumber"
+          [pageSize]="shopParams.pageSize"
+          [totalCount]="totalCount"
+          (pageChanged)="onPageChanged($event)"
+        >
+        </app-pagination-controls>
+      </section>
+    </div>
   </div>
-</div>
 </div>

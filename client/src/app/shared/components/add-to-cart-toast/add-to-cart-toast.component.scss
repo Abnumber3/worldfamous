@@ -1,35 +1,206 @@
 .toast-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3); // dim background
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 1.2rem;
+  background: rgba(15, 23, 42, 0.24);
+  backdrop-filter: blur(6px);
   z-index: 1050;
-  pointer-events: auto;
 }
 
 .toast-flyout {
-  position: fixed; // <— key change from absolute to fixed
-  top: 20px;
-  right: 20px;
-  background: white;
-  padding: 16px;
-  border-radius: 8px;
-  width: 360px;
-  max-width: 90vw;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  animation: fly-in 0.7s ease-out;
-  z-index: 1060; // ensure it's above the overlay
+  position: relative;
+  width: min(430px, 100%);
+  padding: 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.68);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 28px 60px rgba(15, 23, 42, 0.22);
+  animation: toast-slide-in 0.28s ease-out;
 }
 
-@keyframes fly-in {
+.toast-flyout__close {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 999px;
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.toast-flyout__header {
+  display: grid;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+  padding-right: 2.2rem;
+}
+
+.toast-flyout__eyebrow {
+  color: #2563eb;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.toast-flyout__title {
+  color: #111827;
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.toast-flyout__content {
+  display: grid;
+  grid-template-columns: 108px minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.toast-flyout__image-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1.12;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+  overflow: hidden;
+}
+
+.toast-flyout__image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.toast-flyout__details {
+  display: grid;
+  gap: 0.9rem;
+  min-width: 0;
+}
+
+.toast-flyout__product-name {
+  margin: 0;
+  color: #111827;
+  font-size: 1.35rem;
+  line-height: 1.15;
+  font-weight: 900;
+}
+
+.toast-flyout__meta {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.toast-flyout__meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 14px;
+  background: #f8fafc;
+}
+
+.toast-flyout__meta-row span {
+  color: #6b7280;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.toast-flyout__meta-row strong {
+  color: #111827;
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.toast-flyout__actions {
+  display: flex;
+  gap: 0.7rem;
+}
+
+.toast-flyout__ghost,
+.toast-flyout__primary {
+  flex: 1 1 0;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.toast-flyout__ghost {
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #374151;
+}
+
+.toast-flyout__ghost:hover {
+  background: #f8fafc;
+}
+
+.toast-flyout__primary {
+  border: 1px solid #2563eb;
+  background: #2563eb;
+  color: #ffffff;
+  box-shadow: 0 14px 28px rgba(37, 99, 235, 0.22);
+}
+
+.toast-flyout__primary:hover {
+  background: #1d4ed8;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+@keyframes toast-slide-in {
   from {
-    transform: translateX(100%);
+    transform: translateY(-12px) scale(0.98);
     opacity: 0;
   }
+
   to {
-    transform: translateX(0);
+    transform: translateY(0) scale(1);
     opacity: 1;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .toast-overlay {
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0.9rem;
+  }
+
+  .toast-flyout {
+    padding: 1rem;
+    border-radius: 18px;
+  }
+
+  .toast-flyout__content {
+    grid-template-columns: 1fr;
+  }
+
+  .toast-flyout__image-frame {
+    max-width: 132px;
+  }
+
+  .toast-flyout__actions {
+    flex-direction: column;
   }
 }

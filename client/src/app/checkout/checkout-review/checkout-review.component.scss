@@ -1,0 +1,27 @@
+.checkout-review__summary {
+  overflow: hidden;
+  border: 1px solid #eef2f7;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.05);
+}
+
+.checkout-nav-buttons .btn {
+  flex: 1 1 220px;
+  min-height: 48px;
+  padding-inline: 1rem;
+}
+
+@media (max-width: 575.98px) {
+  .checkout-nav-buttons {
+    flex-direction: column-reverse !important;
+  }
+
+  .checkout-nav-buttons .btn {
+    width: 100%;
+    min-height: 42px;
+    padding-block: 0.65rem;
+    font-size: 0.95rem;
+    flex: 0 0 auto;
+  }
+}

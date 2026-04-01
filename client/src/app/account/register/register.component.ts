@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from '../account.service';
 import { debounceTime, map, switchMap, of, catchError } from 'rxjs';
 
@@ -16,6 +16,7 @@ export class RegisterComponent implements OnInit {
   loading = false;
   errorMessage: string | null = null;
   errors: string[] | undefined;
+  returnUrl = '/shop';
 
   // Live username state for UI feedback
   usernameStatus: 'tooShort' | 'checking' | 'taken' | 'available' | null = null;
@@ -23,10 +24,12 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private accountService: AccountService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/shop';
     this.createRegisterForm();
 
     this.registerForm.get('username')!.valueChanges.subscribe((v: string) => {
@@ -196,7 +199,7 @@ export class RegisterComponent implements OnInit {
     next: (user) => {
       console.log('✅ Registration success:', user);
       this.loading = false;
-      this.router.navigateByUrl('/shop');
+      this.router.navigateByUrl(this.returnUrl);
     },
     error: (err) => {
       this.loading = false;
