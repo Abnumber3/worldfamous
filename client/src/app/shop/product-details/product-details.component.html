@@ -45,13 +45,18 @@
             <div class="product-detail__purchase-panel">
               <div class="product-detail__panel-header">
                 <span class="product-detail__section-label">Order Setup</span>
-                <span class="product-detail__panel-note">Change quantity before adding to cart</span>
+                <span class="product-detail__panel-note">Choose size and quantity before adding to cart</span>
               </div>
 
               <div class="product-detail__pricing">
                 <div class="product-detail__pricing-row">
                   <span>Unit Price</span>
                   <strong>{{ product.price | currency }}</strong>
+                </div>
+
+                <div class="product-detail__pricing-row">
+                  <span>Selected Size</span>
+                  <strong>{{ selectedSize || 'Choose One' }}</strong>
                 </div>
 
                 <div class="product-detail__pricing-row">
@@ -62,6 +67,32 @@
                 <div class="product-detail__pricing-row product-detail__pricing-row--total">
                   <span>Total</span>
                   <strong>{{ product.price * quantity | currency }}</strong>
+                </div>
+              </div>
+
+              <div class="product-detail__size-block">
+                <div class="product-detail__size-header">
+                  <span class="product-detail__quantity-label">Select Size</span>
+                  <strong class="product-detail__size-value">
+                    {{ selectedSize || 'Required' }}
+                  </strong>
+                </div>
+
+                <div
+                  class="product-detail__size-options"
+                  role="radiogroup"
+                  aria-label="Select product size"
+                >
+                  <button
+                    *ngFor="let size of availableSizes"
+                    type="button"
+                    class="product-detail__size-option"
+                    [class.product-detail__size-option--active]="selectedSize === size"
+                    [attr.aria-checked]="selectedSize === size"
+                    (click)="selectSize(size)"
+                  >
+                    {{ size }}
+                  </button>
                 </div>
               </div>
 
@@ -94,9 +125,9 @@
                 <button
                   (click)="addItemToBasket()"
                   class="btn product-detail__add-button"
-                  [disabled]="isAdding"
+                  [disabled]="!selectedSize || isAdding"
                 >
-                  {{ isAdding ? 'Adding...' : 'Add to Cart' }}
+                  {{ isAdding ? 'Adding...' : selectedSize ? 'Add to Cart' : 'Select Size First' }}
                 </button>
               </div>
             </div>

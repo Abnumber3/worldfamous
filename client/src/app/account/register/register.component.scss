@@ -1,98 +1,378 @@
 .register-page {
-  padding-inline: 0.75rem;
+  background:
+    linear-gradient(180deg, #f8fafc 0%, #ffffff 40%, #f8fafc 100%);
 }
 
-.form-signin {
+.register-page__container {
+  padding-bottom: 3rem;
+}
+
+.register-page__intro,
+.register-card {
+  height: 100%;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 22px 48px rgba(15, 23, 42, 0.08);
+}
+
+.register-page__intro {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding: 2rem;
+  border-radius: 26px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top right, rgba(59, 130, 246, 0.22), transparent 30%),
+    linear-gradient(155deg, #0f172a 0%, #111827 46%, #1e293b 100%);
+  color: #f8fafc;
+}
+
+.register-page__eyebrow,
+.register-card__eyebrow,
+.register-card__social-label {
+  color: #60a5fa;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.register-page__title {
+  margin: 0;
+  font-size: clamp(2.2rem, 4vw, 3.35rem);
+  font-weight: 900;
+  line-height: 0.96;
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
+}
+
+.register-page__copy {
+  margin: 0;
+  max-width: 34rem;
+  color: rgba(248, 250, 252, 0.78);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.register-page__feature-list {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: auto;
+}
+
+.register-page__feature {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1rem 1.1rem;
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.46);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.register-page__feature-label {
+  color: #93c5fd;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.register-page__feature strong {
+  color: rgba(248, 250, 252, 0.88);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.register-card {
+  display: grid;
+  gap: 1.25rem;
+  padding: 2rem;
+  border-radius: 26px;
+  background: #ffffff;
+}
+
+.register-card__header {
+  display: grid;
+  gap: 0.58rem;
+}
+
+.register-card__title {
+  margin: 0;
+  color: #111111;
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.register-card__subtitle {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.register-card__social {
+  display: grid;
+  gap: 0.85rem;
+  padding: 1rem;
+  border-radius: 18px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+}
+
+.register-card__google-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  padding: 0.45rem 0.65rem;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  transition: opacity 0.2s ease;
+}
+
+.register-card__google-frame.is-loading {
+  opacity: 0.68;
+  pointer-events: none;
+}
+
+.register-card__google-button {
   width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
-.valid-feedback {
-  margin-bottom: 0.4rem;  // nudges it closer to the input
-  font-size: 1rem;     // optional smaller size
-  
+.register-card__social-copy {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.88rem;
+  line-height: 1.6;
 }
 
-.password-success {
-  margin-top: -0.25rem;   /* pull closer to input */
-  margin-bottom: 0.7rem;  /* add small gap to next field */
-  color: #218f3a;         /* Bootstrap green */
-  font-size: 1rem;      /* slightly smaller */
+.register-card__divider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
 }
 
-
-.text-success {
-   margin-top: -0.25rem;   /* pull closer to input */
-  margin-bottom: 0.7rem;  /* add small gap to next field */
-  color: #218f3a;         /* Bootstrap green */
-  font-size: 0.875rem;      /* slightly smaller */
+.register-card__divider::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: 50%;
+  height: 1px;
+  background: #e5e7eb;
 }
 
+.register-card__divider span {
+  position: relative;
+  padding: 0 0.9rem;
+  background: #ffffff;
+}
 
-.username-too-short-msg {
-  color: #dc3545;           // red error tone
+.register-card__fields {
+  display: grid;
+  gap: 0.05rem;
+}
+
+.register-feedback {
+  margin: -0.15rem 0 0.85rem;
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+.register-feedback--muted {
+  color: #6b7280;
+}
+
+.register-feedback--success {
+  color: #166534;
+  font-weight: 700;
+}
+
+.register-feedback--error {
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+.register-password {
+  margin-top: -0.2rem;
+}
+
+.register-password__label {
+  display: block;
+  color: #6b7280;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.register-password__list,
+.register-card__error-list {
+  margin: 0.45rem 0 0.9rem;
+  padding: 0;
+  list-style: none;
+}
+
+.register-password__list li,
+.register-card__error-list li {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.register-password__list li {
+  color: #b91c1c;
+}
+
+.register-password__list li::before,
+.register-card__error-list li::before {
+  content: '';
+  width: 0.42rem;
+  height: 0.42rem;
+  margin-top: 0.45rem;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.register-password__list li::before {
+  background: #ef4444;
+}
+
+.register-card__error {
+  padding: 0.95rem 1rem;
+  border-radius: 14px;
+  border: 1px solid #fecdd3;
+  background: #fff1f2;
+  color: #be123c;
   font-size: 0.9rem;
-  font-weight: 500;
-     margin-top: -0.25rem;   /* pull closer to input */
-  margin-bottom: 0.7rem;
-  
-  letter-spacing: 0.3px;
-  animation: fadeIn 0.2s ease-in-out;
-
-  // optional: make it visually distinct from generic errors
-  &::before {
-    content: "⚠️ ";
-    font-size: 0.9rem;
-  }
+  line-height: 1.6;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-2px); }
-  to { opacity: 1; transform: translateY(0); }
+.register-card__error-list {
+  margin: 0;
 }
 
-.email-invalid-msg {
-  color: #dc3545; // red
-  font-size: 0.9rem;
-  font-weight: 500;
-   margin-top: -0.25rem;   /* pull closer to input */
-  margin-bottom: 0.7rem;
-  letter-spacing: 0.2px;
-  animation: fadeIn 0.25s ease-in-out;
-
-  &::before {
-    content: "⚠️ ";
-    font-size: 0.9rem;
-  }
+.register-card__error-list li::before {
+  background: #f43f5e;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-3px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-li{
-    list-style: none;
+.register-card__submit {
+  min-height: 56px;
+  border: 1px solid #111827;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 }
 
-.taken-username {
-  color: #dc3545; // red
-  font-size: 0.9rem;
-  font-weight: 500;
-   margin-top: -0.25rem;   /* pull closer to input */
-  margin-bottom: 0.7rem;
-  letter-spacing: 0.2px;
-  animation: fadeIn 0.25s ease-in-out;
+.register-card__submit:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 28px rgba(15, 23, 42, 0.16);
+}
 
-  &::before {
-    font-size: 0.9rem;
+.register-card__submit:disabled {
+  opacity: 0.72;
+}
+
+.register-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #e5e7eb;
+  color: #6b7280;
+  font-size: 0.92rem;
+}
+
+.register-card__footer a {
+  color: #111827;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.register-card__footer a:hover {
+  text-decoration: underline;
+}
+
+:host ::ng-deep app-text-input .form-floating > .form-control {
+  min-height: 58px;
+  border-radius: 14px;
+  border-color: #d1d5db;
+  box-shadow: none;
+}
+
+:host ::ng-deep app-text-input .form-floating > .form-control:focus {
+  border-color: #111827;
+  box-shadow: 0 0 0 0.16rem rgba(17, 24, 39, 0.08);
+}
+
+:host ::ng-deep app-text-input .form-floating > label {
+  color: #6b7280;
+  font-weight: 600;
+}
+
+:host ::ng-deep app-text-input .password-toggle {
+  right: 1rem;
+}
+
+:host ::ng-deep .register-card__google-button > div,
+:host ::ng-deep .register-card__google-button iframe {
+  max-width: 100%;
+}
+
+@media (max-width: 991.98px) {
+  .register-page__intro,
+  .register-card {
+    padding: 1.5rem;
   }
 }
 
 @media (max-width: 575.98px) {
-  .password-success,
-  .text-success,
-  .username-too-short-msg,
-  .email-invalid-msg,
-  .taken-username {
-    font-size: 0.85rem;
+  .register-page__container {
+    padding-inline: 0.55rem;
+  }
+
+  .register-page__intro,
+  .register-card {
+    padding: 1.15rem;
+    border-radius: 18px;
+  }
+
+  .register-page__title {
+    font-size: 2rem;
+  }
+
+  .register-card__title {
+    font-size: 1.6rem;
+  }
+
+  .register-feedback,
+  .register-password__label,
+  .register-password__list li,
+  .register-card__social-copy,
+  .register-card__error {
+    font-size: 0.83rem;
+  }
+
+  .register-card__footer {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

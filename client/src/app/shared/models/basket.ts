@@ -20,6 +20,7 @@ export interface IBasketItem {
   quantity: number
   pictureUrl: string
   type: string
+  size?: string
 }
 
 

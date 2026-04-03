@@ -26,8 +26,8 @@ incrementQuanity(item: IBasketItem) {
   this.basketService.incrementItemQuantity(item);
 }
 
-removeItem(event: {id: number, quantity: number}) {
-  this.basketService.removeItemFromBasket(event.id, event.quantity);
+removeItem(event: {item: IBasketItem, quantity: number}) {
+  this.basketService.removeItemFromBasket(event.item, event.quantity);
 
 }
 

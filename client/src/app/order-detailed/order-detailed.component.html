@@ -1,67 +1,150 @@
-<div class="container mt-5">
-    <div class="row" *ngIf="order">
-        <div class="col-12 col-lg-8">
-            <div>
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col" class="border-0 bg-light">
-                                    <div class="p-2 text-uppercase">Product</div>
-                                </th>
-                                <th scope="col" class="border-0 bg-light">
-                                    <div class="py-2 text-uppercase">Price</div>
-                                </th>
-                                <th scope="col" class="border-0 bg-light">
-                                    <div class="py-2 text-uppercase">Quantity</div>
-                                </th>
-                                <th scope="col" class="border-0 bg-light">
-                                    <div class="py-2 text-uppercase">Total</div>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let item of order.orderItems">
-                                <th scope="row">
-                                    <div class="p-2">
-                                        <img src="{{item.pictureUrl}}" alt="{{item.productName}}" class="img-fluid"
-                                            style="max-height: 50px">
-                                        <div class="ml-3 d-inline-block align-middle">
-                                            <h5 class="mb-0">
-                                                {{item.productName}}
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </th>
-                                <td class="align-middle"><strong>{{item.price | currency}}</strong></td>
-                                <td class="align-middle">
-                                    <span class="font-weight-bold px-2">{{item.quantity}}</span>
-                                </td>
-                                <td class="align-middle"><strong>{{item.price * item.quantity | currency}}</strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
+<ng-container *ngIf="order as order; else loadingState">
+  <div class="order-detail-page">
+    <div class="container order-detail-page__container mt-5">
+      <section class="order-detail__hero">
+        <div class="order-detail__hero-copy">
+          <span class="order-detail__eyebrow">Order Details</span>
+          <h1 class="order-detail__title">Order #{{ order.id }}</h1>
+          <p class="order-detail__subtitle">
+            Placed {{ order.orderDate | date:'MMMM d, y, h:mm a' }}
+          </p>
+        </div>
+
+        <div class="order-detail__hero-side">
+          <span class="order-detail__status-badge" [ngClass]="getStatusClass(order.status)">
+            {{ formatStatus(order.status) }}
+          </span>
+
+          <div class="order-detail__hero-stats">
+            <div class="order-detail__hero-stat">
+              <span>Items</span>
+              <strong>{{ order.orderItems.length }}</strong>
+            </div>
+            <div class="order-detail__hero-stat">
+              <span>Total</span>
+              <strong>{{ order.total | currency }}</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="row g-4">
+        <div class="col-12 col-xl-8">
+          <section class="order-detail__panel">
+            <div class="order-detail__panel-header">
+              <div>
+                <span class="order-detail__section-label">Purchased Items</span>
+                <h2 class="order-detail__panel-title">Order Breakdown</h2>
+              </div>
+              <span class="order-detail__panel-note">
+                {{ order.orderItems.length }} item{{ order.orderItems.length === 1 ? '' : 's' }}
+              </span>
+            </div>
+
+            <div class="order-detail__items">
+              <article *ngFor="let item of order.orderItems" class="order-detail__item-card">
+                <div class="order-detail__item-image-frame">
+                  <img
+                    [src]="item.pictureUrl"
+                    [alt]="item.productName"
+                    class="order-detail__item-image"
+                  />
                 </div>
+
+                <div class="order-detail__item-copy">
+                  <div class="order-detail__item-header">
+                    <h3 class="order-detail__item-title">{{ item.productName }}</h3>
+                    <strong class="order-detail__item-total">
+                      {{ item.price * item.quantity | currency }}
+                    </strong>
+                  </div>
+
+                  <div class="order-detail__item-meta">
+                    <span *ngIf="item.size" class="order-detail__item-pill">
+                      Size {{ item.size }}
+                    </span>
+                    <span class="order-detail__item-pill">Qty {{ item.quantity }}</span>
+                    <span class="order-detail__item-pill">Unit {{ item.price | currency }}</span>
+                  </div>
+                </div>
+              </article>
             </div>
+          </section>
         </div>
-        <div class="col-12 col-lg-4">
-            <div class="bg-light px-4 py-3 text-uppercase font-weight-bold">Order summary</div>
-            <div class="p-4">
-                <ul class="list-unstyled mb-1">
-                    <li class="d-flex justify-content-between py-3 border-bottom">
-                        <strong class="text-muted">Order subtotal</strong>
-                        <strong>{{order.subtotal | currency}}</strong>
-                    </li>
-                    <li class="d-flex justify-content-between py-3 border-bottom">
-                        <strong class="text-muted">Shipping and handling</strong>
-                        <strong>{{order.shippingPrice | currency}}</strong>
-                    </li>
-                    <li class="d-flex justify-content-between py-3 border-bottom">
-                        <strong class="text-muted">Total</strong>
-                        <strong>{{order.total | currency}}</strong>
-                    </li>
-                </ul>
-            </div>
+
+        <div class="col-12 col-xl-4">
+          <div class="order-detail__sidebar">
+            <section class="order-detail__panel order-detail__panel--summary">
+              <div class="order-detail__panel-header">
+                <div>
+                  <span class="order-detail__section-label">Order Summary</span>
+                  <h2 class="order-detail__panel-title">Payment Snapshot</h2>
+                </div>
+              </div>
+
+              <div class="order-detail__summary-list">
+                <div class="order-detail__summary-row">
+                  <span>Subtotal</span>
+                  <strong>{{ order.subtotal | currency }}</strong>
+                </div>
+                <div class="order-detail__summary-row">
+                  <span>Shipping</span>
+                  <strong>{{ order.shippingPrice | currency }}</strong>
+                </div>
+                <div class="order-detail__summary-row order-detail__summary-row--total">
+                  <span>Total</span>
+                  <strong>{{ order.total | currency }}</strong>
+                </div>
+              </div>
+            </section>
+
+            <section class="order-detail__panel">
+              <div class="order-detail__panel-header">
+                <div>
+                  <span class="order-detail__section-label">Delivery</span>
+                  <h2 class="order-detail__panel-title">Shipping Details</h2>
+                </div>
+              </div>
+
+              <div class="order-detail__info-grid">
+                <div class="order-detail__info-card">
+                  <span class="order-detail__info-label">Recipient</span>
+                  <strong>{{ order.shipToAddress.firstName }} {{ order.shipToAddress.lastName }}</strong>
+                </div>
+
+                <div class="order-detail__info-card">
+                  <span class="order-detail__info-label">Delivery Method</span>
+                  <strong>{{ order.deliveryMethod }}</strong>
+                </div>
+
+                <div class="order-detail__info-card order-detail__info-card--address">
+                  <span class="order-detail__info-label">Address</span>
+                  <strong>{{ order.shipToAddress.street }}</strong>
+                  <span>
+                    {{ order.shipToAddress.city }}, {{ order.shipToAddress.state }} {{ order.shipToAddress.zipCode }}
+                  </span>
+                </div>
+
+                <div class="order-detail__info-card">
+                  <span class="order-detail__info-label">Contact</span>
+                  <strong>{{ order.buyerEmail }}</strong>
+                </div>
+              </div>
+            </section>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
+</ng-container>
+
+<ng-template #loadingState>
+  <div class="order-detail-page">
+    <div class="container order-detail-page__container mt-5">
+      <div class="order-detail__loading-state">
+        <span class="order-detail__section-label">Order Details</span>
+        <h2 class="order-detail__panel-title">Loading your order...</h2>
+      </div>
+    </div>
+  </div>
+</ng-template>

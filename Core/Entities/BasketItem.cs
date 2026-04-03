@@ -18,5 +18,7 @@ namespace Core.Entities
 
 
         public string Type { get; set; }
+
+        public string? Size { get; set; }
     }
 }

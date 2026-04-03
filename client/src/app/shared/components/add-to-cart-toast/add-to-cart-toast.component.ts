@@ -11,11 +11,13 @@ import { IProduct } from '../../../shared/models/product';
 export class AddToCartToastComponent {
   @Input() product!: IProduct;
   @Input() quantity!: number;
+  @Input() size?: string;
   visible = false;
 
-  show(product: IProduct, quantity: number) {
+  show(product: IProduct, quantity: number, size?: string) {
     this.product = product;
     this.quantity = quantity;
+    this.size = size;
     this.visible = true;
   }
 

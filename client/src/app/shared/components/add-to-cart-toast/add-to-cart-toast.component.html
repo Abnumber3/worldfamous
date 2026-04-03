@@ -23,6 +23,10 @@
         <h3 class="toast-flyout__product-name">{{ product.name }}</h3>
 
         <div class="toast-flyout__meta">
+          <div class="toast-flyout__meta-row" *ngIf="size">
+            <span>Size</span>
+            <strong>{{ size }}</strong>
+          </div>
           <div class="toast-flyout__meta-row">
             <span>Qty</span>
             <strong>{{ quantity }}</strong>

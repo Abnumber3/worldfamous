@@ -85,6 +85,8 @@ namespace api.Helpers
                     o.MapFrom(s => s.ItemOrdered.ProductItemId))
                 .ForMember(d => d.ProductName, o =>
                     o.MapFrom(s => s.ItemOrdered.ProductName))
+                .ForMember(d => d.Size, o =>
+                    o.MapFrom(s => s.ItemOrdered.Size))
                 .ForMember(d => d.Price, o =>
                     o.MapFrom(s => s.Price))
                 .ForMember(d => d.PictureUrl, o =>

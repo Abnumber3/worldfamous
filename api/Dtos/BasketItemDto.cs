@@ -31,5 +31,7 @@ namespace api.Dtos
 
         [Required]
         public string Type { get; set; }
+
+        public string? Size { get; set; }
     }
 }

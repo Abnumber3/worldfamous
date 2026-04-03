@@ -12,11 +12,12 @@ namespace Core.Entities.OrderAggregate
 
         }
 
-        public ProductItemOrdered(int productItemId, string productName, string pictureUrl)
+        public ProductItemOrdered(int productItemId, string productName, string pictureUrl, string? size = null)
         {
             ProductItemId = productItemId;
             ProductName = productName;
             PictureUrl = pictureUrl;
+            Size = size;
         }
       
 
@@ -28,5 +29,7 @@ namespace Core.Entities.OrderAggregate
         public string ProductName { get; set; }
 
         public string PictureUrl { get; set; }
+
+        public string? Size { get; set; }
     }
 }

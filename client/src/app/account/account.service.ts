@@ -32,10 +32,7 @@ export class AccountService {
 
     return this.http.get<IUser>(this.baseUrl + 'account', { headers }).pipe(
       map((user: IUser) => {
-        if (user) {
-          localStorage.setItem('token', user.token);
-          this.currentUserSource.next(user);
-        }
+        this.persistUser(user);
         return user;
       }),
       catchError(() => {
@@ -50,25 +47,36 @@ export class AccountService {
   login(values: any) {
     return this.http.post<IUser>(this.baseUrl + 'account/login', values).pipe(
       map((user: IUser) => {
-        if (user) {
-          localStorage.setItem('token', user.token);
-          this.currentUserSource.next(user);
-        }
+        this.persistUser(user);
         return user;
       })
     );
   }
+
   register(values: any) {
     return this.http.post<IUser>(this.baseUrl + 'account/register', values).pipe(
       map((user: IUser) => {
-        if (user) {
-          localStorage.setItem('token', user.token);
-          this.currentUserSource.next(user);
-        }
+        this.persistUser(user);
         return user;
       })
     );
-}
+  }
+
+  loginWithGoogle(idToken: string) {
+    return this.http.post<IUser>(this.baseUrl + 'account/google', { idToken }).pipe(
+      map((user: IUser) => {
+        this.persistUser(user);
+        return user;
+      })
+    );
+  }
+
+  getGoogleAuthConfig() {
+    return this.http.get<{ clientId: string; enabled: boolean }>(
+      this.baseUrl + 'account/google-config'
+    );
+  }
+
  logout() {
     localStorage.removeItem('token');
     this.currentUserSource.next(null);
@@ -88,6 +96,15 @@ export class AccountService {
 
   updateUserAddress(address: IAddress) {
     return this.http.put(this.baseUrl + 'account/address', address);
+  }
+
+  private persistUser(user: IUser | null) {
+    if (!user) {
+      return;
+    }
+
+    localStorage.setItem('token', user.token);
+    this.currentUserSource.next(user);
   }
 
 }
