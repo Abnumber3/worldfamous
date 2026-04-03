@@ -1,36 +1,67 @@
-.breadcrumb-container {
-  display: flex;
+.breadcrumb-shell {
+  --crumb-ink: #111827;
+  --crumb-muted: #6b7280;
+  --crumb-accent: #2563eb;
+  --crumb-soft: rgba(255, 255, 255, 0.82);
+  --crumb-line: rgba(15, 23, 42, 0.08);
+  display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #6c757dad; // muted gray
-  padding: 0.75rem 1rem;
-  border-radius: 0.375rem;
-  margin-bottom: 1rem;
+  justify-content: flex-end;
+  gap: 0.55rem;
+  padding: 0.72rem 0.95rem;
+  border: 1px solid var(--crumb-line);
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.88));
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(10px);
 }
 
-.breadcrumb-container a {
+.breadcrumb-shell__link,
+.breadcrumb-shell__current {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.38rem 0.72rem;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.breadcrumb-shell__link {
+  color: var(--crumb-muted);
   text-decoration: none;
-  color: black; // bootstrap blue
-  transition: color 0.2s;
+  background: transparent;
+  transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
 }
 
-.breadcrumb-container a:hover {
-  color: #66788b;
+.breadcrumb-shell__link:hover {
+  color: var(--crumb-accent);
+  background: rgba(37, 99, 235, 0.08);
+  transform: translateY(-1px);
   text-decoration: none;
 }
 
-.breadcrumb-container span {
-  color: #212529; // darker final item
+.breadcrumb-shell__current {
+  color: #ffffff;
+  background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.18);
 }
 
-.breadcrumb-container a::after {
-  content: '/';
-  margin: 0 0.5rem;
-  color: #6c757d;
+.breadcrumb-shell__separator {
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.9), rgba(37, 99, 235, 0.35));
+  flex-shrink: 0;
 }
 
-.breadcrumb-container ng-container:last-child a::after {
-  content: '';
+@media (max-width: 991.98px) {
+  .breadcrumb-shell {
+    justify-content: flex-start;
+  }
 }

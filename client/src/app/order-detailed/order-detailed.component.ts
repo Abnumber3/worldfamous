@@ -31,4 +31,22 @@ export class OrderDetailedComponent implements OnInit {
       }
     });
   }
+
+  formatStatus(status: string): string {
+    return status.replace(/([a-z])([A-Z])/g, '$1 $2').trim();
+  }
+
+  getStatusClass(status: string): string {
+    const normalizedStatus = status.toLowerCase();
+
+    if (normalizedStatus.includes('received')) {
+      return 'order-detail__status-badge--received';
+    }
+
+    if (normalizedStatus.includes('failed')) {
+      return 'order-detail__status-badge--failed';
+    }
+
+    return 'order-detail__status-badge--pending';
+  }
 }

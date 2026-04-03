@@ -71,7 +71,9 @@ namespace Infrastructure.Services
                 {
                     Amount = (long) basket.Items.Sum(i => i.Quantity * (i.Price * 100)) + (long) shippingPrice * 100,
                     Currency = "usd",
-                    PaymentMethodTypes = new List<string> { "card" }
+                    PaymentMethodTypes = new List<string> { "card" },
+                    Description = BuildOrderSummary(basket),
+                    Metadata = BuildPaymentMetadata(basket)
                 };
 
                 intent = await service.CreateAsync(options);
@@ -84,6 +86,8 @@ namespace Infrastructure.Services
                 var options = new PaymentIntentUpdateOptions
                 {
                     Amount = (long) basket.Items.Sum(i => i.Quantity * (i.Price * 100)) + (long) shippingPrice * 100,
+                    Description = BuildOrderSummary(basket),
+                    Metadata = BuildPaymentMetadata(basket)
                 };
 
                 await service.UpdateAsync(basket.PaymentIntentId, options);
@@ -119,6 +123,33 @@ namespace Infrastructure.Services
              await _unitOfWork.Complete();
 
             return order; 
+        }
+
+        private static Dictionary<string, string> BuildPaymentMetadata(CustomerBasket basket)
+        {
+            return new Dictionary<string, string>
+            {
+                ["basket_id"] = basket.Id,
+                ["order_summary"] = BuildOrderSummary(basket)
+            };
+        }
+
+        private static string BuildOrderSummary(CustomerBasket basket)
+        {
+            if (basket.Items == null || basket.Items.Count == 0)
+            {
+                return "World Famous order";
+            }
+
+            var summary = string.Join(", ",
+                basket.Items.Select(item => $"{item.ProductName}{FormatSize(item.Size)} x{item.Quantity}"));
+
+            return summary.Length > 400 ? $"{summary[..397]}..." : summary;
+        }
+
+        private static string FormatSize(string? size)
+        {
+            return string.IsNullOrWhiteSpace(size) ? string.Empty : $" ({size.Trim()})";
         }
     }
 }

@@ -10,7 +10,7 @@ import { BasketService } from '../../basket/basket.service';
 })
 export class BasketSummaryComponent {
   @Output() addItem = new EventEmitter<IBasketItem>();
-  @Output() removeItem = new EventEmitter<{id: number, quantity: number}>();
+  @Output() removeItem = new EventEmitter<{item: IBasketItem, quantity: number}>();
   @Input() isBasket = true;
   
   constructor(public basketService: BasketService) { }
@@ -19,8 +19,8 @@ export class BasketSummaryComponent {
     this.addItem.emit(item);
   }
 
-  removeBasketItem(id: number, quantity: number = 1){
-    this.removeItem.emit({id, quantity})
+  removeBasketItem(item: IBasketItem, quantity: number = 1){
+    this.removeItem.emit({item, quantity})
   }
 
 }

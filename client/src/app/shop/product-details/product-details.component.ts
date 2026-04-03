@@ -17,6 +17,8 @@ export class ProductDetailsComponent implements OnInit {
   quantity = 1;
   newPrice: number | null = null; // Initialize newPrice
   isAdding = false;
+  readonly availableSizes = ['Small', 'Medium', 'Large'];
+  selectedSize: string | null = null;
   @ViewChild('toast') toast!: AddToCartToastComponent;
 
   constructor(
@@ -35,18 +37,22 @@ export class ProductDetailsComponent implements OnInit {
   }
 
 addItemToBasket() {
-  if (!this.product || this.isAdding) return;
+  if (!this.product || !this.selectedSize || this.isAdding) return;
 
   this.isAdding = true;
 
-  this.basketService.addItemToBasket(this.product, this.quantity);
-  this.toast.show(this.product, this.quantity);
+  this.basketService.addItemToBasket(this.product, this.quantity, this.selectedSize);
+  this.toast.show(this.product, this.quantity, this.selectedSize);
 
   // Disable for a full second to avoid spamming
   setTimeout(() => {
     this.isAdding = false;
   }, 1000); // try 1000ms instead of 800ms
 }
+
+  selectSize(size: string) {
+    this.selectedSize = size;
+  }
 
 
   incrementQuantity() {
@@ -75,6 +81,7 @@ addItemToBasket() {
     next: (product) => {
       console.log('PRODUCT FROM API:', product);   // <-- add this
       this.product = product;
+      this.selectedSize = null;
       this.bcService.set('@productDetail', product.name);
     },
     error: (error) => {

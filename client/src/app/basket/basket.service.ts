@@ -65,9 +65,9 @@ export class BasketService {
 
   // -------------------- MUTATIONS --------------------
 
-  addItemToBasket(product: IProduct, quantity = 1) {
+  addItemToBasket(product: IProduct, quantity = 1, size?: string) {
     const basket = this.getCurrentBasketValue() ?? this.createBasket();
-    const item = this.mapProductToBasketItem(product, quantity);
+    const item = this.mapProductToBasketItem(product, quantity, size);
 
     basket.items = this.addOrUpdateItem(basket.items, item, quantity);
 
@@ -78,7 +78,7 @@ export class BasketService {
     const basket = this.getCurrentBasketValue();
     if (!basket) return;
 
-    const index = basket.items.findIndex(x => x.id === item.id);
+    const index = basket.items.findIndex(x => this.isSameBasketItem(x, item));
     if (index === -1) return;
 
     basket.items[index].quantity++;
@@ -86,17 +86,17 @@ export class BasketService {
     this.setBasket(basket).subscribe();
   }
 
-  removeItemFromBasket(id: number, quantity = 1) {
+  removeItemFromBasket(itemToRemove: IBasketItem, quantity = 1) {
     const basket = this.getCurrentBasketValue();
     if (!basket) return;
 
-    const item = basket.items.find(x => x.id === id);
+    const item = basket.items.find(x => this.isSameBasketItem(x, itemToRemove));
     if (!item) return;
 
     item.quantity -= quantity;
 
     if (item.quantity <= 0) {
-      basket.items = basket.items.filter(i => i.id !== id);
+      basket.items = basket.items.filter(i => !this.isSameBasketItem(i, itemToRemove));
     }
 
     if (basket.items.length > 0) {
@@ -140,7 +140,7 @@ export class BasketService {
     itemToAdd: IBasketItem,
     quantity: number
   ): IBasketItem[] {
-    const index = items.findIndex(i => i.id === itemToAdd.id);
+    const index = items.findIndex(i => this.isSameBasketItem(i, itemToAdd));
 
     if (index === -1) {
       itemToAdd.quantity = quantity;
@@ -158,14 +158,23 @@ export class BasketService {
     return basket;
   }
 
-  private mapProductToBasketItem(item: IProduct, quantity: number): IBasketItem {
+  private mapProductToBasketItem(item: IProduct, quantity: number, size?: string): IBasketItem {
     return {
       id: item.id,
       productName: item.name,
       price: item.price,
       pictureUrl: item.pictureUrl,
       quantity,
-      type: item.productType
+      type: item.productType,
+      size: size?.trim() || undefined
     };
+  }
+
+  private isSameBasketItem(left: IBasketItem, right: IBasketItem): boolean {
+    return left.id === right.id && this.normalizeSize(left.size) === this.normalizeSize(right.size);
+  }
+
+  private normalizeSize(size?: string): string {
+    return size?.trim().toLowerCase() ?? '';
   }
 }
