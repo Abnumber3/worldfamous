@@ -61,13 +61,13 @@ namespace api.Controllers
 
         [Authorize]
         [HttpGet("address")]
-        public async Task<ActionResult<AddressDto>> GetUserAddress()
+        public async Task<ActionResult<AddressDto?>> GetUserAddress()
         {
             var user = await _userManager.FindUserWithAddressByIdAsync(User);
             if (user == null) return Unauthorized(new ApiResponse(401, "User not found"));
 
             if (user.Address == null)
-                return NotFound(new ApiResponse(404, "Address not set"));
+                return Ok(null);
 
             return Ok(_mapper.Map<AddressDto>(user.Address));
         }

@@ -64,13 +64,16 @@
           (click)="closeMobileMenu()"
         >
           <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-          <span
-            class="wf-navbar__cart-badge"
-            aria-live="polite"
-            aria-atomic="true"
-          >
-            <ng-container *ngIf="(basket$ | async) as basket">{{ basket.items.length }}</ng-container>
-          </span>
+          <ng-container *ngIf="basket$ | async as basket">
+            <span
+              *ngIf="basket.items.length > 0"
+              class="wf-navbar__cart-badge"
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              {{ basket.items.length }}
+            </span>
+          </ng-container>
         </a>
 
         <ng-container *ngIf="(currentUser$ | async) === null">

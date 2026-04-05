@@ -77,6 +77,12 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "proxyConfig": "proxy.conf.json",
+            "ssl": true,
+            "sslKey": "localhost+2-key.pem",
+            "sslCert": "localhost+2.pem"
+          },
           "configurations": {
             "production": {
               "buildTarget": "client:build:production"
@@ -85,12 +91,7 @@
               "buildTarget": "client:build:development"
             }
           },
-          "defaultConfiguration": "development",
-          "options": {
-            "ssl": true,
-            "sslKey": "localhost+2-key.pem",
-            "sslCert": "localhost+2.pem"
-          }
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n"

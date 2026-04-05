@@ -4,6 +4,7 @@
 }
 
 .register-page__container {
+  padding-top: 1.35rem;
   padding-bottom: 3rem;
 }
 
@@ -29,8 +30,7 @@
 }
 
 .register-page__eyebrow,
-.register-card__eyebrow,
-.register-card__social-label {
+.register-card__eyebrow {
   color: #60a5fa;
   font-size: 0.74rem;
   font-weight: 800;
@@ -113,72 +113,6 @@
   color: #6b7280;
   font-size: 0.95rem;
   line-height: 1.7;
-}
-
-.register-card__social {
-  display: grid;
-  gap: 0.85rem;
-  padding: 1rem;
-  border-radius: 18px;
-  background: #f8fafc;
-  border: 1px solid #e5e7eb;
-}
-
-.register-card__google-frame {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 56px;
-  padding: 0.45rem 0.65rem;
-  border-radius: 16px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  transition: opacity 0.2s ease;
-}
-
-.register-card__google-frame.is-loading {
-  opacity: 0.68;
-  pointer-events: none;
-}
-
-.register-card__google-button {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.register-card__social-copy {
-  margin: 0;
-  color: #6b7280;
-  font-size: 0.88rem;
-  line-height: 1.6;
-}
-
-.register-card__divider {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #94a3b8;
-  font-size: 0.74rem;
-  font-weight: 800;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-.register-card__divider::before {
-  content: '';
-  position: absolute;
-  inset-inline: 0;
-  top: 50%;
-  height: 1px;
-  background: #e5e7eb;
-}
-
-.register-card__divider span {
-  position: relative;
-  padding: 0 0.9rem;
-  background: #ffffff;
 }
 
 .register-card__fields {
@@ -332,11 +266,6 @@
   right: 1rem;
 }
 
-:host ::ng-deep .register-card__google-button > div,
-:host ::ng-deep .register-card__google-button iframe {
-  max-width: 100%;
-}
-
 @media (max-width: 991.98px) {
   .register-page__intro,
   .register-card {
@@ -344,19 +273,21 @@
   }
 }
 
+@media (max-width: 767.98px) {
+  .register-page__intro-column {
+    display: none;
+  }
+}
+
 @media (max-width: 575.98px) {
   .register-page__container {
+    padding-top: 0.35rem;
     padding-inline: 0.55rem;
   }
 
-  .register-page__intro,
   .register-card {
     padding: 1.15rem;
     border-radius: 18px;
-  }
-
-  .register-page__title {
-    font-size: 2rem;
   }
 
   .register-card__title {
@@ -366,7 +297,6 @@
   .register-feedback,
   .register-password__label,
   .register-password__list li,
-  .register-card__social-copy,
   .register-card__error {
     font-size: 0.83rem;
   }

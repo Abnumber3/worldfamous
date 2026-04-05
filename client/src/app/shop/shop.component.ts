@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { IType } from '../shared/models/productType';
 import { PaginationControlsComponent } from '../shared/pagination-controls.component';
 import { ShopParams } from '../shared/models/shopParams';
-import { SearchNormalizerService } from './search-normlizer.service';
+import { SearchIntent, SearchNormalizerService } from './search-normlizer.service';
 
 
 
@@ -131,21 +131,23 @@ getDisplayedCount(): number {
 
 onSearch() {
   const searchTerm = this.search.nativeElement.value.trim();
-  const normalizedTerm = this.searchNormalizer.normalize(searchTerm);
+  const searchIntent: SearchIntent = this.searchNormalizer.resolve(searchTerm, this.productType);
 
   const params = this.shopService.getShopParams();
 
-  params.search = normalizedTerm;
+  params.search = searchIntent.search;
   params.pageNumber = 1;
 
-  if (normalizedTerm.length > 0) {
+  if (searchIntent.typeId !== null) {
+    params.typeId = searchIntent.typeId;
+  } else if (searchIntent.search.length > 0) {
     params.typeId = 0;
   }
 
   this.shopService.setShopParams(params);
   this.shopParams = params;
 
-  this.hasSearched = true;
+  this.hasSearched = searchIntent.search.length > 0;
   this.getproducts();
 }
 
@@ -157,7 +159,7 @@ onSearch() {
 onClear() {
   const params = new ShopParams();
 
-  this.shopService.setShopParams(this.shopParams);
+  this.shopService.setShopParams(params);
   this.shopParams = params;
 
   this.hasSearched = false;

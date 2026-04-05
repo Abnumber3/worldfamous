@@ -70,13 +70,54 @@
   text-transform: uppercase;
 }
 
-.hero-copy h1 {
+.hero-title {
   margin: 0;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  display: inline-grid;
+  gap: 0.02em;
+  font-family: 'Arial Black', 'Helvetica Inserat', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   font-size: clamp(3.8rem, 9vw, 7.4rem);
-  line-height: 0.92;
-  letter-spacing: 0.04em;
+  line-height: 0.88;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.hero-title-line {
+  display: block;
+  position: relative;
+  color: var(--hero-text);
+  text-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+}
+
+.hero-title-line--top {
+  font-size: 0.86em;
+  letter-spacing: 0.06em;
+}
+
+.hero-title-line--bottom {
+  padding-bottom: 0.08em;
+}
+
+.hero-title-line--bottom::after {
+  content: '';
+  position: absolute;
+  left: 0.06em;
+  bottom: -0.02em;
+  width: 3.25rem;
+  max-width: 38%;
+  height: 0.1em;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--hero-accent), rgba(246, 241, 232, 0.72));
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
+}
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .hero-title-line--bottom {
+    background: linear-gradient(180deg, #f8f4ec 0%, #ece2d4 62%, #cfd7eb 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
 }
 
 .hero-description {
@@ -270,7 +311,7 @@
   }
 
   .hero-kicker,
-  .hero-copy h1 {
+  .hero-title {
     scroll-margin-top: calc(var(--hero-nav-offset) + 1rem);
   }
 
@@ -280,10 +321,21 @@
     letter-spacing: 0.2em;
   }
 
-  .hero-copy h1 {
-    font-size: clamp(2.8rem, 16vw, 4rem);
-    line-height: 0.94;
-    letter-spacing: 0.02em;
+  .hero-title {
+    font-size: clamp(3rem, 17vw, 4.5rem);
+    line-height: 0.86;
+    letter-spacing: 0.01em;
+    gap: 0.04em;
+  }
+
+  .hero-title-line--top {
+    font-size: 0.8em;
+    letter-spacing: 0.055em;
+  }
+
+  .hero-title-line--bottom::after {
+    width: 2.6rem;
+    height: 0.095em;
   }
 
   .hero-description {

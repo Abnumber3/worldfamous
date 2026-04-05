@@ -4,13 +4,14 @@ import { catchError, map, Observable, of, ReplaySubject } from 'rxjs';
 import { IUser } from '../shared/models/user';
 import { IAddress } from '../shared/models/address';
 import { Router } from '@angular/router';
+import { API_BASE_URL } from '../core/constants/api.constants';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
-  baseUrl = 'https://localhost:5187/api/'
+  baseUrl = API_BASE_URL;
   private currentUserSource = new ReplaySubject<IUser | null>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
@@ -91,7 +92,7 @@ export class AccountService {
   return this.http.get<boolean>(this.baseUrl + 'account/usernameexists?username=' + username);
 }
   getUserAddress() {
-    return this.http.get<IAddress>(this.baseUrl + 'account/address');
+    return this.http.get<IAddress | null>(this.baseUrl + 'account/address');
   }
 
   updateUserAddress(address: IAddress) {

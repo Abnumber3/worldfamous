@@ -5,13 +5,15 @@ import { map, tap } from 'rxjs/operators';
 import { Basket, IBasket, IBasketItem, IBasketTotals } from '../shared/models/basket';
 import { IProduct } from '../shared/models/product';
 import { DeliveryMethod } from '../shared/models/deliveryMethod';
+import { API_BASE_URL } from '../core/constants/api.constants';
+import { normalizeAssetUrl } from '../core/utils/url.utils';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BasketService {
 
-  baseUrl = 'https://localhost:5187/api/basket/';
+  baseUrl = `${API_BASE_URL}basket/`;
 
   private basketSource = new BehaviorSubject<IBasket | null>(null);
   basket$ = this.basketSource.asObservable();
@@ -26,9 +28,10 @@ export class BasketService {
   getBasket(id: string) {
     return this.http.get<IBasket>(`${this.baseUrl}?id=${id}`).pipe(
       map(basket => {
-        this.basketSource.next(basket);
+        const normalizedBasket = this.normalizeBasket(basket);
+        this.basketSource.next(normalizedBasket);
         this.calculateTotals();
-        return basket;
+        return normalizedBasket;
       })
     );
   }
@@ -36,7 +39,7 @@ export class BasketService {
   setBasket(basket: IBasket) {
     return this.http.post<IBasket>(this.baseUrl, basket).pipe(
       tap(response => {
-        this.basketSource.next(response);
+        this.basketSource.next(this.normalizeBasket(response));
         this.calculateTotals();
       })
     );
@@ -163,7 +166,7 @@ export class BasketService {
       id: item.id,
       productName: item.name,
       price: item.price,
-      pictureUrl: item.pictureUrl,
+      pictureUrl: normalizeAssetUrl(item.pictureUrl),
       quantity,
       type: item.productType,
       size: size?.trim() || undefined
@@ -176,5 +179,15 @@ export class BasketService {
 
   private normalizeSize(size?: string): string {
     return size?.trim().toLowerCase() ?? '';
+  }
+
+  private normalizeBasket(basket: IBasket): IBasket {
+    return {
+      ...basket,
+      items: basket.items.map(item => ({
+        ...item,
+        pictureUrl: normalizeAssetUrl(item.pictureUrl)
+      }))
+    };
   }
 }

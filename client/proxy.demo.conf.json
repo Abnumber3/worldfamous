@@ -1,0 +1,12 @@
+{
+  "/api": {
+    "target": "http://localhost:5188",
+    "changeOrigin": true,
+    "logLevel": "warn"
+  },
+  "/images": {
+    "target": "http://localhost:5188",
+    "changeOrigin": true,
+    "logLevel": "warn"
+  }
+}

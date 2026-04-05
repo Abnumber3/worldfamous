@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, catchError, map, of, switchMap, takeUntil, timer } from 'rxjs';
@@ -10,30 +10,17 @@ import { AccountService } from '../account.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
-  private googleButton?: ElementRef<HTMLDivElement>;
-
-  @ViewChild('googleButton')
-  set googleButtonRef(value: ElementRef<HTMLDivElement> | undefined) {
-    this.googleButton = value;
-    if (value) {
-      this.tryRenderGoogleButton();
-    }
-  }
-
+export class RegisterComponent implements OnInit, OnDestroy {
   registerForm!: FormGroup;
   submitted = false;
   loading = false;
-  googleLoading = false;
-  googleEnabled = false;
   errorMessage: string | null = null;
   errors: string[] | undefined;
   returnUrl = '/shop';
   usernameStatus: 'checking' | 'taken' | 'available' | null = null;
+  private readonly postRegisterRoute = '/shop';
 
   private readonly destroy$ = new Subject<void>();
-  private googleClientId = '';
-  private googleScriptPromise: Promise<void> | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -54,18 +41,11 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
           this.usernameStatus = null;
         }
       });
-
-    this.loadGoogleSignIn();
-  }
-
-  ngAfterViewInit(): void {
-    this.tryRenderGoogleButton();
   }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
-    (window as Window & { google?: GoogleNamespace }).google?.accounts.id.cancel();
   }
 
   get emailInvalid(): boolean {
@@ -116,7 +96,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
     this.submitted = true;
     this.registerForm.markAllAsTouched();
 
-    if (this.loading || this.googleLoading || this.registerForm.pending) {
+    if (this.loading || this.registerForm.pending) {
       return;
     }
 
@@ -139,7 +119,7 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe({
         next: () => {
           this.loading = false;
-          this.router.navigateByUrl(this.returnUrl);
+          this.router.navigateByUrl(this.postRegisterRoute);
         },
         error: (error) => {
           this.loading = false;
@@ -205,117 +185,6 @@ export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
     const password = form.get('password')?.value;
     const confirmPassword = form.get('confirmPassword')?.value;
     return password === confirmPassword ? null : { mismatch: true };
-  }
-
-  private loadGoogleSignIn(): void {
-    this.accountService.getGoogleAuthConfig()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (config) => {
-          this.googleClientId = (config.clientId || '').trim();
-          this.googleEnabled = config.enabled && !!this.googleClientId;
-
-          if (!this.googleEnabled) {
-            return;
-          }
-
-          this.loadGoogleScript()
-            .then(() => window.setTimeout(() => this.tryRenderGoogleButton()))
-            .catch(() => {
-              this.googleEnabled = false;
-              this.errorMessage = 'Google sign-in is temporarily unavailable.';
-            });
-        },
-        error: () => {
-          this.googleEnabled = false;
-        }
-      });
-  }
-
-  private loadGoogleScript(): Promise<void> {
-    const googleWindow = window as Window & { google?: GoogleNamespace };
-    if (googleWindow.google?.accounts.id) {
-      return Promise.resolve();
-    }
-
-    if (this.googleScriptPromise) {
-      return this.googleScriptPromise;
-    }
-
-    this.googleScriptPromise = new Promise<void>((resolve, reject) => {
-      const existingScript = document.getElementById('google-identity-script') as HTMLScriptElement | null;
-      if (existingScript) {
-        existingScript.addEventListener('load', () => resolve(), { once: true });
-        existingScript.addEventListener('error', () => reject(), { once: true });
-        return;
-      }
-
-      const script = document.createElement('script');
-      script.id = 'google-identity-script';
-      script.src = 'https://accounts.google.com/gsi/client';
-      script.async = true;
-      script.defer = true;
-      script.onload = () => resolve();
-      script.onerror = () => reject();
-      document.head.appendChild(script);
-    });
-
-    return this.googleScriptPromise;
-  }
-
-  private tryRenderGoogleButton(): void {
-    const googleWindow = window as Window & { google?: GoogleNamespace };
-    const google = googleWindow.google;
-
-    if (!this.googleEnabled || !this.googleClientId || !this.googleButton?.nativeElement || !google?.accounts.id) {
-      return;
-    }
-
-    const buttonHost = this.googleButton.nativeElement;
-    buttonHost.innerHTML = '';
-
-    google.accounts.id.initialize({
-      client_id: this.googleClientId,
-      callback: (response: GoogleCredentialResponse) => this.handleGoogleCredential(response),
-      auto_select: false,
-      cancel_on_tap_outside: true,
-      context: 'signup',
-      ux_mode: 'popup'
-    });
-
-    google.accounts.id.renderButton(buttonHost, {
-      theme: 'outline',
-      size: 'large',
-      shape: 'pill',
-      text: 'continue_with',
-      logo_alignment: 'left',
-      width: Math.max(220, Math.min(Math.floor(buttonHost.clientWidth || 320), 360))
-    });
-  }
-
-  private handleGoogleCredential(response: GoogleCredentialResponse): void {
-    if (!response?.credential || this.loading || this.googleLoading) {
-      return;
-    }
-
-    this.googleLoading = true;
-    this.loading = true;
-    this.clearErrors();
-
-    this.accountService.loginWithGoogle(response.credential)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: () => {
-          this.googleLoading = false;
-          this.loading = false;
-          this.router.navigateByUrl(this.returnUrl);
-        },
-        error: (error) => {
-          this.googleLoading = false;
-          this.loading = false;
-          this.handleAuthError(error);
-        }
-      });
   }
 
   private handleAuthError(error: any): void {

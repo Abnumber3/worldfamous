@@ -1,7 +1,7 @@
 <div class="register-page">
-  <div class="container register-page__container mt-5">
+  <div class="container register-page__container">
     <div class="row g-4 align-items-stretch justify-content-center">
-      <div class="col-12 col-lg-5">
+      <div class="col-12 col-lg-5 register-page__intro-column">
         <section class="register-page__intro">
           <span class="register-page__eyebrow">New Membership</span>
           <h1 class="register-page__title">Create your World Famous account.</h1>
@@ -33,27 +33,9 @@
             <span class="register-card__eyebrow">Member Setup</span>
             <h2 class="register-card__title">Register</h2>
             <p class="register-card__subtitle">
-              Create your account with email, or continue with Google when it is
-              enabled for your store.
+              Create your account with your email to save your details and move
+              through checkout faster.
             </p>
-          </div>
-
-          <div class="register-card__social" *ngIf="googleEnabled">
-            <span class="register-card__social-label">Quick Start</span>
-            <div
-              class="register-card__google-frame"
-              [class.is-loading]="googleLoading || loading"
-            >
-              <div #googleButton class="register-card__google-button"></div>
-            </div>
-            <p class="register-card__social-copy">
-              Google sign-in will create your account or log you back in using the
-              same email.
-            </p>
-          </div>
-
-          <div class="register-card__divider" *ngIf="googleEnabled">
-            <span>or create with email</span>
           </div>
 
           <div class="register-card__fields">
@@ -149,7 +131,7 @@
             </ul>
           </div>
 
-          <button class="register-card__submit" type="submit" [disabled]="loading || googleLoading">
+          <button class="register-card__submit" type="submit" [disabled]="loading">
             {{ loading ? 'Creating account...' : 'Create account' }}
           </button>
 

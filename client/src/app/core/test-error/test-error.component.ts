@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Type } from '@angular/core';
+import { API_BASE_URL } from '../constants/api.constants';
 
 @Component({
   selector: 'app-test-error',
@@ -11,7 +12,7 @@ export class TestErrorComponent {
 
   constructor(private http: HttpClient) { }
 
-  baseUrl = 'https://localhost:5187/api/';
+  baseUrl = API_BASE_URL;
   validationErrors: any;
 
   ngOnInit(){

@@ -6,13 +6,15 @@ import { IType } from '../shared/models/productType';
 import { delay, map } from 'rxjs/operators';
 import { ShopParams } from '../shared/models/shopParams';
 import { Observable, of } from 'rxjs';
+import { API_BASE_URL } from '../core/constants/api.constants';
+import { normalizeAssetUrl } from '../core/utils/url.utils';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShopService {
 
-  baseUrl = 'https://localhost:5187/api/';
+  baseUrl = API_BASE_URL;
   products: IProduct[] = [];
   types : IType[]= [];
   pagination?: IPagination<IProduct[]>;
@@ -54,13 +56,17 @@ export class ShopService {
     return this.http.get<IPagination<IProduct[]>>(this.baseUrl + 'Product', { observe: 'response', params })
     .pipe(
       map(response => {
-        // this.products = response.body?.data || [];
         if(!response.body){
           throw new Error('No response body returned');
         }
-      
-        this.pagination = response.body || undefined;
-        return response.body;
+
+        const normalizedResponse = {
+          ...response.body,
+          data: response.body.data.map(product => this.normalizeProduct(product))
+        };
+
+        this.pagination = normalizedResponse;
+        return normalizedResponse;
       })
     );
   }
@@ -87,7 +93,9 @@ export class ShopService {
     if (Object.keys(product).length > 0) return of(product);
     console.log(product);
 
-    return this.http.get<IProduct>(this.baseUrl + 'product/' + id);
+    return this.http.get<IProduct>(this.baseUrl + 'product/' + id).pipe(
+      map(product => this.normalizeProduct(product))
+    );
   }
 
   getTypes(){
@@ -96,5 +104,12 @@ export class ShopService {
     return this.http.get<IType[]>(this.baseUrl + 'product/types').pipe(
       map(types => this.types = types)
     )
+  }
+
+  private normalizeProduct(product: IProduct): IProduct {
+    return {
+      ...product,
+      pictureUrl: normalizeAssetUrl(product.pictureUrl)
+    };
   }
 }
